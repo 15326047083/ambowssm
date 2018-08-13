@@ -17,6 +17,7 @@
     <!-- 配置整合Mybatis -->
     <!-- 1.配置数据库相关参数 -->
     <context:property-placeholder
+
             location="classpath:jdbc.properties"/>
     <!-- 2.数据库连接池 --><!-- 阿里 druid数据库连接池 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
