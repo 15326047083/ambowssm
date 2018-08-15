@@ -19,4 +19,6 @@ public interface TypeMapper {
     int updateByPrimaryKey(Type record);
 
     List<BookTypeVo> getBookTypeVoList();
+
+    List<Type> queryAll();
 }
