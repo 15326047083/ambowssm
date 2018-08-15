@@ -1,6 +1,9 @@
 package com.ambow.first.dao;
 
 import com.ambow.first.entity.Type;
+import com.ambow.first.vo.BookTypeVo;
+
+import java.util.List;
 
 public interface TypeMapper {
     int deleteByPrimaryKey(String id);
@@ -14,4 +17,6 @@ public interface TypeMapper {
     int updateByPrimaryKeySelective(Type record);
 
     int updateByPrimaryKey(Type record);
+
+    List<BookTypeVo> getBookTypeVoList();
 }
