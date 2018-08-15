@@ -17,34 +17,6 @@
        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
     <!-- 配置SpringMvc -->
 
-    <!-- shiro配置 -->
-
-    <bean class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
-    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-        <property name="securityManager" ref="securityManager"/>
-    </bean>
-
-    <bean id="shiroFilter"
-          class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-        <property name="securityManager" ref="securityManager"></property>
-        <property name="loginUrl" value="/login/toLogin.action"></property>
-        <property name="unauthorizedUrl" value="/login/toLogin.action"></property>
-        <property name="filterChainDefinitions">
-            <value>
-                /css/**=anon
-                /login/login.action=anon
-                /**=authc
-            </value>
-        </property>
-    </bean>
-    <!-- 创建securityManager对象 -->
-    <bean class="org.apache.shiro.web.mgt.DefaultWebSecurityManager"
-          id="securityManager">
-        <property name="realm" ref="realm"></property>
-    </bean>
-
-    <bean id="realm" class="com.ambow.first.util.CustomRealm"/>
-
 
     <!-- 1.开始SpringMvc注解模式 -->
     <!-- <mvc:annotation-driven /> 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter
