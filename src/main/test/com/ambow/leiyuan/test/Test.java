@@ -1,6 +1,5 @@
 package com.ambow.leiyuan.test;
 
-import com.ambow.first.entity.User;
 import com.ambow.first.service.UserService;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
