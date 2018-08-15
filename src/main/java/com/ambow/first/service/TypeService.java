@@ -1,4 +1,4 @@
 package com.ambow.first.service;
 
-public interface UserService {
+public interface TypeService {
 }

@@ -17,7 +17,7 @@
 //public class CustomRealm extends AuthorizingRealm {
 //
 //    @Autowired
-//    private UserService userService;
+//    private UserServiceImpl userService;
 //
 //    @Autowired
 //    private IUserRolesService userRolesService;

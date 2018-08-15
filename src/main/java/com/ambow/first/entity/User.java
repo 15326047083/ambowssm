@@ -1,46 +1,64 @@
 package com.ambow.first.entity;
 
+import java.util.Date;
+import java.util.UUID;
+
+/**
+ * 用户
+ */
 public class User {
-    private String id;
+    private String id; // 主键
 
-    private Integer alive;
+    private String name; // 用户名称
 
-    private String deptid;
+    private String sex; // 性别
 
-    private String duty;
+    private Integer age; // 年龄
 
-    private String edu;
+    private String phone; // 手机号
 
-    private String email;
+    private Date newDate; // 注册日期
 
-    private String jointime;
+    private Date outDate; // 注销日期
 
-    private String name;
+    private String place; // 住址
 
-    private Integer num;
+    private Integer borrowNum; // 借阅次数
 
-    private String password;
+    private String password; // 登陆密码
 
-    private String phone;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", age=" + age +
+                ", phone='" + phone + '\'' +
+                ", newDate=" + newDate +
+                ", outDate=" + outDate +
+                ", place='" + place + '\'' +
+                ", borrowNum=" + borrowNum +
+                ", password='" + password + '\'' +
+                '}';
+    }
 
-    private String sex;
+    public User() {
+        this.id = UUID.randomUUID().toString();
+    }
 
-    private String usertype;
-
-    public User(String id, Integer alive, String deptid, String duty, String edu, String email, String jointime, String name, Integer num, String password, String phone, String sex, String usertype) {
+    public User(String id, String name, String sex, Integer age, String phone, Date newDate, Date outDate, String
+            place, Integer borrowNum, String password) {
         this.id = id;
-        this.alive = alive;
-        this.deptid = deptid;
-        this.duty = duty;
-        this.edu = edu;
-        this.email = email;
-        this.jointime = jointime;
         this.name = name;
-        this.num = num;
-        this.password = password;
-        this.phone = phone;
         this.sex = sex;
-        this.usertype = usertype;
+        this.age = age;
+        this.phone = phone;
+        this.newDate = newDate;
+        this.outDate = outDate;
+        this.place = place;
+        this.borrowNum = borrowNum;
+        this.password = password;
     }
 
     public String getId() {
@@ -51,84 +69,12 @@ public class User {
         this.id = id == null ? null : id.trim();
     }
 
-    public Integer getAlive() {
-        return alive;
-    }
-
-    public void setAlive(Integer alive) {
-        this.alive = alive;
-    }
-
-    public String getDeptid() {
-        return deptid;
-    }
-
-    public void setDeptid(String deptid) {
-        this.deptid = deptid == null ? null : deptid.trim();
-    }
-
-    public String getDuty() {
-        return duty;
-    }
-
-    public void setDuty(String duty) {
-        this.duty = duty == null ? null : duty.trim();
-    }
-
-    public String getEdu() {
-        return edu;
-    }
-
-    public void setEdu(String edu) {
-        this.edu = edu == null ? null : edu.trim();
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
-
-    public String getJointime() {
-        return jointime;
-    }
-
-    public void setJointime(String jointime) {
-        this.jointime = jointime == null ? null : jointime.trim();
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
-    }
-
-    public Integer getNum() {
-        return num;
-    }
-
-    public void setNum(Integer num) {
-        this.num = num;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
     }
 
     public String getSex() {
@@ -139,11 +85,59 @@ public class User {
         this.sex = sex == null ? null : sex.trim();
     }
 
-    public String getUsertype() {
-        return usertype;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setUsertype(String usertype) {
-        this.usertype = usertype == null ? null : usertype.trim();
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
+    }
+
+    public Date getNewDate() {
+        return newDate;
+    }
+
+    public void setNewDate(Date newDate) {
+        this.newDate = newDate;
+    }
+
+    public Date getOutDate() {
+        return outDate;
+    }
+
+    public void setOutDate(Date outDate) {
+        this.outDate = outDate;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place == null ? null : place.trim();
+    }
+
+    public Integer getBorrowNum() {
+        return borrowNum;
+    }
+
+    public void setBorrowNum(Integer borrowNum) {
+        this.borrowNum = borrowNum;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 }

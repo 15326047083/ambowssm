@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ambow.first.dao.BookMapper" >
+  <resultMap id="BaseResultMap" type="com.ambow.first.entity.Book" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="VARCHAR" />
+    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+    <result column="author_name" property="authorName" jdbcType="VARCHAR" />
+    <result column="press" property="press" jdbcType="VARCHAR" />
+    <result column="publish_date" property="publishDate" jdbcType="TIMESTAMP" />
+    <result column="info" property="info" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, type_id, book_name, author_name, press, publish_date, info, status, num, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from book
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from book
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ambow.first.entity.Book" >
+    insert into book (id, type_id, book_name, 
+      author_name, press, publish_date, 
+      info, status, num, 
+      remark)
+    values (#{id,jdbcType=VARCHAR}, #{typeId,jdbcType=VARCHAR}, #{bookName,jdbcType=VARCHAR}, 
+      #{authorName,jdbcType=VARCHAR}, #{press,jdbcType=VARCHAR}, #{publishDate,jdbcType=TIMESTAMP}, 
+      #{info,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ambow.first.entity.Book" >
+    insert into book
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="bookName != null" >
+        book_name,
+      </if>
+      <if test="authorName != null" >
+        author_name,
+      </if>
+      <if test="press != null" >
+        press,
+      </if>
+      <if test="publishDate != null" >
+        publish_date,
+      </if>
+      <if test="info != null" >
+        info,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="bookName != null" >
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="authorName != null" >
+        #{authorName,jdbcType=VARCHAR},
+      </if>
+      <if test="press != null" >
+        #{press,jdbcType=VARCHAR},
+      </if>
+      <if test="publishDate != null" >
+        #{publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="info != null" >
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ambow.first.entity.Book" >
+    update book
+    <set >
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="bookName != null" >
+        book_name = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="authorName != null" >
+        author_name = #{authorName,jdbcType=VARCHAR},
+      </if>
+      <if test="press != null" >
+        press = #{press,jdbcType=VARCHAR},
+      </if>
+      <if test="publishDate != null" >
+        publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="info != null" >
+        info = #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ambow.first.entity.Book" >
+    update book
+    set type_id = #{typeId,jdbcType=VARCHAR},
+      book_name = #{bookName,jdbcType=VARCHAR},
+      author_name = #{authorName,jdbcType=VARCHAR},
+      press = #{press,jdbcType=VARCHAR},
+      publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      info = #{info,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
