@@ -10,4 +10,25 @@ public interface TypeService {
      * @return
      */
     List<Type> queryAll();
+
+    /**
+     * 新增分类
+     * @param type
+     */
+    void newType(Type type);
+
+    /**
+     * 根据ID查找全部信息
+     * @param id
+     * @return
+     */
+    Type selectByPrimaryKey(String id);
+
+    /**
+     * 修改信息
+     * @param record
+     * @return
+     */
+    int updateByPrimaryKey(Type record);
+
 }

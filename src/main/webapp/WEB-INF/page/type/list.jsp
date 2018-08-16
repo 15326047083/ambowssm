@@ -28,16 +28,10 @@
 </fieldset>
 <div class="my-btn-box" style="width: 1100px">
     <span class="fl">
-        <a class="layui-btn mgl-20" id="btn-delete-all">添加</a>
+        <a href="/type/toNew" class="layui-btn mgl-20" id="btn-delete-all">添加</a>
 
     </span>
-    <span class="fr">
-        <span class="layui-form-label">搜索条件：</span>
-        <div class="layui-input-inline">
-            <input type="text" autocomplete="off" placeholder="请输入搜索条件" class="layui-input">
-        </div>
-        <button class="layui-btn mgl-20">查询</button>
-    </span>
+
 </div>
 <table class="layui-table" style="width: 1100px">
     <colgroup>
@@ -61,9 +55,10 @@
             <td><a> ${status.count}</a></td>
             <td><a href="">${type.name}</a></td>
             <td>${type.place}</td>
-            <td><a href="">${type.bookNum}</a></td>
+            <td>${type.bookNum}</td>
             <td class="actions">
-                <button class="layui-btn layui-btn-primary layui-btn-small">修改</button>
+                <a href="/type/toUpdate/${type.id}">
+                <button class="layui-btn layui-btn-primary layui-btn-small">修改</button></a>
             </td>
         </tr>
     </c:forEach>
