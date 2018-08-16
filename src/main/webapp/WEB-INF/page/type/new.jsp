@@ -14,7 +14,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>修改类型</title>
+    <title>新增类型</title>
     <link rel="stylesheet" href="/frame/layui/css/layui.css">
     <link rel="stylesheet" href="/frame/static/css/style.css">
     <link rel="icon" href="/frame/static/image/code.png">
@@ -23,32 +23,26 @@
 
 
 <blockquote class="layui-elem-quote layui-text">
-    为书籍加一个地址吧，让读者们能更快的找到他^-^
+    为书籍加一个分类吧，让读者们能更快的找到他^-^
 </blockquote>
 
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
     <legend>图书分类</legend>
 </fieldset>
 
-<form class="" action="/type/update">
-<input value="${type.id}" name="id" hidden>
+<form class="" action="/type/new">
+
     <div class="layui-form-item">
         <label class="layui-form-label">分类名称</label>
         <div class="layui-input-block">
-            <input value="${type.name}" type="text" name="name" lay-verify="required" placeholder="请输入书名" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">图书数量</label>
-        <div class="layui-input-block">
-            <input value="${type.bookNum}" type="text" name="bookNum" lay-verify="required" placeholder="请输入书名" autocomplete="off" class="layui-input">
+            <input type="text" name="name" lay-verify="required" placeholder="请输入书名" autocomplete="off" class="layui-input">
         </div>
     </div>
 
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">分类位置</label>
         <div class="layui-input-block">
-            <textarea  placeholder="请输入分类的位置" class="layui-textarea" name="place">${type.place}</textarea>
+            <textarea placeholder="请输入分类的位置" class="layui-textarea" name="place"></textarea>
         </div>
     </div>
 
