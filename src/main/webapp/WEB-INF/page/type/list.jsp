@@ -15,11 +15,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>图书类型</title>
-    <link rel="stylesheet" href="../frame/layui/css/layui.css">
-    <link rel="stylesheet" href="../frame/static/css/style.css">
-    <link rel="icon" href="../frame/static/image/code.png">
+    <link rel="stylesheet" href="/frame/layui/css/layui.css">
+    <link rel="stylesheet" href="/frame/static/css/style.css">
+    <link rel="icon" href="/frame/static/image/code.png">
 </head>
-<body>
+
 <body class="body">
 
 
@@ -29,6 +29,7 @@
 <div class="my-btn-box" style="width: 1100px">
     <span class="fl">
         <a href="/type/toNew" class="layui-btn mgl-20" id="btn-delete-all">添加</a>
+         <a href="/type/export" class="layui-btn mgl-20" id="">导出</a>
 
     </span>
 

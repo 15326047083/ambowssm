@@ -11,4 +11,9 @@ public class JumpController {
     public String toIndex(){
         return "/index";
     }
+
+    @RequestMapping("/todataAnalysis")
+    public String todataAnalysis(){
+        return "/dataAnalysis";
+    }
 }

@@ -1,6 +1,7 @@
 package com.ambow.first.service;
 
 import com.ambow.first.entity.Type;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.util.List;
 
@@ -31,4 +32,5 @@ public interface TypeService {
      */
     int updateByPrimaryKey(Type record);
 
+    XSSFWorkbook exportExcelInfo();
 }

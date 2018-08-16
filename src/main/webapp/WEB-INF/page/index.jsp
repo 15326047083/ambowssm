@@ -75,7 +75,7 @@
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" href-url="demo/btn1.html"><i class="layui-icon">&#xe621;</i>按钮</a></dd>
                         <dd><a href="javascript:;" href-url="/type/toList"><i class="layui-icon">&#xe621;</i>表单</a></dd>
-                        <dd><a href="javascript:;" href-url="demo/table.html"><i class="layui-icon">&#xe621;</i>表格</a></dd>
+                        <dd><a href="javascript:;" href-url="<%=request.getContextPath()%>/jump/todataAnalysis"><i class="layui-icon">&#xe621;</i>数据分析</a></dd>
                         <dd><a href="javascript:;" href-url="demo/tab-card.html"><i class="layui-icon">&#xe621;</i>选项卡</a></dd>
                         <dd><a href="javascript:;" href-url="demo/progress-bar.html"><i class="layui-icon">&#xe621;</i>进度条</a></dd>
                         <dd><a href="javascript:;" href-url="demo/folding-panel.html"><i class="layui-icon">&#xe621;</i>折叠面板</a></dd>
