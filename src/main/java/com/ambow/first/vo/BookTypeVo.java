@@ -14,7 +14,7 @@ public class BookTypeVo {
     private String bookName; // 图书名称
     private String bookAuthorName; // 图书作者
     private String bookPress; // 图书出版社
-    private Date bookPublishDate; // 图书出版日期
+    private String bookPublishDate; // 图书出版日期
     private String bookInfo; // 图书简介
     private Integer bookStatus; // 图书状态
     private Integer bookBorrowNum; // 被借次数
@@ -43,7 +43,7 @@ public class BookTypeVo {
     }
 
     public BookTypeVo(String typeId, String typeName, String typePlace, Integer bookNum, String bookId, String
-            bookName, String bookAuthorName, String bookPress, Date bookPublishDate, String bookInfo, Integer
+            bookName, String bookAuthorName, String bookPress, String bookPublishDate, String bookInfo, Integer
                               bookStatus, Integer bookBorrowNum, String bookRemark) {
 
         this.typeId = typeId;
@@ -125,11 +125,11 @@ public class BookTypeVo {
         this.bookPress = bookPress;
     }
 
-    public Date getBookPublishDate() {
+    public String getBookPublishDate() {
         return bookPublishDate;
     }
 
-    public void setBookPublishDate(Date bookPublishDate) {
+    public void setBookPublishDate(String bookPublishDate) {
         this.bookPublishDate = bookPublishDate;
     }
 

@@ -31,7 +31,7 @@ public class BookTest {
             book.setPress("清华");
             book.setTypeId("2");
             book.setStatus(1);
-            book.setPublishDate(new Date());
+            book.setPublishDate("2017-06-03");
 
             book.setRemark("ddd");
             bookService.insert(book);
