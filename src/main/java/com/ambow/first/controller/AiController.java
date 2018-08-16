@@ -11,12 +11,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 人工智障
+ */
 @Controller
 public class AiController {
+    /**
+     * 人工智障问答
+     *
+     * @param question 问题
+     * @return 回复
+     */
     @RequestMapping(value = "/ai", produces = "text/plain;charset=UTF-8")
     @ResponseBody
     public String ai(@RequestParam String question) {
-
         String host = "https://jisuznwd.market.alicloudapi.com";
         String path = "/iqa/query";
         String method = "GET";
