@@ -149,4 +149,13 @@
       password = #{password,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="selectAllByBorrowNum" resultType="com.ambow.first.entity.User">
+      select * from user order by borrow_num DESC
+  </select>
+  <select id="selectAll" resultType="com.ambow.first.entity.User">
+      select * from user
+  </select>
+  <select id="getUserByPhone" resultType="com.ambow.first.entity.User">
+      select * from user where  phone = #{phone,jdbcType=VARCHAR};
+  </select>
 </mapper>

@@ -17,7 +17,7 @@ public class Book {
 
     private String press; // 出版社
 
-    private Date publishDate; // 出版日期
+    private String publishDate; // 出版日期
 
     private String info; // 简介
 
@@ -47,7 +47,7 @@ public class Book {
         this.id = UUID.randomUUID().toString();
     }
 
-    public Book(String id, String typeId, String bookName, String authorName, String press, Date publishDate, String
+    public Book(String id, String typeId, String bookName, String authorName, String press, String publishDate, String
             info, Integer status, Integer num, String remark) {
         this.id = id;
         this.typeId = typeId;
@@ -101,11 +101,11 @@ public class Book {
         this.press = press == null ? null : press.trim();
     }
 
-    public Date getPublishDate() {
+    public String getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(Date publishDate) {
+    public void setPublishDate(String publishDate) {
         this.publishDate = publishDate;
     }
 
