@@ -1,44 +1,17 @@
 package com.ambow.first.entity;
 
-import java.util.UUID;
+import java.util.Date;
 
-/**
- * 捐赠
- */
 public class Donate {
-    private String id; // ID
+    private String id;
 
-    private String bookId; // 图书ID
+    private String bookId;
 
-    private String userName; // 捐赠人姓名
+    private String userName;
 
-    private String userPhone; // 捐赠人电话
+    private String userPhone;
 
-    private String donateTime; // 捐赠时间
-
-    @Override
-    public String toString() {
-        return "Donate{" +
-                "id='" + id + '\'' +
-                ", bookId='" + bookId + '\'' +
-                ", userName='" + userName + '\'' +
-                ", userPhone='" + userPhone + '\'' +
-                ", donateTime='" + donateTime + '\'' +
-                '}';
-    }
-
-    public Donate() {
-        this.id = UUID.randomUUID().toString();
-    }
-
-    public Donate(String id, String bookId, String userName, String userPhone, String donateTime) {
-
-        this.id = id;
-        this.bookId = bookId;
-        this.userName = userName;
-        this.userPhone = userPhone;
-        this.donateTime = donateTime;
-    }
+    private Date donateTime;
 
     public String getId() {
         return id;
@@ -72,11 +45,11 @@ public class Donate {
         this.userPhone = userPhone == null ? null : userPhone.trim();
     }
 
-    public String getDonateTime() {
+    public Date getDonateTime() {
         return donateTime;
     }
 
-    public void setDonateTime(String donateTime) {
-        this.donateTime = donateTime == null ? null : donateTime.trim();
+    public void setDonateTime(Date donateTime) {
+        this.donateTime = donateTime;
     }
 }

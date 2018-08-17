@@ -6,7 +6,7 @@
     <result column="book_id" property="bookId" jdbcType="VARCHAR" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
-    <result column="donate_time" property="donateTime" jdbcType="VARCHAR" />
+    <result column="donate_time" property="donateTime" jdbcType="DATE" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, book_id, user_name, user_phone, donate_time
@@ -25,7 +25,7 @@
     insert into donate (id, book_id, user_name, 
       user_phone, donate_time)
     values (#{id,jdbcType=VARCHAR}, #{bookId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{userPhone,jdbcType=VARCHAR}, #{donateTime,jdbcType=VARCHAR})
+      #{userPhone,jdbcType=VARCHAR}, #{donateTime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.ambow.first.entity.Donate" >
     insert into donate
@@ -60,7 +60,7 @@
         #{userPhone,jdbcType=VARCHAR},
       </if>
       <if test="donateTime != null" >
-        #{donateTime,jdbcType=VARCHAR},
+        #{donateTime,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -77,7 +77,7 @@
         user_phone = #{userPhone,jdbcType=VARCHAR},
       </if>
       <if test="donateTime != null" >
-        donate_time = #{donateTime,jdbcType=VARCHAR},
+        donate_time = #{donateTime,jdbcType=DATE},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -87,7 +87,7 @@
     set book_id = #{bookId,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
       user_phone = #{userPhone,jdbcType=VARCHAR},
-      donate_time = #{donateTime,jdbcType=VARCHAR}
+      donate_time = #{donateTime,jdbcType=DATE}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
