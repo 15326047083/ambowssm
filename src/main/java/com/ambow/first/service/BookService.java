@@ -1,11 +1,14 @@
 package com.ambow.first.service;
 
 import com.ambow.first.entity.Book;
+import com.ambow.first.util.Page;
 import com.ambow.first.vo.BookTypeVo;
 
 import java.util.List;
 
 public interface BookService {
+
+    List<Book>  selectAlllBook();//图书全查
 
     int insert(Book record);//添加图书
 
@@ -19,7 +22,7 @@ public interface BookService {
 
     int deleteByPrimaryKey(String id);//根据关键值删除
 
-    List<BookTypeVo> getBookTypeVoList();//查询全部图书类型
+    Page<BookTypeVo> getBookTypeVoList(Integer page, Integer size);//查询全部图书类型
 
     List<BookTypeVo> getBookTypeVoByTypeId(String typeId);//根据类型ID查询
 

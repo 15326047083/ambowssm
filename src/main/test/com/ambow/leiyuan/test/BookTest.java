@@ -63,7 +63,7 @@ public class BookTest {
 
     @org.junit.Test
     public void getBookTypeVoList() {
-        System.out.println(bookService.getBookTypeVoList().toString());
+        System.out.println(bookService.getBookTypeVoList(1,3).toString());
     }
 
     @org.junit.Test

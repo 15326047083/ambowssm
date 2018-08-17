@@ -23,13 +23,30 @@
         where id = #{id,jdbcType=VARCHAR}
     </select>
 
+    <select id="selectAlllBook" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List"/>
+        from book
+
+    </select>
 
     <!--全查vo-->
     <select id="getBookTypeVoList" resultType="com.ambow.first.vo.BookTypeVo">
     select t.id typeId,t.name typeName,t.place typePlace,t.book_num bookNum,b.id bookId,b.book_name bookName,b.author_name bookAuthorName,
     b.press bookPress,b.publish_date bookPublishDate,b.info bookInfo,b.status bookStatus,b.num bookBorrowNum,b.remark bookRemark
+    from book b,type t where t.id=b.type_id limit #{page},#{size};
+  </select>
+
+
+
+    <!--Vo总数量-->
+
+    <select id="getBookTypeVoListNum" resultType="java.lang.Integer">
+    select count(*)
     from book b,type t where t.id=b.type_id;
   </select>
+
+
 
     <!--图书类型-->
 
@@ -39,7 +56,7 @@
     from book b,type t where t.id=b.type_id and t.id=#{typeId};
   </select>
 
-    <!--图书类型数量-->
+    <!--根据类型Id图书类型数量-->
 
     <select id="getBookTypeVoByTypeIdNum" parameterType="java.lang.String" resultType="java.lang.Integer">
     select count(*)
@@ -70,10 +87,10 @@
 
     <!--借阅排行-->
 
-    <select id="getBookTypeVoByTypeIdSort" parameterType="java.lang.String" resultType="com.ambow.first.vo.BookTypeVo">
-    select t.id typeId,t.name typeName,t.place typePlace,t.book_num bookNum,b.id bookId,b.book_name bookName,b.author_name bookAuthorName,
-    b.press bookPress,b.publish_date bookPublishDate,b.info bookInfo,b.status bookStatus,b.num bookBorrowNum,b.remark bookRemark
-    from book b,type t where t.id=b.type_id and t.id=#{typeId} order  by b.num DESC ;
+    <select id="getBookTypeVoByTypeIdSort"  resultType="com.ambow.first.vo.BookTypeVo">
+    select  SUM(b.num) as bookBorrowNum,t.id typeId,t.name typeName,t.place typePlace,t.book_num bookNum,b.id bookId,b.book_name bookName,b.author_name bookAuthorName,
+    b.press bookPress,b.publish_date bookPublishDate,b.info bookInfo,b.status bookStatus,b.remark bookRemark
+    from book b,type t where t.id=b.type_id  group by b.book_name order by bookBorrowNum DESC ;
   </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
