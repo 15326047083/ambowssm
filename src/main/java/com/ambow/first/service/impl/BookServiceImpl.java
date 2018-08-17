@@ -4,6 +4,7 @@ import com.ambow.first.dao.BookMapper;
 import com.ambow.first.entity.Book;
 import com.ambow.first.service.BookService;
 
+import com.ambow.first.util.Page;
 import com.ambow.first.vo.BookTypeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,22 +15,34 @@ import java.util.List;
 public class BookServiceImpl implements BookService {
 
     @Autowired
-    private BookMapper  bookMapper;
+    private BookMapper bookMapper;
 
     /**
-     *添加图书
+     * 全查图书
+     */
+
+
+    @Override
+    public List<Book> selectAlllBook() {
+        return bookMapper.selectAlllBook();
+    }
+
+    /**
+     * 添加图书
+     *
      * @param record
      * @return
      */
     @Override
-    public int insert( Book record) {
+    public int insert(Book record) {
 
-
-        return   bookMapper.insert(record);
+        record.setNum(0);
+        return bookMapper.insert(record);
     }
 
     /**
      * 可选择增加
+     *
      * @param record
      * @return
      */
@@ -40,6 +53,7 @@ public class BookServiceImpl implements BookService {
 
     /**
      * 根据ID查询图书
+     *
      * @param id
      * @return
      */
@@ -51,6 +65,7 @@ public class BookServiceImpl implements BookService {
 
     /**
      * 修改图书
+     *
      * @param record
      * @return
      */
@@ -62,6 +77,7 @@ public class BookServiceImpl implements BookService {
 
     /**
      * 可选择修改
+     *
      * @param record
      * @return
      */
@@ -73,6 +89,7 @@ public class BookServiceImpl implements BookService {
 
     /**
      * 根据id删除
+     *
      * @param id
      * @return
      */
@@ -83,19 +100,30 @@ public class BookServiceImpl implements BookService {
 
     /**
      * 根据类型Id查询信息
+     *
      * @param
      * @return
      */
     @Override
 
-   public  List<BookTypeVo> getBookTypeVoList()
-    {
-        return bookMapper.getBookTypeVoList();
+    public Page<BookTypeVo> getBookTypeVoList(Integer page, Integer size) {
+
+        Page<BookTypeVo> pages = new Page<>();
+        pages.setTotal(bookMapper.getBookTypeVoListNum());
+        pages.setPage(page);
+        pages.setSize(size);
+        List<BookTypeVo> bookTypeVoList = bookMapper.getBookTypeVoList((page - 1) * size, pages.getSize());
+        pages.setRows(bookTypeVoList);
+
+
+
+        return pages;
     }
 
     /**
      * 根据类型ID
      * 查询图书及类型
+     *
      * @param typeId
      * @return
      */
@@ -106,8 +134,9 @@ public class BookServiceImpl implements BookService {
 
     /**
      * 分页
-     *根据类型ID
+     * 根据类型ID
      * 查询图书及类型总数量
+     *
      * @param typeId
      * @return
      */
@@ -119,26 +148,28 @@ public class BookServiceImpl implements BookService {
 
     /**
      * 总模糊查询
+     *
      * @param blur
      * @return
      */
     @Override
     public List<Book> selectByLike(String blur) {
 
-        blur="%" + blur + "%";
+        blur = "%" + blur + "%";
         System.out.println(blur);
         return bookMapper.selectByLike(blur);
     }
 
     /**
      * 基于分类下的模糊查询
+     *
      * @param blur
      * @return
      */
     @Override
-    public List<Book> getBookTypeVoByTypeIAndLike(String typeId,String blur) {
-        blur="%" + blur + "%";
+    public List<Book> getBookTypeVoByTypeIAndLike(String typeId, String blur) {
+        blur = "%" + blur + "%";
 
-        return bookMapper.getBookTypeVoByTypeIAndLike(typeId,blur);
+        return bookMapper.getBookTypeVoByTypeIAndLike(typeId, blur);
     }
 }

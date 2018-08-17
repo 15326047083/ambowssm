@@ -26,9 +26,26 @@
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
     <legend>全部类型</legend>
 </fieldset>
+<span class="fr">
+        <span class="layui-form-label">搜索条件：</span>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" placeholder="请输入搜索条件" class="layui-input">
+        </div>
+        <button class="layui-btn mgl-20">查询</button>
+    </span>
+
+<span class="fr">
+        <span class="layui-form-label">搜索类型：</span>
+        <div class="layui-input-inline">
+            <input type="text" autocomplete="off" placeholder="请输入类型条件" class="layui-input">
+        </div>
+        <button class="layui-btn mgl-20">查询</button>
+    </span>
+
+
 <div class="my-btn-box" style="width: 1100px">
     <span class="fl">
-        <a href="/type/toNew" class="layui-btn mgl-20" id="btn-delete-all">添加</a>
+     <a href="/book/toNew" class="layui-btn mgl-20" id="btn-delete-all">添加</a>
 
     </span>
 
@@ -63,28 +80,31 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${list}" var="type" varStatus="status">
+    <c:forEach items="${list.rows}" var="type" varStatus="status">
         <tr >
-            <td><a> ${status.count}</a></td>
-            <td><a href="">${type.typeId}</a></td>
+            <td>${status.count}</td>
+            <td>${type.typeId}</td>
             <td>${type.typeName}</td>
             <td>${type.typePlace}</td>
             <td>${type.bookNum}</td>
-            <td><a href="">${type.bookId}</a></td>
+            <td>${type.bookId}</td>
             <td>${type.bookName}</td>
             <td>${type.bookAuthorName}</td>
             <td>${type.bookPress}</td>
-            <td><a href="">${type.bookPublishDate}</a></td>
+            <td>${type.bookPublishDate}</td>
             <td>${type.bookInfo}</td>
-            <td>${type.bookStatus}</td>
+
+            <c:if test="${type.bookStatus==1}">
+            <td>在馆</td></c:if>
+            <c:if test="${type.bookStatus==2}">
+                <td>借出</td></c:if>
+
+
+           <%-- <td>${type.bookStatus}</td>--%>
             <td>${type.bookBorrowNum}</td>
             <td>${type.bookRemark}</td>
-
-
-
             <td class="actions">
-                <a href="">
-                    <button class="layui-btn layui-btn-primary layui-btn-small">修改</button></a>
+                <a href="/book/toUpdate"><button class="layui-btn layui-btn-primary layui-btn-small">修改</button></a>
             </td>
         </tr>
     </c:forEach>
@@ -93,13 +113,20 @@
 <div class="my-btn-box" style="width: 1100px">
 
     <span class="fr">
-     <button class="layui-btn layui-btn-primary layui-btn-small">首页</button>
-      <button class="layui-btn layui-btn-primary layui-btn-small">上一页</button>
-      1/5
-        <button class="layui-btn layui-btn-primary layui-btn-small">下一页</button>
-        <button class="layui-btn layui-btn-primary layui-btn-small">尾页</button>
+        <a href="/book/listVo?page=1 && size=${list.size}">  <button class="layui-btn layui-btn-primary layui-btn-small">首页</button></a>
+
+        <c:if test="${list.page>1}">
+        
+        <a href="/book/listVo?page=${list.page-1}&&size=${list.size}">    <button class="layui-btn layui-btn-primary layui-btn-small">上一页</button></a>
+        </c:if>
+      ${list.page}/${ye}
+    <c:if test="${list.page<ye}">
+      <a href="/book/listVo?page=${list.page+1}&&size=${list.size}">  <button class="layui-btn layui-btn-primary layui-btn-small">下一页</button></a>
+
+    </c:if>
+       <a href="/book/listVo?page=${ye}&& size=${list.size}"><button class="layui-btn layui-btn-primary layui-btn-small">尾页</button> </a>
     </span>
-</div>
+</div
 <%----%>
 <script type="text/javascript" src="../frame/layui/layui.js"></script>
 <script type="text/javascript">

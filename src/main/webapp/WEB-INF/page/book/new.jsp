@@ -30,72 +30,68 @@
     <legend>图书添加</legend>
 </fieldset>
 
-<form class="layui-form" action="">
+<form class="layui-form" action="/book/insert">
     <div class="layui-form-item">
         <label class="layui-form-label">图书类型</label>
         <div class="layui-input-block">
-            <select name="" lay-filter="aihao">
-                <option value=""></option>
-                <option value="0">写作</option>
-                <option value="1">阅读</option>
-                <option value="2">游戏</option>
-                <option value="3">音乐</option>
-                <option value="4">旅行</option>
+            <select name="typeId"  lay-filter="aihao" >
+                <c:forEach items="${types}" var="types">
+                    <option value="${types.id}">${types.name}</option>
+                </c:forEach>
             </select>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">图书名称</label>
         <div class="layui-input-block">
-            <input type="text" name="" lay-verify="required" placeholder="请输入书名" autocomplete="off" class="layui-input">
+            <input type="text" name="bookName" lay-verify="required" placeholder="请输入书名" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">图书作者</label>
         <div class="layui-input-block">
-            <input type="text" name="" lay-verify="required" placeholder="请输入作者名字" autocomplete="off" class="layui-input">
+            <input type="text" name="authorName" lay-verify="required" placeholder="请输入作者名字" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">出版社</label>
         <div class="layui-input-block">
-            <input type="text" name="" lay-verify="required" placeholder="请输入图书出版社" autocomplete="off" class="layui-input">
+            <input type="text" name="press" lay-verify="required" placeholder="请输入图书出版社" autocomplete="off" class="layui-input">
         </div>
     </div>
     </div>
-    <div class="layui-form-item">
+   <div class="layui-form-item">
         <label class="layui-form-label">出版日期</label>
         <div class="layui-input-block">
-            <input type="date" name="" placeholder="请输入图书出版日期" class="layui-input">
+            <input type="date" name="publishDate" placeholder="请输入图书出版日期" class="layui-input">
         </div>
     </div>
+
     <div class="layui-form-item">
         <label class="layui-form-label">图书状态</label>
         <div class="layui-input-block">
-            <input type="radio" name="sex" value="在馆" title="在馆" checked="">
-            <input type="radio" name="sex" value="借出" title="借出">
-            <input type="radio" name="sex" value="禁" title="禁用" disabled="">
+            <input type="radio" name="status" value="1" title="在馆" checked="">
+            <input type="radio" name="status" value="2" title="借出" disabled="">
+
         </div>
     </div>
+
+
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">图书简介</label>
         <div class="layui-input-block">
-            <textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="LAY_demo_editor"></textarea>
+            <textarea class="layui-textarea layui-hide" name="info" lay-verify="content" id="LAY_demo_editor"></textarea>
         </div>
     </div>
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">备注</label>
         <div class="layui-input-block">
-            <textarea placeholder="请输入图为位置" class="layui-textarea"></textarea>
+            <textarea placeholder="请输入图为位置" class="layui-textarea"name="remark"></textarea>
         </div>
     </div>
-
-
-
-
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <input type="submit" value="立即提交">
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>

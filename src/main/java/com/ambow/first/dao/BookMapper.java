@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface BookMapper {
 
+    List<Book>  selectAlllBook();//图书全查
+
     int deleteByPrimaryKey(String id);//根据关键值删除
 
     int insert(Book record);//添加图书
@@ -21,7 +23,9 @@ public interface BookMapper {
 
     int updateByPrimaryKey(Book record);//修改图书
 
-    List<BookTypeVo> getBookTypeVoList();//查询全部图书类型
+    List<BookTypeVo> getBookTypeVoList(@Param("page") Integer page,@Param("size") Integer size);//查询全部图书类型
+
+    Integer getBookTypeVoListNum();//全部图书类型数量
 
     List<BookTypeVo> getBookTypeVoByTypeId(String typeId);//根据类型ID查询
 
