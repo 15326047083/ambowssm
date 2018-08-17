@@ -6,7 +6,7 @@
     <result column="book_id" property="bookId" jdbcType="VARCHAR" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
-    <result column="donate_time" property="donateTime" jdbcType="DATE" />
+    <result column="donate_time" property="donateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, book_id, user_name, user_phone, donate_time
@@ -90,4 +90,13 @@
       donate_time = #{donateTime,jdbcType=DATE}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="queryAllByDate" resultType="com.ambow.first.vo.DonateCountVo">
+    select donate_time as donateTime,count(*) as count from donate
+    <if test="start!=null and end!=null">
+       where donate_time between #{start} and #{end}
+    </if>
+    group by donate_time
+    order by donate_time asc
+  </select>
 </mapper>
