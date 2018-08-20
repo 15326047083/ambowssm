@@ -92,11 +92,11 @@
   </update>
 
   <select id="queryAllByDate" resultType="com.ambow.first.vo.DonateCountVo">
-    select donate_time as donateTime,count(*) as count from donate
+    select DATE_FORMAT(donate_time,'%Y-%m-%d') as donateTime,count(*) as count from donate
     <if test="start!=null and end!=null">
        where donate_time between #{start} and #{end}
     </if>
-    group by donate_time
+    group by donateTime
     order by donate_time asc
   </select>
 </mapper>
