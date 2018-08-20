@@ -3,34 +3,40 @@ package com.ambow.first.service;
 import com.ambow.first.entity.Book;
 import com.ambow.first.util.Page;
 import com.ambow.first.vo.BookTypeVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface BookService {
 
-    List<Book>  selectAlllBook();//图书全查
+    List<Book> selectAlllBook();//图书全查
+
+    int deleteByPrimaryKey(String id);//根据关键值删除
 
     int insert(Book record);//添加图书
 
     int insertSelective(Book record);//可选择增加图书
 
-    Book selectByPrimaryKey(String id);//根据主键查询
-
-    int updateByPrimaryKey(Book record);//修改图书
+    Book selectByPrimaryKey(String id);//根据ID查询图书
 
     int updateByPrimaryKeySelective(Book record);//可选择修改
 
-    int deleteByPrimaryKey(String id);//根据关键值删除
+    int updateByPrimaryKey(Book record);//修改图书
 
     Page<BookTypeVo> getBookTypeVoList(Integer page, Integer size);//查询全部图书类型
 
-    List<BookTypeVo> getBookTypeVoByTypeId(String typeId);//根据类型ID查询
 
-    Integer getBookTypeVoByTypeIdNum(String typeId);//根据类型ID查询总数量
+    Page<BookTypeVo> getBookTypeVoByTypeId(String typeId, Integer page, Integer size);//根据类型ID查询
 
-    List<Book> selectByLike(String blur);//总模糊查询
 
-    List<Book> getBookTypeVoByTypeIAndLike(String typeId,String blur);//分类下模糊查询
+    Page<BookTypeVo> selectByLike(String blur, Integer page, Integer size);//总模糊查询
+
+
+    Page<BookTypeVo> getBookTypeVoByTypeIAndLike(String typeId, String blur, Integer page, Integer size);//分类下模糊查询
+
+
+    Page<BookTypeVo> getBookTypeVoByTypeIdSort(Integer page, Integer size);//排行
+
 
 }
 

@@ -68,21 +68,18 @@ public class BookTest {
 
     @org.junit.Test
     public void getBookTypeVoByTypeId() {
-        System.out.println(bookService.getBookTypeVoByTypeId("2").toString());
+        System.out.println(bookService.getBookTypeVoByTypeId("2",3,2).toString());
     }
-    @org.junit.Test
-    public void getBookTypeVoByTypeIdNum() {
-        System.out.println(bookService.getBookTypeVoByTypeIdNum("2"));
-    }
+
 
     @org.junit.Test
     public void selectByLike() {
-        System.out.println(bookService.selectByLike("人").toString());
+        System.out.println(bookService.selectByLike("人",2,3).toString());
     }
 
     @org.junit.Test
     public void getBookTypeVoByTypeIAndLike() {
-        System.out.println(bookService.getBookTypeVoByTypeIAndLike("2","b").toString());
+        System.out.println(bookService.getBookTypeVoByTypeIAndLike("2","b",1,2).toString());
     }
 
 
