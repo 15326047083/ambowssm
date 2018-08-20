@@ -1,9 +1,12 @@
 package com.ambow.first.service;
 
 import com.ambow.first.entity.User;
+import org.apache.ibatis.annotations.Param;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.util.List;
+import java.util.Map;
+
 
 public interface UserService {
 
@@ -17,7 +20,17 @@ public interface UserService {
 
     List<User> selectAllByBorrowNum(); // 查询所有读者并按借阅次数排列
 
+    List<User> selectAllByBorrowNumLimit(int pageIndex); // 查询所有读者并按借阅次数排列带分页
+
     List<User> selectAll(); // 查询所有读者
+
+    List<User> selectAllLimit(int pageIndex); // 查询所有读者带分页
+
+    List<User> likeSelect( String selectKey,int pageIndex); //模糊查询
+
+    int getPageNumber(); // 获取表中的数据总数
+
+    int getPageNumberLike(String selectKey); // 获得模糊查询后的总记录数
 
     void deleteUser(String id); // 根据读者ID删除信息
 

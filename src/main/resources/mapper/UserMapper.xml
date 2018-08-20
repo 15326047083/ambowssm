@@ -152,10 +152,25 @@
   <select id="selectAllByBorrowNum" resultType="com.ambow.first.entity.User">
       select * from user order by borrow_num DESC
   </select>
+  <select id="selectAllByBorrowNumLimit" resultType="com.ambow.first.entity.User">
+      select * from user order by borrow_num DESC limit #{pageIndex},5
+  </select>
   <select id="selectAll" resultType="com.ambow.first.entity.User">
       select * from user
   </select>
-  <select id="getUserByPhone" resultType="com.ambow.first.entity.User">
-      select * from user where  phone = #{phone,jdbcType=VARCHAR};
+  <select id="selectAllLimit" resultType="com.ambow.first.entity.User">
+      select * from user limit #{pageIndex},5
   </select>
+  <select id="likeSelect" resultType="com.ambow.first.entity.User">
+      select * from user where name like concat('%',#{selectKey},'%') or phone like concat('%',#{selectKey},'%') or place like concat('%',#{selectKey},'%') limit #{pageIndex},5
+</select>
+  <select id="getUserByPhone" resultType="com.ambow.first.entity.User">
+      select * from user where  phone = #{phone,jdbcType=VARCHAR}
+  </select>
+<select id="getPageNumber" resultType="int">
+      select count(*) from user
+</select>
+  <select id="getPageNumberLike" resultType="int">
+      select count(*) from user where name like concat('%',#{selectKey},'%') or phone like concat('%',#{selectKey},'%') or place like concat('%',#{selectKey},'%')
+</select>
 </mapper>
