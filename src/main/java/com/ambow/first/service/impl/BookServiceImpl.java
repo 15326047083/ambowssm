@@ -64,6 +64,17 @@ public class BookServiceImpl implements BookService {
     }
 
     /**
+     * 单查
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public BookTypeVo selectTypeByKey(String id) {
+        return bookMapper.selectTypeByKey(id);
+    }
+
+    /**
      * 修改图书
      *
      * @param record
@@ -84,6 +95,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public int updateByPrimaryKeySelective(Book record) {
+        System.out.println(record.toString());
         return bookMapper.updateByPrimaryKeySelective(record);
     }
 
@@ -116,7 +128,6 @@ public class BookServiceImpl implements BookService {
         pages.setRows(bookTypeVoList);
 
 
-
         return pages;
     }
 
@@ -128,19 +139,18 @@ public class BookServiceImpl implements BookService {
      * @return
      */
     @Override
-    public Page<BookTypeVo> getBookTypeVoByTypeId(String typeId,Integer page, Integer size) {
+    public Page<BookTypeVo> getBookTypeVoByTypeId(String typeId, Integer page, Integer size) {
         Page<BookTypeVo> pages = new Page<>();
         pages.setTotal(bookMapper.getBookTypeVoByTypeIdNum(typeId));
         pages.setPage(page);
         pages.setSize(size);
-        List<BookTypeVo> bookTypeVoList = bookMapper.getBookTypeVoByTypeId(typeId,(page - 1) * size, pages.getSize());
+        List<BookTypeVo> bookTypeVoList = bookMapper.getBookTypeVoByTypeId(typeId, (page - 1) * size, pages.getSize());
+        System.out.println(bookTypeVoList.toString());
         pages.setRows(bookTypeVoList);
-
 
 
         return pages;
     }
-
 
 
     /**
@@ -150,7 +160,7 @@ public class BookServiceImpl implements BookService {
      * @return
      */
     @Override
-    public Page<BookTypeVo> selectByLike(String blur,Integer page, Integer size) {
+    public Page<BookTypeVo> selectByLike(String blur, Integer page, Integer size) {
 
         blur = "%" + blur + "%";
         System.out.println(blur);
@@ -159,9 +169,8 @@ public class BookServiceImpl implements BookService {
         pages.setTotal(bookMapper.selectByLikeNum(blur));
         pages.setPage(page);
         pages.setSize(size);
-        List<BookTypeVo> bookTypeVoList = bookMapper.selectByLike(blur,(page - 1) * size, pages.getSize());
+        List<BookTypeVo> bookTypeVoList = bookMapper.selectByLike(blur, (page - 1) * size, pages.getSize());
         pages.setRows(bookTypeVoList);
-
 
 
         return pages;
@@ -175,19 +184,23 @@ public class BookServiceImpl implements BookService {
      * @return
      */
     @Override
-    public Page<BookTypeVo> getBookTypeVoByTypeIAndLike(String typeId, String blur,Integer page, Integer size) {
-        blur = "%" + blur + "%";
+    public Page<BookTypeVo> getBookTypeVoByTypeIAndLike(String typeId, String blur, Integer page, Integer size) {
+    //    blur = "%" + blur + "%";
         Page<BookTypeVo> pages = new Page<>();
-        pages.setTotal(bookMapper.getBookTypeVoByTypeIAndLikeNum(typeId,blur));
+        pages.setTotal(bookMapper.getBookTypeVoByTypeIAndLikeNum(typeId, blur));
+        System.out.println(blur);
+        System.out.println(typeId);
         pages.setPage(page);
         pages.setSize(size);
-        List<BookTypeVo> bookTypeVoList = bookMapper.getBookTypeVoByTypeIAndLike(typeId,blur,(page - 1) * size, pages.getSize());
+        List<BookTypeVo> bookTypeVoList = bookMapper.getBookTypeVoByTypeIAndLike(typeId, blur, (page - 1) * size, pages.getSize());
+        System.out.println(bookTypeVoList.toString());
         pages.setRows(bookTypeVoList);
-       return  pages;
+        return pages;
     }
 
     /**
      * 排行
+     *
      * @param page
      * @param size
      * @return
@@ -196,11 +209,12 @@ public class BookServiceImpl implements BookService {
     public Page<BookTypeVo> getBookTypeVoByTypeIdSort(Integer page, Integer size) {
         Page<BookTypeVo> pages = new Page<>();
         pages.setTotal(bookMapper.getBookTypeVoByTypeIdSortNum());
+        System.out.println(bookMapper.getBookTypeVoByTypeIdSortNum());
         pages.setPage(page);
         pages.setSize(size);
         List<BookTypeVo> bookTypeVoList = bookMapper.getBookTypeVoByTypeIdSort((page - 1) * size, pages.getSize());
         pages.setRows(bookTypeVoList);
-        return  pages;
+        return pages;
 
     }
 }
