@@ -94,4 +94,7 @@
     <update id="subBookNum" parameterType="java.lang.String">
         update type set book_num = (book_num-1) where id =#{id}
     </update>
+    <select id="allBookNum" resultType="java.lang.Integer">
+        select SUM(book_num) FROM type
+    </select>
 </mapper>

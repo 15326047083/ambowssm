@@ -45,4 +45,10 @@ public interface TypeService {
      * @param id
      */
     void subBookNum(String id);
+
+    /**
+     * 计算总图书数量
+     * @return
+     */
+    int allBookNum ();
 }

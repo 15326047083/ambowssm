@@ -121,4 +121,14 @@ public class TypeServiceImpl implements TypeService {
         }
     }
 
+    /**
+     * 计算总图书数量
+     *
+     * @return
+     */
+    @Override
+    public int allBookNum() {
+        return typeMapper.allBookNum();
+    }
+
 }

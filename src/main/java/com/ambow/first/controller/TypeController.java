@@ -2,6 +2,8 @@ package com.ambow.first.controller;
 
 import com.ambow.first.entity.Type;
 import com.ambow.first.service.TypeService;
+import com.ambow.first.vo.PieVo;
+import org.apache.poi.ss.formula.functions.T;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +18,7 @@ import java.beans.IntrospectionException;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/type")
@@ -27,6 +26,47 @@ public class TypeController {
     @Autowired
     private TypeService typeService;
 
+    @RequestMapping("/toPie")
+    public String toPie(){
+        return "/type/pie";
+    }
+
+    @RequestMapping(value = "/pie")
+    @ResponseBody
+    public PieVo pie(){
+
+        PieVo p=new PieVo();
+        List<Type> list1 =typeService.queryAll();
+        //按booknum大小排序
+        Collections.sort(list1, new Comparator<Type>() {
+            @Override
+            public int compare(Type o1, Type o2) {
+                return o2.getBookNum().compareTo(o1.getBookNum());
+            }
+        });
+
+        List<Type> list=list1.subList(0,5);
+        String[] name=new String[6];
+        int[] count=new int[6];
+        int i=0;
+        int sum=typeService.allBookNum();
+
+        for (Type type:list){
+            if (type.getBookNum()!=0) {
+                sum = sum - type.getBookNum();
+                count[i] = type.getBookNum();
+                name[i] = type.getName();
+                i++;
+            }
+        }
+        if (i==5) {
+            count[i] = sum;
+            name[i] = "其他";
+        }
+        p.setName(name);
+        p.setCount(count);
+        return p;
+    }
     @RequestMapping(value = "/toList")
     public String toList(Model model) {
         model.addAttribute("list", typeService.queryAll());

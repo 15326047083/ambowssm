@@ -37,4 +37,6 @@ public interface TypeMapper {
      * @param id
      */
     void subBookNum(String id);
+
+    int allBookNum ();
 }
