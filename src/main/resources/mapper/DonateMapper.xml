@@ -99,4 +99,12 @@
     group by donateTime
     order by donate_time asc
   </select>
+  <select id="getBorrowByDate" resultType="com.ambow.first.vo.DonateCountVo">
+    select DATE_FORMAT(borrow_date,'%Y-%m-%d') as donateTime,count(*) as count from borrow
+    <if test="start!=null and end!=null">
+    where borrow_date between #{start} and #{end}
+    </if>
+    group by donateTime
+    order by donateTime asc
+  </select>
 </mapper>
