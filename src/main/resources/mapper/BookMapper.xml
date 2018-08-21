@@ -13,6 +13,9 @@
         <result column="num" property="num" jdbcType="INTEGER"/>
         <result column="remark" property="remark" jdbcType="VARCHAR"/>
     </resultMap>
+
+
+
     <sql id="Base_Column_List">
     id, type_id, book_name, author_name, press, publish_date, info, status, num, remark
   </sql>
@@ -30,6 +33,13 @@
 
     </select>
 
+    <!--单查-->
+
+    <select id="selectTypeByKey" parameterType="java.lang.String" resultType="com.ambow.first.vo.BookTypeVo">
+    select t.id typeId,t.name typeName,t.place typePlace,t.book_num bookNum,b.id bookId,b.book_name bookName,b.author_name bookAuthorName,
+    b.press bookPress,b.publish_date bookPublishDate,b.info bookInfo,b.status bookStatus,b.num bookBorrowNum,b.remark bookRemark
+    from book b,type t where t.id=b.type_id and b.id=#{id};
+  </select>
     <!--全查vo-->
     <select id="getBookTypeVoList" resultType="com.ambow.first.vo.BookTypeVo">
     select t.id typeId,t.name typeName,t.place typePlace,t.book_num bookNum,b.id bookId,b.book_name bookName,b.author_name bookAuthorName,
@@ -64,7 +74,7 @@
 
     <!--总模糊-->
 
-    <select id="selectByLike" resultMap="com.ambow.first.vo.BookTypeVo" parameterType="java.lang.String">
+    <select id="selectByLike" resultType="com.ambow.first.vo.BookTypeVo" >
         select t.id typeId,t.name typeName,t.place typePlace,t.book_num bookNum,b.id bookId,b.book_name bookName,b.author_name bookAuthorName,
     b.press bookPress,b.publish_date bookPublishDate,b.info bookInfo,b.status bookStatus,b.num bookBorrowNum,b.remark bookRemark
     from book b,type t where t.id=b.type_id
@@ -73,7 +83,7 @@
 
 
     <!--总模糊的数量-->
-    <select id="selectByLikeNum" resultMap="java.lang.Integer" parameterType="java.lang.String">
+    <select id="selectByLikeNum" resultType="java.lang.Integer" parameterType="java.lang.String">
         select count(*)
     from book b,type t where t.id=b.type_id
        and (book_name like #{blur} or author_name like #{blur} or press like #{blur} or info like #{blur}) ;
@@ -83,15 +93,33 @@
 
 
     <select id="getBookTypeVoByTypeIAndLike" resultType="com.ambow.first.vo.BookTypeVo">
+
+
     select t.id typeId,t.name typeName,t.place typePlace,t.book_num bookNum,b.id bookId,b.book_name bookName,b.author_name bookAuthorName,
     b.press bookPress,b.publish_date bookPublishDate,b.info bookInfo,b.status bookStatus,b.num bookBorrowNum,b.remark bookRemark
-    from book b,type t where t.id=b.type_id and t.id=#{typeId} and ( b.book_name like #{blur} or b.author_name like #{blur} or b.press like #{blur} or b.info like #{blur} ) limit #{page},#{size} ;
+    from book b,type t where t.id=b.type_id
+    <if test="typeId!=null  ">
+        and  t.id=#{typeId}
+    </if>
+
+        <if test="blur!=null ">
+
+        and ( b.book_name like "%"#{blur}"%" or b.author_name like '%#{blur}%' or b.press like '%#{blur}%' or b.info like '%#{blur}%' )
+        </if>
+        limit #{page},#{size} ;
   </select>
 
     <!--分类下的模糊查询的数量-->
     <select id="getBookTypeVoByTypeIAndLikeNum" resultType="java.lang.Integer">
     select count(*)
-    from book b,type t where t.id=b.type_id and t.id=#{typeId} and ( b.book_name like #{blur} or b.author_name like #{blur} or b.press like #{blur} or b.info like #{blur} )  ;
+    from book b,type t where t.id=b.type_id
+        <if test="typeId!=null">
+            and  t.id=#{typeId}
+        </if>
+        <if test="blur!=null">
+            and ( b.book_name like #{blur} or b.author_name like #{blur} or b.press like #{blur} or b.info like #{blur} )
+        </if>
+       ;
   </select>
     <!--借阅排行-->
 
@@ -100,11 +128,13 @@
     b.press bookPress,b.publish_date bookPublishDate,b.info bookInfo,b.status bookStatus,b.remark bookRemark
     from book b,type t where t.id=b.type_id  group by b.book_name order by bookBorrowNum DESC limit #{page},#{size};
   </select>
-    //todo
-    <!--借阅排行数量-->
-    <select id="getBookTypeVoByTypeIdSortNum">
-    select  count (*),SUM(b.num) as bookBorrowNum,b.book_name bookName
-    from book b,type t where t.id=b.type_id  group by b.book_name order by bookBorrowNum DESC ;
+
+
+<!--借阅排行数量-->
+    <select id="getBookTypeVoByTypeIdSortNum"  resultType="java.lang.Integer">
+   SELECT count(*) FROM(
+SELECT b.book_name
+    from book b,type t where t.id=b.type_id  group by b.book_name) sort ;
   </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -121,7 +151,7 @@
       #{info,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, 
       #{remark,jdbcType=VARCHAR})
   </insert>
-    <insert id="insertSelective" parameterType="com.ambow.first.entity.Book">
+    <insert id="insertSelective"  parameterType="com.ambow.first.entity.Book">
         insert into book
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -188,7 +218,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.ambow.first.entity.Book">
+    <update id="updateByPrimaryKeySelective"   parameterType="com.ambow.first.entity.Book">
         update book
         <set>
             <if test="typeId != null">

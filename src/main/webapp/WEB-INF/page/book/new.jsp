@@ -30,7 +30,7 @@
     <legend>图书添加</legend>
 </fieldset>
 
-<form class="layui-form" action="">
+<form class="layui-form" action="/book/insert">
     <div class="layui-form-item">
         <label class="layui-form-label">图书类型</label>
         <div class="layui-input-block">
@@ -91,9 +91,10 @@
     </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
-          <a href="/book/insert">   <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button></a>
 
+            <input type="submit" value="提交" class="layui-btn"  lay-filter="demo1" >
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+
         </div>
     </div>
 </form>

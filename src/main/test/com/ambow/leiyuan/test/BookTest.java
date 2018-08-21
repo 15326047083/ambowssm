@@ -49,9 +49,8 @@ public class BookTest {
     @org.junit.Test
     public void updateSelective() {
 
-        Book book=new Book();
-        book.setId("2");
-        book.setAuthorName("李");
+    Book book=new Book("9","3" ,"d","d","d","2018-8-24","pppppp",1,null,"s");
+
         System.out.println(bookService.updateByPrimaryKeySelective(book));
 
     }

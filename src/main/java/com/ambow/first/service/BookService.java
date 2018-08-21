@@ -19,6 +19,8 @@ public interface BookService {
 
     Book selectByPrimaryKey(String id);//根据ID查询图书
 
+    BookTypeVo selectTypeByKey(String id);//单查
+
     int updateByPrimaryKeySelective(Book record);//可选择修改
 
     int updateByPrimaryKey(Book record);//修改图书
@@ -36,6 +38,8 @@ public interface BookService {
 
 
     Page<BookTypeVo> getBookTypeVoByTypeIdSort(Integer page, Integer size);//排行
+
+
 
 
 }

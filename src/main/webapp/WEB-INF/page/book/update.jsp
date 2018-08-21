@@ -30,16 +30,31 @@
     <legend>图书添加</legend>
 </fieldset>
 
-<form class="layui-form" action="/book/insert">
+<form class="layui-form" action="/book/update">
+    <div class="layui-form-item">
+
+        <div class="layui-input-block">
+            <input type="hidden" name="id"  value="${book.id}" lay-verify="required" placeholder="请输入书名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
     <div class="layui-form-item">
         <label class="layui-form-label">图书类型</label>
         <div class="layui-input-block">
             <select name="typeId"  lay-filter="aihao">
 
                 <c:forEach items="${types}" var="types">
-                    <option value="${types.id}">${types.name}</option>
+                 <c:if test="${types.id==book.typeId}">
+                     <option value="${types.id}">${types.name}</option>
+                 </c:if>
                 </c:forEach>
-                    <option value="${book.typeId} ">${type.name} </option>
+
+                    <c:forEach items="${types}" var="types">
+                   <c:if test="${types.id!=book.typeId}">
+                       <option value="${types.id}">${types.name}</option>
+                   </c:if>
+                </c:forEach>
+
 
 
             </select>
@@ -67,7 +82,7 @@
    <div class="layui-form-item">
         <label class="layui-form-label">出版日期</label>
         <div class="layui-input-block">
-            <input type="date" name="publishDate" value="${date}" placeholder="请输入图书出版日期" class="layui-input">
+            <input type="date" name="publishDate" value="${book.publishDate}" placeholder="请输入图书出版日期" class="layui-input">
         </div>
     </div>
 
@@ -104,8 +119,8 @@
     </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <input type="submit" value="立即提交">
 
+            <input type="submit" value="立即提交" class="layui-btn"  lay-filter="demo1" >
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>

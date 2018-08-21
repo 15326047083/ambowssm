@@ -30,16 +30,32 @@ public class BookController {
     private TypeService typeService;
 
     /**
+     * 查询类型到
+     * 新增页面
+     */
+
+    @RequestMapping(value = "/toNew")
+    public String toNew(Model model) {
+
+        List<Type> types = typeService.queryAll();
+        model.addAttribute("types", types);
+        return "/book/new";
+    }
+
+
+    /**
      * 添加图书
      *
      * @param book
      * @return
      */
     @RequestMapping(value = "/insert")
+
     public String insert(Book book) {
 
+
         bookService.insert(book);
-        return "redirect:/book/list";
+        return "redirect:/book/listVo";
     }
 
     /**
@@ -50,12 +66,7 @@ public class BookController {
      */
 
 
-    @RequestMapping(value = "/list")
-    public String list(Model mode) {
-        Page<BookTypeVo> bookTypeVoList = bookService.getBookTypeVoByTypeId("2", 1, 2);
-        mode.addAttribute("list", bookTypeVoList);
-        return "/book/list";
-    }
+
 
     /**
      * 图书类型查询
@@ -76,54 +87,84 @@ public class BookController {
 
             ye = ye + 1;
         }
+        if(ye==0){ye=1;}
 
+        List<Type> types = typeService.queryAll();
+        mode.addAttribute("types", types);
+        mode.addAttribute("show", "duo");
+        mode.addAttribute("root","vo");
         mode.addAttribute("ye", ye);
         mode.addAttribute("list", bookTypeVoList);
         return "/book/list";
 
     }
 
-    /**
-     * 图书类型下模糊查询
-     */
 
 
     /**
-     * 查询类型到
-     * 新增页面
+     * 单查
      */
 
-    @RequestMapping(value = "/toNew")
-    public String toNew(Model model) {
+    @RequestMapping(value = "/get")
+    public String get(String bookId, Model mode) {
+
+        BookTypeVo bookTypeVo = bookService.selectTypeByKey(bookId);
+
+
+        mode.addAttribute("bookTypeVo", bookTypeVo);
+        mode.addAttribute("show","dan");
+        return "/book/list";
+    }
+
+    /**
+     * 分类下的模糊
+     */
+
+    @RequestMapping(value = "/listVoBlurTypeId")
+    public String listVoBlurTypeId(Model mode,String blur,String typeId,@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
+
+
+        Page<BookTypeVo> bookTypeVoList = bookService.getBookTypeVoByTypeIAndLike(typeId, blur, page, size);
+
+        Integer ye = bookTypeVoList.getTotal() / bookTypeVoList.getSize();
+
+        if (bookTypeVoList.getTotal() % bookTypeVoList.getSize() != 0) {
+
+            ye = ye + 1;
+        }
+        if(ye==0){ye=1;}
 
         List<Type> types = typeService.queryAll();
-        model.addAttribute("types", types);
-        return "/book/new";
+        mode.addAttribute("types", types);
+        mode.addAttribute("root", "typeBlur");
+        mode.addAttribute("show","duo");
+        mode.addAttribute("typeId", typeId);
+        mode.addAttribute("blur", blur);
+        mode.addAttribute("ye", ye);
+        mode.addAttribute("list", bookTypeVoList);
+        return "/book/list";
+
     }
+
 
     /**
      * 修改前查询
      */
     @RequestMapping(value = "/toUpdate")
-    public String toUpdate(String bookId, Model mode) {
+    public String toUpdate(String bookId, Model mode) throws ParseException {
 
         Book book = bookService.selectByPrimaryKey(bookId);
 
-        DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date = format1.parse(book.getPublishDate());
-            System.out.println(date);
-            mode.addAttribute("date", date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
-        Type type = typeService.selectByPrimaryKey(bookId);
-        System.out.println(type.getName());
-
-        mode.addAttribute("type", type);
+        String publishDate = book.getPublishDate();
+        publishDate = publishDate.substring(0, 10);
+        book.setPublishDate(publishDate);
 
 
+        List<Type> types = typeService.queryAll();
+
+
+        mode.addAttribute("types", types);
         mode.addAttribute("book", book);
         return "/book/update";
     }
@@ -132,9 +173,39 @@ public class BookController {
      * 修改
      */
     @RequestMapping(value = "/update")
-    public String Update(Book book) {
-        bookService.updateByPrimaryKeySelective(book);
-        return "redirect:/book/list";
+    public String update(Book book) {
+
+        System.out.println(book.toString());
+        System.out.println(bookService.updateByPrimaryKeySelective(book));
+
+        return "redirect:/book/listVo";
+    }
+
+
+    /**
+     * 排行
+     */
+    @RequestMapping(value = "/sort")
+    public String sort(Model mode, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
+
+
+        Page<BookTypeVo> bookTypeVoList = bookService.getBookTypeVoByTypeIdSort(page, size);
+
+        Integer ye = bookTypeVoList.getTotal() / bookTypeVoList.getSize();
+
+        if (bookTypeVoList.getTotal() % bookTypeVoList.getSize() != 0) {
+
+            ye = ye + 1;
+        }
+        if(ye==0){ye=1;}
+        List<Type> types = typeService.queryAll();
+        mode.addAttribute("types", types);
+        mode.addAttribute("show", "duo");
+        mode.addAttribute("root", "sort");
+        mode.addAttribute("ye", ye);
+        mode.addAttribute("list", bookTypeVoList);
+
+        return "/book/list";
     }
 
 
