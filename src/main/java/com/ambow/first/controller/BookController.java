@@ -50,22 +50,29 @@ public class BookController {
      * @return
      */
     @RequestMapping(value = "/insert")
+    public String insert(Book book, int num) {
 
-    public String insert(Book book) {
 
+        int i = num;
+        while (i > 0) {
+            i--;
+            Book book1 = new  Book();
+            book1.setTypeId(book.getTypeId());
+            book1.setBookName(book.getBookName());
+            book1.setAuthorName(book.getAuthorName());
+            book1.setPress(book.getPress());
+            book1.setPublishDate(book.getPublishDate());
+            book1.setInfo(book.getInfo());
+            book1.setStatus(book.getStatus());
+            book1.setNum(book.getNum());
+            book1.setRemark(book.getRemark());
 
-        bookService.insert(book);
+            bookService.insert(book1);
+             typeService.addBookNum(book1.getTypeId());
+
+        }
         return "redirect:/book/listVo";
     }
-
-    /**
-     * 根据类型Id查询
-     *
-     * @param mode
-     * @return
-     */
-
-
 
 
     /**
@@ -87,18 +94,20 @@ public class BookController {
 
             ye = ye + 1;
         }
-        if(ye==0){ye=1;}
+
+        if (ye == 0) {
+            ye = 1;
+        }
 
         List<Type> types = typeService.queryAll();
         mode.addAttribute("types", types);
         mode.addAttribute("show", "duo");
-        mode.addAttribute("root","vo");
+        mode.addAttribute("root", "vo");
         mode.addAttribute("ye", ye);
         mode.addAttribute("list", bookTypeVoList);
         return "/book/list";
 
     }
-
 
 
     /**
@@ -110,10 +119,10 @@ public class BookController {
 
         BookTypeVo bookTypeVo = bookService.selectTypeByKey(bookId);
 
-
+        bookTypeVo.setBookPublishDate(bookTypeVo.getBookPublishDate().substring(0,10));
         mode.addAttribute("bookTypeVo", bookTypeVo);
-        mode.addAttribute("show","dan");
-        return "/book/list";
+
+        return "/book/show";
     }
 
     /**
@@ -121,7 +130,7 @@ public class BookController {
      */
 
     @RequestMapping(value = "/listVoBlurTypeId")
-    public String listVoBlurTypeId(Model mode,String blur,String typeId,@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
+    public String listVoBlurTypeId(Model mode, String blur, String typeId, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
 
 
         Page<BookTypeVo> bookTypeVoList = bookService.getBookTypeVoByTypeIAndLike(typeId, blur, page, size);
@@ -132,12 +141,14 @@ public class BookController {
 
             ye = ye + 1;
         }
-        if(ye==0){ye=1;}
+        if (ye == 0) {
+            ye = 1;
+        }
 
         List<Type> types = typeService.queryAll();
         mode.addAttribute("types", types);
         mode.addAttribute("root", "typeBlur");
-        mode.addAttribute("show","duo");
+        mode.addAttribute("show", "duo");
         mode.addAttribute("typeId", typeId);
         mode.addAttribute("blur", blur);
         mode.addAttribute("ye", ye);
@@ -151,7 +162,7 @@ public class BookController {
      * 修改前查询
      */
     @RequestMapping(value = "/toUpdate")
-    public String toUpdate(String bookId, Model mode) throws ParseException {
+    public String toUpdate(String bookId, Model mode)  {
 
         Book book = bookService.selectByPrimaryKey(bookId);
 
@@ -197,7 +208,9 @@ public class BookController {
 
             ye = ye + 1;
         }
-        if(ye==0){ye=1;}
+        if (ye == 0) {
+            ye = 1;
+        }
         List<Type> types = typeService.queryAll();
         mode.addAttribute("types", types);
         mode.addAttribute("show", "duo");
@@ -208,5 +221,18 @@ public class BookController {
         return "/book/list";
     }
 
+    /**
+     * 删除
+     */
+
+    @RequestMapping(value = "/delete")
+    public String delete(String bookId,String typeId) {
+
+
+        System.out.println(bookService.deleteByPrimaryKey(bookId));
+        typeService.subBookNum(typeId);
+
+        return "redirect:/book/listVo";
+    }
 
 }

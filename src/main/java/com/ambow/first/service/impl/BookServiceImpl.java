@@ -30,14 +30,15 @@ public class BookServiceImpl implements BookService {
     /**
      * 添加图书
      *
-     * @param record
+     * @param book1
      * @return
      */
     @Override
-    public int insert(Book record) {
+    public int insert(Book book1) {
 
-        record.setNum(0);
-        return bookMapper.insert(record);
+        System.out.println(book1.getTypeId()+"123");
+        System.out.println(book1.toString());
+        return bookMapper.insert(book1);
     }
 
     /**
@@ -131,51 +132,6 @@ public class BookServiceImpl implements BookService {
         return pages;
     }
 
-    /**
-     * 根据类型ID
-     * 查询图书及类型
-     *
-     * @param typeId
-     * @return
-     */
-    @Override
-    public Page<BookTypeVo> getBookTypeVoByTypeId(String typeId, Integer page, Integer size) {
-        Page<BookTypeVo> pages = new Page<>();
-        pages.setTotal(bookMapper.getBookTypeVoByTypeIdNum(typeId));
-        pages.setPage(page);
-        pages.setSize(size);
-        List<BookTypeVo> bookTypeVoList = bookMapper.getBookTypeVoByTypeId(typeId, (page - 1) * size, pages.getSize());
-        System.out.println(bookTypeVoList.toString());
-        pages.setRows(bookTypeVoList);
-
-
-        return pages;
-    }
-
-
-    /**
-     * 总模糊查询
-     *
-     * @param blur
-     * @return
-     */
-    @Override
-    public Page<BookTypeVo> selectByLike(String blur, Integer page, Integer size) {
-
-        blur = "%" + blur + "%";
-        System.out.println(blur);
-
-        Page<BookTypeVo> pages = new Page<>();
-        pages.setTotal(bookMapper.selectByLikeNum(blur));
-        pages.setPage(page);
-        pages.setSize(size);
-        List<BookTypeVo> bookTypeVoList = bookMapper.selectByLike(blur, (page - 1) * size, pages.getSize());
-        pages.setRows(bookTypeVoList);
-
-
-        return pages;
-
-    }
 
     /**
      * 基于分类下的模糊查询

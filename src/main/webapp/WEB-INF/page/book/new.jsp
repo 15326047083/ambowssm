@@ -89,6 +89,13 @@
             <textarea placeholder="请输入图为位置" class="layui-textarea"name="remark"></textarea>
         </div>
     </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">数量</label>
+        <div class="layui-input-block">
+            <input type="text" name="num" lay-verify="required" placeholder="请输入图书数量" autocomplete="off" class="layui-input">
+        </div>
+    </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
 
