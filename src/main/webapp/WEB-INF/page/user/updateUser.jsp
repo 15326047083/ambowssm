@@ -30,7 +30,7 @@
     <legend>信息修改</legend>
 </fieldset>
 
-<form class="layui-form" action="/updateUser.action" method="post">
+<form class="layui-form" action="/user/updateUser" method="post">
     <input type="hidden" name="id" value="${userList.id}">
     <div class="layui-form-item">
         <label class="layui-form-label">读者姓名</label>

@@ -30,7 +30,7 @@
     <legend>读者添加</legend>
 </fieldset>
 
-<form class="layui-form" action="/insertUser.action" method="post">
+<form class="layui-form" action="/user/insertUser" method="post">
 
     <div class="layui-form-item">
         <label class="layui-form-label">读者姓名</label>
@@ -70,12 +70,16 @@
 
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <input type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" value="立即提交">
+            <input type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" value="立即提交" onblur="validate(this)">
             <input type="reset" class="layui-btn layui-btn-primary" value="重置">
         </div>
     </div>
 </form>
+<script>
 
+
+
+</script>
 
 <script src="../frame/layui/layui.js" charset="utf-8"></script>
 <script>

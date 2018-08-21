@@ -21,24 +21,25 @@
 </head>
 <body>
 <body class="body">
-
-
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
     <legend>全部读者</legend>
 </fieldset>
 <div class="my-btn-box" style="width: 1100px">
     <span class="fl">
-        <a class="layui-btn mgl-20" id="btn-delete-all" href="/toInsertUser.action">添加</a>
+        <a class="layui-btn mgl-20" id="btn-delete-all" href="/user/toInsertUser">添加</a>
+         <a href="/user/export" class="layui-btn mgl-20" id="">导出</a>
     </span>
     <span class="fl"  style="float: right">
-        <a class="layui-btn mgl-20" id="btn-delete-all2" href="/selectAllByBorrowNum.action">借书排行查询</a>
+        <a class="layui-btn mgl-20" id="btn-delete-all2" href="/user/selectAllByBorrowNum">借书排行查询</a>
     </span>
     <span class="fr">
-        <span class="layui-form-label">搜索条件：</span>
-        <div class="layui-input-inline">
-            <input type="text" autocomplete="off" placeholder="请输入搜索条件" class="layui-input">
-        </div>
-        <button class="layui-btn mgl-20">查询</button>
+        <form method="post" action="/user/likeSelect">
+             <span class="layui-form-label">搜索条件：</span>
+           <div class="layui-input-inline">
+               <input type="text" name="selectKey" value="" placeholder="请输入搜索条件" class="layui-input">
+           </div>
+               <input name="" type="submit" value="查询" class="layui-btn mgl-20">
+        </form>
     </span>
 </div>
 <table class="layui-table" style="width: 1100px">
@@ -58,15 +59,15 @@
     <thead>
     <tr>
         <th>读者编号</th>
-        <th>读者姓名</th>
-        <th>读者性别</th>
-        <th>读者年龄</th>
-        <th>读者电话</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>年龄</th>
+        <th>电话</th>
         <th>注册时间</th>
         <th>注销时间</th>
-        <th>读者地址</th>
+        <th>地址</th>
         <th>借阅次数</th>
-        <th>读者密码</th>
+        <th>密码</th>
         <th class="actions">操作</th>
     </tr>
     </thead>
@@ -75,7 +76,8 @@
         <tr >
             <td>${ul.id}</td>
             <td>${ul.name}</td>
-            <td>${ul.sex}</td>
+            <c:if test="${ul.sex==0}"><td>男</td></c:if>
+            <c:if test="${ul.sex==1}"><td>女</td></c:if>
             <td>${ul.age}</td>
             <td>${ul.phone}</td>
             <td>${ul.newDate}</td>
@@ -84,8 +86,8 @@
             <td>${ul.borrowNum}</td>
             <td>${ul.password}</td>
             <td class="actions">
-                <a class="layui-btn layui-btn-primary layui-btn-small" href="/toUpdateUser.action?id=${ul.id}">修改</a>
-                <a class="layui-btn layui-btn-primary layui-btn-small" href="/deleteUser.action?id=${ul.id}">删除</a>
+                <a class="layui-btn layui-btn-primary layui-btn-small" href="/user/toUpdateUser?id=${ul.id}">修改</a>
+                <a class="layui-btn layui-btn-primary layui-btn-small" href="/user/deleteUser?id=${ul.id}">删除</a>
             </td>
         </tr>
     </c:forEach>
@@ -93,18 +95,41 @@
 </table>
 <div class="my-btn-box" style="width: 1100px">
 
-    <span class="fr">
-     <button class="layui-btn layui-btn-primary layui-btn-small">首页</button>
-      <button class="layui-btn layui-btn-primary layui-btn-small">上一页</button>
-      1/5
-        <button class="layui-btn layui-btn-primary layui-btn-small">下一页</button>
-        <button class="layui-btn layui-btn-primary layui-btn-small">尾页</button>
+    <c:if test="${tiao==1}">
+    <span  class="fr">
+        <span>${pageUtil.pageIndex}</span>/<span>${pageUtil.pageCount}</span>
+        <a href="/user/selectAll?pageIndex=1" class="layui-btn layui-btn-primary layui-btn-small">首页</a>
+        <a href="/user/selectAll?pageIndex=${pageUtil.pageIndex>1?pageUtil.pageIndex-1:1}" class="layui-btn layui-btn-primary layui-btn-small">上一页</a>
+        <a href="/user/selectAll?pageIndex=${pageUtil.pageIndex<pageUtil.pageCount?pageUtil.pageIndex+1:pageUtil.pageCount}" class="layui-btn layui-btn-primary layui-btn-small">下一页</a>
+        <a href="/user/selectAll?pageIndex=${pageUtil.pageCount}" class="layui-btn layui-btn-primary layui-btn-small">尾页</a>
     </span>
+    </c:if>
+
+    <c:if test="${tiao==2}">
+    <span  class="fr">
+        <span>${pageUtil.pageIndex}</span>/<span>${pageUtil.pageCount}</span>
+        <a href="/user/selectAllByBorrowNum?pageIndex=1" class="layui-btn layui-btn-primary layui-btn-small">首页</a>
+        <a href="/user/selectAllByBorrowNum?pageIndex=${pageUtil.pageIndex>1?pageUtil.pageIndex-1:1}" class="layui-btn layui-btn-primary layui-btn-small">上一页</a>
+        <a href="/user/selectAllByBorrowNum?pageIndex=${pageUtil.pageIndex<pageUtil.pageCount?pageUtil.pageIndex+1:pageUtil.pageCount}" class="layui-btn layui-btn-primary layui-btn-small">下一页</a>
+        <a href="/user/selectAllByBorrowNum?pageIndex=${pageUtil.pageCount}" class="layui-btn layui-btn-primary layui-btn-small">尾页</a>
+    </span>
+    </c:if>
+    <c:if test="${tiao==3}">
+    <span  class="fr">
+        <span>${pageUtil.pageIndex}</span>/<span>${pageUtil.pageCount}</span>
+        <a href="/user/likeSelect?pageIndex=1&selectKey=${selectKey}" class="layui-btn layui-btn-primary layui-btn-small">首页</a>
+        <a href="/user/likeSelect?pageIndex=${pageUtil.pageIndex>1?pageUtil.pageIndex-1:1}&selectKey=${selectKey}" class="layui-btn layui-btn-primary layui-btn-small">上一页</a>
+        <a href="/user/likeSelect?pageIndex=${pageUtil.pageIndex<pageUtil.pageCount?pageUtil.pageIndex+1:pageUtil.pageCount}&selectKey=${selectKey}" class="layui-btn layui-btn-primary layui-btn-small">下一页</a>
+        <a href="/user/likeSelect?pageIndex=${pageUtil.pageCount}&selectKey=${selectKey}" class="layui-btn layui-btn-primary layui-btn-small">尾页</a>
+    </span>
+    </c:if>
+
 </div>
 <%----%>
 <script type="text/javascript" src="../frame/layui/layui.js"></script>
 <script type="text/javascript">
     // you code ...
 </script>
+</body>
 </body>
 </html>
