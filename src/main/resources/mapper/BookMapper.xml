@@ -49,7 +49,6 @@
 
 
     <!--Vo总数量-->
-
     <select id="getBookTypeVoListNum" resultType="java.lang.Integer">
     select count(*)
     from book b,type t where t.id=b.type_id;

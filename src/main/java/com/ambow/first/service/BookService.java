@@ -28,7 +28,6 @@ public interface BookService {
     Page<BookTypeVo> getBookTypeVoList(Integer page, Integer size);//查询全部图书类型
 
 
-
     Page<BookTypeVo> getBookTypeVoByTypeIAndLike(String typeId, String blur, Integer page, Integer size);//分类下模糊查询
 
 

@@ -36,8 +36,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public int insert(Book book1) {
 
-        System.out.println(book1.getTypeId()+"123");
-        System.out.println(book1.toString());
+
         return bookMapper.insert(book1);
     }
 

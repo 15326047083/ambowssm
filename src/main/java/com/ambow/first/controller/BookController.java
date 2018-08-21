@@ -1,8 +1,10 @@
 package com.ambow.first.controller;
 
 import com.ambow.first.entity.Book;
+import com.ambow.first.entity.Donate;
 import com.ambow.first.entity.Type;
 import com.ambow.first.service.BookService;
+import com.ambow.first.service.DonateService;
 import com.ambow.first.service.TypeService;
 import com.ambow.first.util.Page;
 import com.ambow.first.vo.BookTypeVo;
@@ -28,6 +30,8 @@ public class BookController {
     private BookService bookService;
     @Autowired
     private TypeService typeService;
+    @Autowired
+    private DonateService donateService;
 
     /**
      * 查询类型到
@@ -50,13 +54,14 @@ public class BookController {
      * @return
      */
     @RequestMapping(value = "/insert")
-    public String insert(Book book, int num) {
+    public String insert(Book book, int num, String userName, String userPhone) {
 
-
+        System.out.println(userName);
+        System.out.println(userPhone);
         int i = num;
         while (i > 0) {
             i--;
-            Book book1 = new  Book();
+            Book book1 = new Book();
             book1.setTypeId(book.getTypeId());
             book1.setBookName(book.getBookName());
             book1.setAuthorName(book.getAuthorName());
@@ -64,11 +69,24 @@ public class BookController {
             book1.setPublishDate(book.getPublishDate());
             book1.setInfo(book.getInfo());
             book1.setStatus(book.getStatus());
-            book1.setNum(book.getNum());
+            book1.setNum(0);
             book1.setRemark(book.getRemark());
 
+
+
+            if (userName!= "" &&userPhone!="") {
+                Donate donate = new Donate();
+
+                donate.setBookId(book1.getId());
+                donate.setUserName(userName);
+                donate.setUserPhone(userPhone);
+                donate.setDonateTime(new Date());
+                System.out.println(donate.getDonateTime());
+
+                donateService.insert(donate);
+            }
             bookService.insert(book1);
-             typeService.addBookNum(book1.getTypeId());
+            typeService.addBookNum(book1.getTypeId());
 
         }
         return "redirect:/book/listVo";
@@ -109,6 +127,32 @@ public class BookController {
 
     }
 
+    /**
+     * 查询捐赠信息
+     */
+    @RequestMapping(value = "/getDonate")
+    public String getDonate(Model mode,@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
+
+
+
+       Page<Donate> list=donateService.selectAll(page,size);
+
+        Integer ye = list.getTotal() / list.getSize();
+
+        if (list.getTotal() % list.getSize() != 0) {
+
+            ye = ye + 1;
+        }
+        if (ye == 0) {
+            ye = 1;
+        }
+        mode.addAttribute("list", list);
+        mode.addAttribute("ye", ye);
+         mode.addAttribute("root","donate");
+
+        return "/book/listDonate";
+    }
+
 
     /**
      * 单查
@@ -119,7 +163,7 @@ public class BookController {
 
         BookTypeVo bookTypeVo = bookService.selectTypeByKey(bookId);
 
-        bookTypeVo.setBookPublishDate(bookTypeVo.getBookPublishDate().substring(0,10));
+        bookTypeVo.setBookPublishDate(bookTypeVo.getBookPublishDate().substring(0, 10));
         mode.addAttribute("bookTypeVo", bookTypeVo);
 
         return "/book/show";
@@ -162,7 +206,7 @@ public class BookController {
      * 修改前查询
      */
     @RequestMapping(value = "/toUpdate")
-    public String toUpdate(String bookId, Model mode)  {
+    public String toUpdate(String bookId, Model mode) {
 
         Book book = bookService.selectByPrimaryKey(bookId);
 
@@ -226,7 +270,7 @@ public class BookController {
      */
 
     @RequestMapping(value = "/delete")
-    public String delete(String bookId,String typeId) {
+    public String delete(String bookId, String typeId) {
 
 
         System.out.println(bookService.deleteByPrimaryKey(bookId));

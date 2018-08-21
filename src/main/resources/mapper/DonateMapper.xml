@@ -17,6 +17,18 @@
     from donate
     where id = #{id,jdbcType=VARCHAR}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from donate limit #{page},#{size}
+
+  </select>
+  <select id="selectAllNum" resultType="java.lang.Integer"  >
+    select
+    count(*)
+    from donate
+
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from donate
     where id = #{id,jdbcType=VARCHAR}

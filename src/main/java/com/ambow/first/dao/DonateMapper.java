@@ -21,5 +21,7 @@ public interface DonateMapper {
     int updateByPrimaryKey(Donate record);
 
     List<DonateCountVo> queryAllByDate(@Param("start") Date start, @Param("end") Date end) ;
+    List<Donate> selectAll(@Param("page") Integer page, @Param("size") Integer size);
+    Integer selectAllNum();
     List<DonateCountVo> getBorrowByDate(@Param("start") Date start, @Param("end") Date end) ;
 }

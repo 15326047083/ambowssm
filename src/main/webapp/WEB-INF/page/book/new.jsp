@@ -96,6 +96,22 @@
             <input type="text" name="num" lay-verify="required" placeholder="请输入图书数量" autocomplete="off" class="layui-input">
         </div>
     </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">捐赠人</label>
+        <div class="layui-input-block">
+            <input type="text" name="userName" lay-verify="required" placeholder="请输入捐赠人" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">联系方式</label>
+        <div class="layui-input-block">
+            <input type="text" name="userPhone" lay-verify="required" placeholder="请输入联系方式" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+
+
     <div class="layui-form-item">
         <div class="layui-input-block">
 

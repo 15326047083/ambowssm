@@ -1,6 +1,7 @@
 package com.ambow.first.service;
 
 import com.ambow.first.entity.Donate;
+import com.ambow.first.util.Page;
 import com.ambow.first.vo.DonateCountVo;
 
 import java.util.Date;
@@ -34,4 +35,12 @@ public interface DonateService {
      * @return
      */
     int getAllDate (Date[] date1 ,Date[] date2);
+
+    /**
+     * 查询全部捐赠信息
+     * @return
+     */
+    Page<Donate> selectAll(Integer page, Integer size);
+
+
 }

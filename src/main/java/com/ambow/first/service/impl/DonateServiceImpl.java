@@ -3,6 +3,8 @@ package com.ambow.first.service.impl;
 import com.ambow.first.dao.DonateMapper;
 import com.ambow.first.entity.Donate;
 import com.ambow.first.service.DonateService;
+import com.ambow.first.util.Page;
+import com.ambow.first.vo.BookTypeVo;
 import com.ambow.first.vo.DonateCountVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,4 +90,24 @@ public class DonateServiceImpl implements DonateService {
         Object[] result =  set.toArray();
         return result.length;
     }
+
+    /**
+     * 全查
+     * @return
+     */
+    @Override
+    public Page<Donate> selectAll(Integer page,Integer size) {
+        Page<Donate> pages = new Page<>();
+        pages.setTotal(donateMapper.selectAllNum());
+        pages.setPage(page);
+        pages.setSize(size);
+        List<Donate> donateList = donateMapper.selectAll((page - 1) * size, pages.getSize());
+        pages.setRows(donateList);
+
+
+        return pages;
+    }
+
+
+
 }
