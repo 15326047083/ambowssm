@@ -20,5 +20,21 @@ public interface TypeMapper {
 
     List<BookTypeVo> getBookTypeVoList();
 
+    /**
+     * 导出excel
+     * @return
+     */
     List<Type> queryAll();
+
+    /**
+     * 图书数量+1
+     * @param id
+     */
+    void addBookNum(String id);
+
+    /**
+     * 图书数量-1
+     * @param id
+     */
+    void subBookNum(String id);
 }

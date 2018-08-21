@@ -88,5 +88,10 @@
     b.press bookPress,b.publish_date bookPublishDate,b.info bookInfo,b.status bookStatus,b.num bookBorrowNum,b.remark bookRemark
     from book b,type t where t.id=b.type_id;
   </select>
-
+    <update id="addBookNum" parameterType="java.lang.String">
+        update type set book_num = (book_num+1) where id =#{id}
+    </update>
+    <update id="subBookNum" parameterType="java.lang.String">
+        update type set book_num = (book_num-1) where id =#{id}
+    </update>
 </mapper>

@@ -49,19 +49,28 @@ public class DataAnalysisController {
         }
         SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
         int[] count = new int[list.size()];
+
         String[] date = new String[list.size()];
         int i = 0;
         for (DonateCountVo v : list) {
             count[i] = v.getCount();
             date[i] = simpleDateFormat.format(v.getDonateTime());
-            System.out.println(date[i]);
+            //date[i]=v.getDonateTime();
             i++;
-
         }
+        //借书
+      /*  int j=0;
+        i=0;
+        int[] count2 = new int[list2.size()];
+        String[] dateSum = new String[list.size()+list2.size()];
+        for (DonateCountVo o:list2){
+            if (date[i]>)
+        }*/
+
         CountDateVo countDateVo = new CountDateVo();
         countDateVo.setCount(count);
         countDateVo.setDate(date);
-        System.out.println(list);
+
         return countDateVo;
     }
 

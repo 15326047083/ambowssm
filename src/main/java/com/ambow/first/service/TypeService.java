@@ -33,4 +33,16 @@ public interface TypeService {
     int updateByPrimaryKey(Type record);
 
     XSSFWorkbook exportExcelInfo();
+
+    /**
+     * 图书数量+1
+     * @param id
+     */
+    void addBookNum(String id);
+
+    /**
+     * 图书数量-1
+     * @param id
+     */
+    void subBookNum(String id);
 }

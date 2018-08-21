@@ -3,6 +3,7 @@ package com.ambow.leiyuan.test;
 import com.ambow.first.dao.DonateMapper;
 import com.ambow.first.entity.Donate;
 import com.ambow.first.service.DonateService;
+import com.ambow.first.service.TypeService;
 import com.ambow.first.vo.DonateCountVo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,8 @@ public class cyj {
     private DonateService donateService;
     @Autowired
     private DonateMapper donateMapper;
+    @Autowired
+    private TypeService typeService;
     @Test
     public void insertDonate(){
         Donate donate=new Donate();
@@ -45,6 +48,10 @@ public class cyj {
             e.printStackTrace();
         }
         System.out.println(list);
-
+    }
+    @Test
+    public void updatebookNum(){
+        typeService.addBookNum("1");
+        typeService.subBookNum("3");
     }
 }

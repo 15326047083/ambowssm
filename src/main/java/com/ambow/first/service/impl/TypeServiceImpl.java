@@ -98,4 +98,27 @@ public class TypeServiceImpl implements TypeService {
         return xssfWorkbook;
     }
 
+    /**
+     * 图书数量+1
+     *
+     * @param id
+     */
+    @Override
+    public void addBookNum(String id) {
+        typeMapper.addBookNum(id);
+    }
+
+    /**
+     * 图书数量-1
+     *
+     * @param id
+     */
+    @Override
+    public void subBookNum(String id) {
+        Type type=typeMapper.selectByPrimaryKey(id);
+        if (type.getBookNum()>0){
+            typeMapper.subBookNum(id);
+        }
+    }
+
 }
