@@ -13,7 +13,7 @@ public interface BookService {
 
     int deleteByPrimaryKey(String id);//根据关键值删除
 
-    int insert(Book record);//添加图书
+    int insert(Book book1);//添加图书
 
     int insertSelective(Book record);//可选择增加图书
 
@@ -27,11 +27,6 @@ public interface BookService {
 
     Page<BookTypeVo> getBookTypeVoList(Integer page, Integer size);//查询全部图书类型
 
-
-    Page<BookTypeVo> getBookTypeVoByTypeId(String typeId, Integer page, Integer size);//根据类型ID查询
-
-
-    Page<BookTypeVo> selectByLike(String blur, Integer page, Integer size);//总模糊查询
 
 
     Page<BookTypeVo> getBookTypeVoByTypeIAndLike(String typeId, String blur, Integer page, Integer size);//分类下模糊查询
