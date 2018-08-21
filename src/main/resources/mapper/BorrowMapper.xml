@@ -14,7 +14,7 @@
     id, book_id, user_id, borrow_date, s_r_date, s_r_time_stamp, status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from borrow
     where id = #{id,jdbcType=VARCHAR}
@@ -24,11 +24,11 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.ambow.first.entity.Borrow" >
-    insert into borrow (id, book_id, user_id, 
-      borrow_date, s_r_date, s_r_time_stamp, 
+    insert into borrow (id, book_id, user_id,
+      borrow_date, s_r_date, s_r_time_stamp,
       status)
-    values (#{id,jdbcType=VARCHAR}, #{bookId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
-      #{borrowDate,jdbcType=TIMESTAMP}, #{sRDate,jdbcType=TIMESTAMP}, #{sRTimeStamp,jdbcType=BIGINT}, 
+    values (#{id,jdbcType=VARCHAR}, #{bookId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+      #{borrowDate,jdbcType=TIMESTAMP}, #{sRDate,jdbcType=TIMESTAMP}, #{sRTimeStamp,jdbcType=BIGINT},
       #{status,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ambow.first.entity.Borrow" >
@@ -114,4 +114,54 @@
       status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <update id="updateByBookId">
+    update borrow
+    set status = #{status,jdbcType=INTEGER}
+    where book_id = #{bookId,jdbcType=VARCHAR}
+
+  </update>
+  <!--借阅列表的全查带分页-->
+  <select id="selectBorrowUserBook" resultType="com.ambow.first.vo.BorrowBookUserVo">
+    select w.id borrowId,w.borrow_date borrowDate,w.s_r_date borrowSrdate,w.s_r_time_stamp borrowSrtimeStamp,
+    w.status borrowStatus,b.id bookId,b.book_name bookName,b.author_name bookAuthorName,b.press bookPress,
+    b.publish_date bookPublishDate,b.info bookInfo,b.status bookStatus,b.num bookNum,b.remark bookRemark,
+    u.id userId,u.name UserName,u.sex UserSex,u.age UserAge,u.phone UserPhone,u.new_date UserNewDate,
+    u.out_date UserOutDate,u.place UserPlace,u.borrow_num borrowNum,u.password UserPassword
+    from book b,user u,borrow w
+    where b.id=w.book_id and w.user_id=u.id limit #{page},#{size};
+  </select>
+  <!--借阅列表模糊查询-->
+  <select id="selectBorrowLike"  resultType="com.ambow.first.vo.BorrowBookUserVo">
+    select w.id borrowId,w.borrow_date borrowDate,w.s_r_date borrowSrdate,w.s_r_time_stamp borrowSrtimeStamp,
+    w.status borrowStatus,b.id bookId,b.book_name bookName,b.author_name bookAuthorName,b.press bookPress,
+    b.publish_date bookPublishDate,b.info bookInfo,b.status bookStatus,b.num bookNum,b.remark bookRemark,
+    u.id userId,u.name UserName,u.sex UserSex,u.age UserAge,u.phone UserPhone,u.new_date UserNewDate,
+    u.out_date UserOutDate,u.place UserPlace,u.borrow_num borrowNum,u.password UserPassword
+    from book b,user u,borrow w
+    where b.id=w.book_id and w.user_id=u.id
+    and(b.book_name like #{mohu} or u.phone like #{mohu} or u.name like #{mohu}) limit #{page},#{size};
+  </select>
+  <!--统计全查的分页的统计条目-->
+  <select id="selectAllCount" resultType="java.lang.Integer">
+    select count(*)
+    from book b,user u,borrow w
+    where b.id=w.book_id and w.user_id=u.id;
+  </select>
+  <!--统计模糊分页查询的总条目-->
+  <select id="selectAllCountLike" resultType="java.lang.Integer">
+
+    select count(*)
+    from book b,user u,borrow w
+    where b.id=w.book_id and  w.user_id=u.id
+    and(b.book_name like #{mohu} or u.phone like #{mohu} or u.name like #{mohu});
+
+  </select>
+  <!--根据bookID查找应当还书时间戳-->
+  <select id="getByBookId" parameterType="java.lang.String" resultType="borrow">
+    select
+    s_r_time_stamp,user_id from borrow
+    where book_id = #{bookId,jdbcType=VARCHAR}
+  </select>
+  <!--全查borrow表-->
 </mapper>

@@ -14,4 +14,8 @@ public interface LostMapper {
     int updateByPrimaryKeySelective(Lost record);
 
     int updateByPrimaryKey(Lost record);
+
+    Integer selectCountUser(String phone);
+
+    Lost getByBorrowId(String borrowId);
 }
