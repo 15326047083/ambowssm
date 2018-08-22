@@ -173,7 +173,7 @@
         }
     }
 </script>
-<script src="../frame/jquery-3.3.1.js"></script>
+
 <script>
     function checkPhone() {
         var phone = document.getElementById("phone").value;

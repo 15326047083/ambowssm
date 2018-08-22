@@ -147,6 +147,24 @@
 </script>
 <script src="../frame/jquery-3.3.1.js"></script>
 <script>
+    function checkAge()                                               // 判断年龄为5—120
+    {
+        var val = document.getElementById('age').value.trim();
+            reg=/^[-+]?\d*$/;
+            if(!reg.test(val)){//判断是否为数字类型
+                alert('对不起，您输入的是字符,请输入5到120之间的数字');
+                document.getElementById("age").value='';
+            }
+            if(val>parseInt('120')||val<parseInt('5'))
+            {
+                alert('对不起，您输入的年龄不在范围,请输入5到120之间的数字');
+                document.getElementById("age").value='';
+            }
+    }
+</script>
+
+
+<script>
     function checkPhone(phone) {
         var partten = /^((\(\d{3}\))|(\d{3}\-))?13[0-9]\d{8}|15[0-9]\d{8}|189\d{8}$/;
         if(!partten.test(phone)){
@@ -164,22 +182,6 @@
                 }
             });
         }
-    }
-</script>
-<script>
-    function checkAge()                                               // 判断年龄为5—120
-    {
-        var val = document.getElementById('age').value.trim();
-
-            reg=/^[-+]?\d*$/;
-            if(!reg.test(val)){//判断是否为数字类型
-                alert('对不起，您输入的是字符,请输入5到120之间的数字');
-                document.getElementById("age").value='';
-            if(val>parseInt('120')||val<parseInt('5'))
-            {
-                alert('对不起，您输入的年龄不在范围,请输入5到120之间的数字');
-                document.getElementById("age").value='';
-            }
     }
 </script>
 </body>
