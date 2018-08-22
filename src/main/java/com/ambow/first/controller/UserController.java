@@ -8,6 +8,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -40,6 +41,21 @@ public class UserController {
     @RequestMapping(value = "/toInsertUser")
     public String toInsertUser() {
         return "/user/insertUser";
+    }
+
+    /**
+     * 判断手机号是否已被注册
+     * @param phone
+     * @return
+     */
+    @RequestMapping("/checkPhone/{phone}")
+    @ResponseBody
+    public int checkPhone(@PathVariable("phone")String phone){
+        System.out.println(phone);
+        if (userService.getUserByPhone(phone)==null){
+            return 0; // 未注册
+        }
+        return 1; // 已经注册
     }
 
     /**

@@ -35,7 +35,8 @@
     <div class="layui-form-item">
         <label class="layui-form-label">读者姓名</label>
         <div class="layui-input-block">
-            <input type="text" name="name" lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+            <input type="text" name="name" lay-verify="required" placeholder="请输入姓名" autocomplete="off"
+                   class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -50,44 +51,58 @@
     <div class="layui-form-item">
         <label class="layui-form-label">读者年龄</label>
         <div class="layui-input-block">
-            <input type="text" name="age" lay-verify="required" placeholder="请输入读者年龄" autocomplete="off" class="layui-input">
+            <input type="text" name="age" lay-verify="required" placeholder="请输入读者年龄" autocomplete="off"
+                   id="age" onblur="checkAge()" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">读者电话</label>
         <div class="layui-input-block">
-            <input type="text" name="phone" lay-verify="required" placeholder="请输入读者电话" autocomplete="off" class="layui-input">
+            <input type="text" name="phone" lay-verify="required" placeholder="请输入读者电话" autocomplete="off"
+                   class="layui-input"
+                   id="phone" onkeyup="checkPhone(this.value)" required>
         </div>
     </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">读者地址</label>
         <div class="layui-input-block">
-            <input type="text" name="place" lay-verify="required" placeholder="请输入读者地址" autocomplete="off" class="layui-input">
+            <input type="text" name="place" lay-verify="required" placeholder="请输入读者地址" autocomplete="off"
+                   class="layui-input">
         </div>
     </div>
 
 
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <input type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" value="立即提交" onblur="validate(this)">
+            <input type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" value="立即提交"
+                   onclick="return submitNewUser()">
             <input type="reset" class="layui-btn layui-btn-primary" value="重置">
         </div>
     </div>
+    <script>
+       function submitNewUser() {
+            if (document.getElementById("phone").value.length!=11){
+                document.getElementById("phone").style.color="red"
+                return false;
+            }else if (document.getElementById("phone").value.length==11&&document.getElementById("phone").style.color=="black"){
+                return true
+            }
+            else if (document.getElementById("phone").style.color=="red")
+                return false;
+            return true;
+        }
+    </script>
 </form>
-<script>
 
-
-
-</script>
 
 <script src="../frame/layui/layui.js" charset="utf-8"></script>
 <script>
-    layui.use(['form', 'layedit', 'laydate'], function(){
+    layui.use(['form', 'layedit', 'laydate'], function () {
         var form = layui.form
-            ,layer = layui.layer
-            ,layedit = layui.layedit
-            ,laydate = layui.laydate;
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
 
         //日期
         laydate.render({
@@ -102,20 +117,20 @@
 
         //自定义验证规则
         form.verify({
-            title: function(value){
-                if(value.length < 5){
+            title: function (value) {
+                if (value.length < 5) {
                     return '标题至少得5个字符啊';
                 }
             }
-            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
-            ,content: function(value){
+            , pass: [/(.+){6,12}$/, '密码必须6到12位']
+            , content: function (value) {
                 layedit.sync(editIndex);
             }
         });
 
         //监听指定开关
-        form.on('switch(switchTest)', function(data){
-            layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+        form.on('switch(switchTest)', function (data) {
+            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
                 offset: '6px'
             });
             layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
@@ -129,6 +144,43 @@
         //     return false;
         // });
     });
+</script>
+<script src="../frame/jquery-3.3.1.js"></script>
+<script>
+    function checkPhone(phone) {
+        var partten = /^((\(\d{3}\))|(\d{3}\-))?13[0-9]\d{8}|15[0-9]\d{8}|189\d{8}$/;
+        if(!partten.test(phone)){
+            return false;
+        }else{
+            $.ajax({
+                type: "get",
+                url: "/user/checkPhone/" + phone,
+                success(data) {
+                    if (data == 1) {
+                        document.getElementById("phone").style.color = "red";
+                    } else {
+                        document.getElementById("phone").style.color = "black";
+                    }
+                }
+            });
+        }
+    }
+</script>
+<script>
+    function checkAge()                                               // 判断年龄为5—120
+    {
+        var val = document.getElementById('age').value.trim();
+
+            reg=/^[-+]?\d*$/;
+            if(!reg.test(val)){//判断是否为数字类型
+                alert('对不起，您输入的是字符,请输入5到120之间的数字');
+                document.getElementById("age").value='';
+            if(val>parseInt('120')||val<parseInt('5'))
+            {
+                alert('对不起，您输入的年龄不在范围,请输入5到120之间的数字');
+                document.getElementById("age").value='';
+            }
+    }
 </script>
 </body>
 </html>

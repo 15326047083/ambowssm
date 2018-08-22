@@ -50,13 +50,15 @@
     <div class="layui-form-item">
         <label class="layui-form-label">读者年龄</label>
         <div class="layui-input-block">
-            <input type="text" name="age" lay-verify="required" autocomplete="off" class="layui-input"  value="${userList.age}">
+            <input type="text" id="age" name="age" lay-verify="required" autocomplete="off"
+                  onblur="checkAge()" class="layui-input"  value="${userList.age}">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">读者电话</label>
         <div class="layui-input-block">
-            <input type="text" name="phone" lay-verify="required" autocomplete="off" class="layui-input" value="${userList.phone}">
+            <input type="text" name="phone" lay-verify="required" autocomplete="off" class="layui-input" value="${userList.phone}"
+                   id="phone" onblur="checkPhone()">
         </div>
     </div>
     <div class="layui-form-item">
@@ -86,10 +88,23 @@
     </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <input type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" value="确定修改">
+            <input type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" value="确定修改" onclick="return submitUpdateUser()">
             <input type="reset" class="layui-btn layui-btn-primary" value="重置">
         </div>
     </div>
+    <script>
+        function submitUpdateUser() {
+            if (document.getElementById("phone").value.length!=11){
+                document.getElementById("phone").style.color="red"
+                return false;
+            }else if (document.getElementById("phone").value.length==11&&document.getElementById("phone").style.color=="black"){
+                return true
+            }
+            else if (document.getElementById("phone").style.color=="red")
+                return false;
+            return true;
+        }
+    </script>
 </form>
 
 
@@ -141,6 +156,35 @@
         //     return false;
         // });
     });
+</script>
+
+<script src="../frame/jquery-3.3.1.js"></script>
+<script>
+    function checkAge() {
+        var val=document.getElementById("age").value;
+        reg=/^[-+]?\d*$/;
+        if(!reg.test(val)){
+            alert('对不起，您输入的是字符,请输入5到120之间的数字');
+            document.getElementById("id").value='';
+        }
+        if(val>parseInt("120")||val<5){
+            alert('对不起，您输入的年龄不在范围,请输入5到120之间的数字');
+            document.getElementById("age").value='';
+        }
+    }
+</script>
+<script src="../frame/jquery-3.3.1.js"></script>
+<script>
+    function checkPhone() {
+        var phone = document.getElementById("phone").value;
+        var partten = /^((\(\d{3}\))|(\d{3}\-))?13[0-9]\d{8}|15[0-9]\d{8}|189\d{8}$/;
+        if(!partten.test(phone)){
+            document.getElementById("phone").style.color="red";
+            return false;
+        }else{
+            document.getElementById("phone").style.color="black";
+        }
+    }
 </script>
 </body>
 </html>
