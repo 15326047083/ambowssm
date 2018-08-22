@@ -131,4 +131,15 @@ public class TypeServiceImpl implements TypeService {
         return typeMapper.allBookNum();
     }
 
+    /**
+     * 判断是否有重名
+     *
+     * @param name
+     * @return
+     */
+    @Override
+    public int getCountByName(String name) {
+        return typeMapper.getCountByName(name);
+    }
+
 }

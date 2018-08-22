@@ -31,6 +31,10 @@ public class TypeController {
         return "/type/pie";
     }
 
+    /**
+     * 饼图的生成
+     * @return
+     */
     @RequestMapping(value = "/pie")
     @ResponseBody
     public PieVo pie(){
@@ -67,12 +71,24 @@ public class TypeController {
         p.setCount(count);
         return p;
     }
+
+    /**
+     * 查看列表
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/toList")
     public String toList(Model model) {
         model.addAttribute("list", typeService.queryAll());
         return "/type/list";
     }
 
+    /**
+     * 根据ID修改
+     * @param id  前台传来的ID
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/toUpdate/{id}")
     public String toUpdate(@PathVariable("id") String id, Model model) {
 
@@ -129,6 +145,19 @@ public class TypeController {
                 e.printStackTrace();
             }
         return "redirect:/type/toList";
+    }
+
+    /**
+     * 判断是否有重名
+     * @param name
+     * @return
+     */
+    @RequestMapping("/checkname/{name}")
+    @ResponseBody
+    int getCountByName(@PathVariable("name") String name){
+
+       // System.out.println(name);
+        return typeService.getCountByName(name);
     }
 
 

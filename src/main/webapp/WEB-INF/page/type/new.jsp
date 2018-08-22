@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/frame/layui/css/layui.css">
     <link rel="stylesheet" href="/frame/static/css/style.css">
     <link rel="icon" href="/frame/static/image/code.png">
+    <script type="text/javascript" src="/frame/jquery-3.3.1.js"></script>
 </head>
 <body class="body">
 
@@ -35,7 +36,8 @@
     <div class="layui-form-item">
         <label class="layui-form-label">分类名称</label>
         <div class="layui-input-block">
-            <input type="text" name="name" lay-verify="required" placeholder="请输入书名" autocomplete="off" class="layui-input">
+            <input onkeyup="checkType(this.value)" required type="text" id="name" name="name" lay-verify="required" placeholder="请输入书名" autocomplete="off" class="layui-input">
+        <span id="errorMsg" style="color: red"></span>
         </div>
     </div>
 
@@ -48,30 +50,40 @@
 
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
+
+            <input type="submit" value="提交" onclick="return submitType()" class="layui-btn">
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
 </form>
-
-
 <script src="../frame/layui/layui.js" charset="utf-8"></script>
-<script>
-    layui.use(['form', 'layedit', 'laydate'], function(){
-        var form = layui.form
-            ,layer = layui.layer
-            ,layedit = layui.layedit
-            ,laydate = layui.laydate;
-
-        //日期
-        laydate.render({
-            elem: '#date'
-        });
-        laydate.render({
-            elem: '#date1'
-        });
-
-    });
-</script>
 </body>
 </html>
+<script>
+    var bj=0;
+    function checkType(name) {
+        //发ajax请求到后台判断用户名是否重复
+        $.ajax({
+            url:"/type/checkname/"+name,
+            data:{name:name},
+            dataType: "json",
+            error() {
+            },
+            success(json) {
+                if (json==0){
+                    $("#errorMsg").html("可以注册");
+                    bj=0;
+                }
+                else {
+                    $("#errorMsg").html("该名字已经存在");
+                    bj=1;
+                }
+            }
+        });
+    }
+    function submitType(){
+        if (bj==0)
+            return true;
+        return false;
+    }
+</script>

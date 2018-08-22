@@ -97,4 +97,7 @@
     <select id="allBookNum" resultType="java.lang.Integer">
         select SUM(book_num) FROM type
     </select>
+    <select id="getCountByName" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT count(*) from type where name=#{name}
+    </select>
 </mapper>

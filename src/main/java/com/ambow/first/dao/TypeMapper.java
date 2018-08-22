@@ -38,5 +38,16 @@ public interface TypeMapper {
      */
     void subBookNum(String id);
 
+    /**
+     * 全部书籍数量
+     * @return
+     */
     int allBookNum ();
+
+    /**
+     *判断是否有重名
+     * @param name
+     * @return
+     */
+    int getCountByName(String name);
 }

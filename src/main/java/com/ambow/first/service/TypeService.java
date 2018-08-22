@@ -51,4 +51,10 @@ public interface TypeService {
      * @return
      */
     int allBookNum ();
+    /**
+     *判断是否有重名
+     * @param name
+     * @return
+     */
+    int getCountByName(String name);
 }
