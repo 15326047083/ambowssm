@@ -2,18 +2,22 @@ package com.ambow.first.service.impl;
 
 import com.ambow.first.dao.BorrowMapper;
 import com.ambow.first.entity.Borrow;
+import com.ambow.first.entity.Type;
 import com.ambow.first.service.BorrowService;
 
+import com.ambow.first.util.ExcelBean;
+import com.ambow.first.util.ExcelUtil;
 import com.ambow.first.util.Page;
 import com.ambow.first.vo.BorrowBookUserVo;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.beans.IntrospectionException;
+import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class BorrowServiceImpl implements BorrowService {
@@ -145,6 +149,52 @@ public class BorrowServiceImpl implements BorrowService {
     @Override
     public Borrow getByBookId(String bookId) {
         return borrowMapper.getByBookId(bookId);
+    }
+
+    /**
+     * 导出
+     *
+     * @return
+     */
+    @Override
+    public XSSFWorkbook exportExcelInfo() {
+        //根据条件查询数据，把数据装载到一个list中
+        List<BorrowBookUserVo> list=borrowMapper.queryAll();
+        List<ExcelBean> excel=new ArrayList<>();
+        Map<Integer,List<ExcelBean>> map=new LinkedHashMap<>();
+        XSSFWorkbook xssfWorkbook=null;
+        //设置标题栏
+        excel.add(new ExcelBean("借阅表编号","borrowId",0));
+        excel.add(new ExcelBean("图书编号","bookId",0));
+        excel.add(new ExcelBean("图书名称","bookName",0));
+        excel.add(new ExcelBean("图书作者","bookAuthorName",0));
+        excel.add(new ExcelBean("图书出版社","bookPress",0));
+        excel.add(new ExcelBean("图书出版日期","bookPublishDate",0));
+        excel.add(new ExcelBean("图书简介","bookInfo",0));
+        excel.add(new ExcelBean("图书备注","bookRemark",0));
+        excel.add(new ExcelBean("读者姓名","UserName",0));
+        excel.add(new ExcelBean("读者性别","UserSex",0));
+        excel.add(new ExcelBean("读者手机号","UserPhone",0));
+        excel.add(new ExcelBean("读者住址","UserPlace",0));
+        excel.add(new ExcelBean("外借时间","borrowDate",0));
+        excel.add(new ExcelBean("应归还时间","borrowSrdate",0));
+         map.put(0, excel);
+        String sheetName = "sheet1";
+        //调用ExcelUtil的方法
+        try {
+            xssfWorkbook = ExcelUtil.createExcelFile(BorrowBookUserVo.class, list, map, sheetName);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IntrospectionException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return xssfWorkbook;
     }
 
 

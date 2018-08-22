@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="../frame/static/css/style.css">
     <link rel="icon" href="../frame/static/image/code.png">
 </head>
-<body>
 <body class="body">
 
 
@@ -29,32 +28,31 @@
 <div class="my-btn-box" style="width: 1100px">
     <span class="fl">
         <a class="layui-btn mgl-20" id="btn-delete-all">添加</a>
-
+ <a href="/borrow/export" class="layui-btn mgl-20" id="">导出</a>
     </span>
     <form action="/borrow/toLikeList" >
     <span class="fr">
         <span class="layui-form-label">搜索条件：</span>
         <div class="layui-input-inline">
-            <input type="text" name="mohu" autocomplete="off" placeholder="请输入搜索条件" class="layui-input">
+            <input type="text" name="mohu" autocomplete="off" placeholder="读者姓名/手机号/书名" class="layui-input">
         </div>
-        <input type="submit" class="layui-btn mgl-20">查询</input>
+        <input type="submit" class="layui-btn mgl-20" value="查询"></input>
     </span>
     </form>
 </div>
 <table class="layui-table" style="width: 1100px">
     <colgroup>
-        <col width="100">
-        <col width="200">
-        <col width="500">
+        <col width="80">
+        <col width="180">
+        <col width="120">
         <col width="100">
     </colgroup>
     <thead>
     <tr>
         <th>编号</th>
-        <th>图书ID</th>
         <th>图书名字</th>
-        <th>用户ID</th>
         <th>用户姓名</th>
+        <th>用户手机号</th>
         <th>借出日期</th>
         <th>应当归还日期</th>
         <th>借阅状态</th>
@@ -66,26 +64,25 @@
     <c:forEach items="${list.rows}" var="borrow" varStatus="status">
 
         <tr >
-            <td><a> ${borrow.borrowId}</a></td>
-            <td><a> ${borrow.bookId}</a></td>
-            <td><a> ${borrow.bookName}</a></td>
-            <td><a href="">${borrow.userPhone}</a></td>
-            <td><a> ${borrow.userName}</a></td>
+            <td>${status.count}</td>
+            <td>《${borrow.bookName}》</td>
+            <td>${borrow.userName}</td>
+            <td>${borrow.userPhone}</td>
             <td>${borrow.borrowDate}</td>
-            <td><a href="">${borrow.borrowSrdate}</a></td>
-            <td>
-
-                <c:if test="${borrow.borrowStatus==2}">借阅中</c:if>
-                <c:if test="${borrow.borrowStatus==3}">逾期未还</c:if>
-                <c:if test="${borrow.borrowStatus==4}">逾期已还</c:if>
-                <c:if test="${borrow.borrowStatus==5}">按时归还</c:if>
-            </td>
+            <td>${borrow.borrowSrdate}</td>
+            <c:if test="${borrow.borrowStatus==2}"><td style="color:red">借阅中</td></c:if>
+            <c:if test="${borrow.borrowStatus==3}"><td  style="color:red ">逾期未还
+            </td></c:if>
+            <c:if test="${borrow.borrowStatus==4}"><td  style="color: green">逾期已还
+            </td></c:if>
+            <c:if test="${borrow.borrowStatus==5}"><td style="color: green">按时归还
+            </td></c:if>
 <%----%>
             <td class="actions">
                <%--  <a href="/borrow/updateBorrow?bookId=${borrow.bookId}"><button class="layui-btn layui-btn-primary layui-btn-small" >还书</button></a>--%>
 
                   <%-- <c:if test="${borrow.borrowStatus==5}"> <button class="layui-btn layui-btn-primary layui-btn-small" >还书</button></a></c:if>--%>
-                    <a href="#" onclick="updateBorrow(${borrow.bookId})"><button class="layui-btn layui-btn-primary layui-btn-small" >还书</button></a>        </td>
+                   <button onclick="updateBorrow('${borrow.bookId}')" class="layui-btn layui-btn-primary layui-btn-small" >还书</button>        </td>
         </tr>
 
     </c:forEach>
@@ -140,6 +137,7 @@
 <script src="/js/sb-admin-2.js"></script>
 <script type="text/javascript">
     function updateBorrow(bookId) {
+
         if(confirm('确定要归还此书吗?')) {
             $.post("/borrow/updateBorrow",{"bookId":bookId},
                 function(data){

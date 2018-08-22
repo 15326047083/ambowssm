@@ -131,6 +131,16 @@
     from book b,user u,borrow w
     where b.id=w.book_id and w.user_id=u.id limit #{page},#{size};
   </select>
+  <select id="queryAll" resultType="com.ambow.first.vo.BorrowBookUserVo">
+    select w.id borrowId,w.borrow_date borrowDate,w.s_r_date borrowSrdate,w.s_r_time_stamp borrowSrtimeStamp,
+    w.status borrowStatus,b.id bookId,b.book_name bookName,b.author_name bookAuthorName,b.press bookPress,
+    b.publish_date bookPublishDate,b.info bookInfo,b.status bookStatus,b.num bookNum,b.remark bookRemark,
+    u.id userId,u.name UserName,u.sex UserSex,u.age UserAge,u.phone UserPhone,u.new_date UserNewDate,
+    u.out_date UserOutDate,u.place UserPlace,u.borrow_num borrowNum,u.password UserPassword
+    from book b,user u,borrow w
+    where b.id=w.book_id and w.user_id=u.id;
+  </select>
+
   <!--借阅列表模糊查询-->
   <select id="selectBorrowLike"  resultType="com.ambow.first.vo.BorrowBookUserVo">
     select w.id borrowId,w.borrow_date borrowDate,w.s_r_date borrowSrdate,w.s_r_time_stamp borrowSrtimeStamp,

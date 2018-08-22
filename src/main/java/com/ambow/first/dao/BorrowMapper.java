@@ -31,5 +31,7 @@ public interface BorrowMapper {
     Integer selectAllCountLike(@Param("mohu") String mohu);
     //根据bookId查询时间戳
     Borrow getByBookId(String bookId);
+    //查询全部借书信息
+    List<BorrowBookUserVo> queryAll();
 
 }

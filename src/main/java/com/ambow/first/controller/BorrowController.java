@@ -11,6 +11,7 @@ import com.ambow.first.service.LostService;
 import com.ambow.first.service.UserService;
 import com.ambow.first.util.Page;
 import com.ambow.first.vo.BorrowBookUserVo;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.beans.IntrospectionException;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -179,6 +189,32 @@ public class BorrowController {
         }
 
     }
-
+    @RequestMapping("/export")
+    @ResponseBody
+    public String export(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, IntrospectionException, IllegalAccessException, ParseException, InvocationTargetException, UnsupportedEncodingException {
+        System.out.println(response+" "+request);
+        response.reset(); //清除buffer缓存
+        // 指定下载的文件名，浏览器都会使用本地编码，即GBK，浏览器收到这个文件名后，用ISO-8859-1来解码，然后用GBK来显示
+        // 所以我们用GBK解码，ISO-8859-1来编码，在浏览器那边会反过来执行。
+        response.setHeader("Content-Disposition", "attachment;filename=Borrow_"+new Date().getTime()+".xlsx");
+        response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+        XSSFWorkbook workbook = null;
+        //导出Excel对象
+        workbook = borrowService.exportExcelInfo();
+        OutputStream output;
+        try {
+            output = response.getOutputStream();
+            BufferedOutputStream bufferedOutPut = new BufferedOutputStream(output);
+            bufferedOutPut.flush();
+            workbook.write(bufferedOutPut);
+            bufferedOutPut.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/borrow/toList";
+    }
 
 }

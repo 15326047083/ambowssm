@@ -4,6 +4,7 @@ import com.ambow.first.entity.Borrow;
 import com.ambow.first.util.Page;
 import com.ambow.first.vo.BorrowBookUserVo;
 import org.apache.ibatis.annotations.Param;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.util.List;
 
@@ -25,4 +26,10 @@ public interface BorrowService {
     int updateByBookId(Borrow borrow);
 
     Borrow getByBookId(String bookId);
+
+    /**
+     * 导出
+     * @return
+     */
+    XSSFWorkbook exportExcelInfo();
 }
