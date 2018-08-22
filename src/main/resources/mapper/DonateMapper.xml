@@ -17,16 +17,15 @@
     from donate
     where id = #{id,jdbcType=VARCHAR}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap"  >
-    select
-    <include refid="Base_Column_List" />
-    from donate limit #{page},#{size}
+  <select id="selectAll" resultType="com.ambow.first.vo.BookDonateVo"  >
+  select b.id,b.book_name,d.user_name,d.user_phone,d.donate_time from book b,donate d where b.id=d.book_id limit #{page},#{size}
 
   </select>
+
+
+
   <select id="selectAllNum" resultType="java.lang.Integer"  >
-    select
-    count(*)
-    from donate
+select count(*) from book b,donate d where b.id=d.book_id;
 
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >

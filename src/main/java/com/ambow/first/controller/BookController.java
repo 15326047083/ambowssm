@@ -85,7 +85,7 @@ public class BookController {
 
                 donateService.insert(donate);
             }
-            bookService.insert(book1);
+            bookService.insertSelective(book1);
             typeService.addBookNum(book1.getTypeId());
 
         }
@@ -127,31 +127,6 @@ public class BookController {
 
     }
 
-    /**
-     * 查询捐赠信息
-     */
-    @RequestMapping(value = "/getDonate")
-    public String getDonate(Model mode,@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
-
-
-
-       Page<Donate> list=donateService.selectAll(page,size);
-
-        Integer ye = list.getTotal() / list.getSize();
-
-        if (list.getTotal() % list.getSize() != 0) {
-
-            ye = ye + 1;
-        }
-        if (ye == 0) {
-            ye = 1;
-        }
-        mode.addAttribute("list", list);
-        mode.addAttribute("ye", ye);
-         mode.addAttribute("root","donate");
-
-        return "/book/listDonate";
-    }
 
 
     /**

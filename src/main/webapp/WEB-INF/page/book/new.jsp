@@ -34,7 +34,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">图书类型</label>
         <div class="layui-input-block">
-            <select name="typeId"  lay-filter="aihao" >
+            <select name="typeId" lay-filter="aihao">
                 <c:forEach items="${types}" var="types">
                     <option value="${types.id}">${types.name}</option>
                 </c:forEach>
@@ -44,26 +44,29 @@
     <div class="layui-form-item">
         <label class="layui-form-label">图书名称</label>
         <div class="layui-input-block">
-            <input type="text" name="bookName"  lay-verify="required" placeholder="请输入书名" autocomplete="off" class="layui-input">
+            <input type="text" name="bookName" lay-verify="required" placeholder="请输入书名" autocomplete="off"
+                   class="layui-input" required>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">图书作者</label>
         <div class="layui-input-block">
-            <input type="text" name="authorName"   lay-verify="required" placeholder="请输入作者名字" autocomplete="off" class="layui-input">
+            <input type="text" name="authorName" lay-verify="required" placeholder="请输入作者名字" autocomplete="off"
+                   class="layui-input" required>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">出版社</label>
         <div class="layui-input-block">
-            <input type="text" name="press" lay-verify="required" placeholder="请输入图书出版社" autocomplete="off" class="layui-input">
+            <input type="text" name="press" lay-verify="required" placeholder="请输入图书出版社" autocomplete="off"
+                   class="layui-input" required>
         </div>
     </div>
     </div>
-   <div class="layui-form-item">
+    <div class="layui-form-item">
         <label class="layui-form-label">出版日期</label>
         <div class="layui-input-block">
-            <input type="date" name="publishDate"  placeholder="请输入图书出版日期" class="layui-input">
+            <input type="date" name="publishDate" placeholder="请输入图书出版日期" class="layui-input" required>
         </div>
     </div>
 
@@ -80,56 +83,95 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">图书简介</label>
         <div class="layui-input-block">
-            <textarea class="layui-textarea layui-hide"  name="info" lay-verify="content" id="LAY_demo_editor"></textarea>
+            <textarea class="layui-textarea layui-hide" name="info" lay-verify="content" id="LAY_demo_editor"
+                      required></textarea>
         </div>
     </div>
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">备注</label>
         <div class="layui-input-block">
-            <textarea placeholder="请输入图为位置" class="layui-textarea"name="remark"></textarea>
+            <textarea placeholder="请输入图为位置" class="layui-textarea" name="remark" required></textarea>
         </div>
     </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">数量</label>
         <div class="layui-input-block">
-            <input type="text" name="num" lay-verify="required" placeholder="请输入图书数量" autocomplete="off" class="layui-input">
+            <input type="number" name="num" id="num" lay-verify="required" placeholder="请输入图书数量" autocomplete="off"
+                   class="layui-input" required>
         </div>
     </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">捐赠人</label>
         <div class="layui-input-block">
-            <input type="text" name="userName" lay-verify="required" placeholder="请输入捐赠人" autocomplete="off" class="layui-input">
+            <input type="text" name="userName" lay-verify="required" placeholder="请输入捐赠人" autocomplete="off"
+                   class="layui-input" >
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">联系方式</label>
         <div class="layui-input-block">
-            <input type="text" name="userPhone" lay-verify="required" placeholder="请输入联系方式" autocomplete="off" class="layui-input">
+            <input type="number" name="userPhone" id="userPhone" lay-verify="required" placeholder="请输入联系方式"
+                   autocomplete="off" required="required" class="layui-input" >
         </div>
     </div>
+
+
+
 
 
 
     <div class="layui-form-item">
         <div class="layui-input-block">
 
-            <input type="submit" value="提交" class="layui-btn"  lay-filter="demo1" >
+            <input type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" value="提交"
+                   onclick="return submitNewUser()">
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
 
         </div>
     </div>
+    <script>
+        function submitNewUser() {
+
+            if(document.getElementById("num").value<1){
+                alert("图书数量要大于0")
+                document.getElementById("num").value='';
+            }
+
+          /*  var phone=document.getElementById("userPhone").value;
+            alert(phone+"aaa");
+            var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+            if (!myreg.test(phone)) {
+                alert("手机号格式不正确")
+                document.getElementById("userPhone").value='';
+                return false;
+            } else {
+                return true;
+            }*/
+
+
+
+            if (document.getElementById("userPhone").value.length!=11  ){
+                alert("手机号格式不正确")
+                document.getElementById("userPhone").value='';
+                return false;
+            }else {
+                return true;
+            }
+
+        }
+    </script>
 </form>
 
 
 <script src="../frame/layui/layui.js" charset="utf-8"></script>
 <script>
-    layui.use(['form', 'layedit', 'laydate'], function(){
+    layui.use(['form', 'layedit', 'laydate'], function () {
         var form = layui.form
-            ,layer = layui.layer
-            ,layedit = layui.layedit
-            ,laydate = layui.laydate;
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
 
         //日期
         laydate.render({
@@ -144,20 +186,20 @@
 
         //自定义验证规则
         form.verify({
-            title: function(value){
-                if(value.length < 5){
+            title: function (value) {
+                if (value.length < 5) {
                     return '标题至少得5个字符啊';
                 }
             }
-            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
-            ,content: function(value){
+            , pass: [/(.+){6,12}$/, '密码必须6到12位']
+            , content: function (value) {
                 layedit.sync(editIndex);
             }
         });
 
         //监听指定开关
-        form.on('switch(switchTest)', function(data){
-            layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+        form.on('switch(switchTest)', function (data) {
+            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
                 offset: '6px'
             });
             layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)

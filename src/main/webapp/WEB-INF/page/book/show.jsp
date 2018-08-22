@@ -58,7 +58,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">图书名称</label>
         <div class="layui-input-block">
-            <input type="text" value="${bookTypeVo.bookName}" disabled="disabled" lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" value="《${bookTypeVo.bookName}》" disabled="disabled" lay-verify="required" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">

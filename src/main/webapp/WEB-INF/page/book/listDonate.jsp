@@ -48,7 +48,7 @@
     <thead>
     <tr>
         <th>编号</th>
-        <th>图书编号</th>
+        <th>图书名称</th>
         <th>捐赠人</th>
         <th>捐赠人联系方式</th>
         <th>捐赠时间</th>
@@ -63,7 +63,7 @@
         <tr>
             <td>${status.count}</td>
 
-            <td>${donate.bookId}</td>
+            <td>${donate.bookName}</td>
             <td>${donate.userName}</td>
             <td>${donate.userPhone}</td>
 
@@ -81,22 +81,22 @@
 <div class="my-btn-box" style="width: 1100px">
     <c:if test="${root=='donate'}">
     <span class="fr">
-        <a href="/book/getDonate?page=1 && size=${list.size}">  <button
+        <a href="/dataAnalysis/getDonate?page=1 && size=${list.size}">  <button
                 class="layui-btn layui-btn-primary layui-btn-small">首页</button></a>
 
         <c:if test="${list.page>1}">
 
-            <a href="/book/getDonate?page=${list.page-1}&&size=${list.size}">    <button
+            <a href="/dataAnalysis/getDonate?page=${list.page-1}&&size=${list.size}">    <button
                     class="layui-btn layui-btn-primary layui-btn-small">上一页</button></a>
         </c:if>
       ${list.page}/${ye}
     <c:if test="${list.page<ye}">
-        <a href="/book/getDonate?page=${list.page+1}&&size=${list.size}">  <button
+        <a href="/dataAnalysis/getDonate?page=${list.page+1}&&size=${list.size}">  <button
                 class="layui-btn layui-btn-primary layui-btn-small">下一页</button></a>
 
     </c:if>
         <c:if test="${ye>0}">
-       <a href="/book/getDonate?page=${ye}&& size=${list.size}"><button
+       <a href="/dataAnalysis/getDonate?page=${ye}&& size=${list.size}"><button
                class="layui-btn layui-btn-primary layui-btn-small">尾页</button> </a>
         </c:if>
     </span>

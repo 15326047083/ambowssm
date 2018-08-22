@@ -4,6 +4,7 @@ import com.ambow.first.dao.DonateMapper;
 import com.ambow.first.entity.Donate;
 import com.ambow.first.service.DonateService;
 import com.ambow.first.util.Page;
+import com.ambow.first.vo.BookDonateVo;
 import com.ambow.first.vo.BookTypeVo;
 import com.ambow.first.vo.DonateCountVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,12 +97,13 @@ public class DonateServiceImpl implements DonateService {
      * @return
      */
     @Override
-    public Page<Donate> selectAll(Integer page,Integer size) {
-        Page<Donate> pages = new Page<>();
+    public Page<BookDonateVo> selectAll(Integer page, Integer size) {
+        Page<BookDonateVo> pages = new Page<>();
         pages.setTotal(donateMapper.selectAllNum());
         pages.setPage(page);
         pages.setSize(size);
-        List<Donate> donateList = donateMapper.selectAll((page - 1) * size, pages.getSize());
+        List<BookDonateVo> donateList = donateMapper.selectAll((page - 1) * size, pages.getSize());
+
         pages.setRows(donateList);
 
 

@@ -87,7 +87,7 @@
         <th>图书类型</th>
         <th>书架位置</th>
 
-        <th>图书编号</th>
+
         <th>图书名称</th>
         <th>图书作者</th>
 
@@ -105,9 +105,8 @@
 
             <td>${type.typeName}</td>
             <td>${type.typePlace}</td>
-            <td>${type.bookId}</td>
 
-            <td>${type.bookName}</td>
+            <td>《${type.bookName}》</td>
             <td>${type.bookAuthorName}</td>
 
 

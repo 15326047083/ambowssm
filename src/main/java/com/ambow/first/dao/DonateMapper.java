@@ -1,6 +1,7 @@
 package com.ambow.first.dao;
 
 import com.ambow.first.entity.Donate;
+import com.ambow.first.vo.BookDonateVo;
 import com.ambow.first.vo.DonateCountVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,7 +22,7 @@ public interface DonateMapper {
     int updateByPrimaryKey(Donate record);
 
     List<DonateCountVo> queryAllByDate(@Param("start") Date start, @Param("end") Date end) ;
-    List<Donate> selectAll(@Param("page") Integer page, @Param("size") Integer size);
+    List<BookDonateVo> selectAll(@Param("page") Integer page, @Param("size") Integer size);
     Integer selectAllNum();
     List<DonateCountVo> getBorrowByDate(@Param("start") Date start, @Param("end") Date end) ;
 }

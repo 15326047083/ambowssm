@@ -1,7 +1,10 @@
 package com.ambow.first.controller;
 
 import com.ambow.first.dao.DonateMapper;
+import com.ambow.first.entity.Donate;
 import com.ambow.first.service.DonateService;
+import com.ambow.first.util.Page;
+import com.ambow.first.vo.BookDonateVo;
 import com.ambow.first.vo.CountDateVo;
 import com.ambow.first.vo.DonateCountVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,5 +130,33 @@ public class DataAnalysisController {
 
         return countDateVo;
     }
+
+
+    /**
+     * 查询捐赠信息
+     */
+    @RequestMapping(value = "/getDonate")
+    public String getDonate(Model mode,@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
+
+
+
+        Page<BookDonateVo> list=donateService.selectAll(page,size);
+
+        Integer ye = list.getTotal() / list.getSize();
+
+        if (list.getTotal() % list.getSize() != 0) {
+
+            ye = ye + 1;
+        }
+        if (ye == 0) {
+            ye = 1;
+        }
+        mode.addAttribute("list", list);
+        mode.addAttribute("ye", ye);
+        mode.addAttribute("root","donate");
+
+        return "/book/listDonate";
+    }
+
 
 }

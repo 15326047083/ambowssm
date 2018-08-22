@@ -2,6 +2,7 @@ package com.ambow.first.service;
 
 import com.ambow.first.entity.Donate;
 import com.ambow.first.util.Page;
+import com.ambow.first.vo.BookDonateVo;
 import com.ambow.first.vo.DonateCountVo;
 
 import java.util.Date;
@@ -40,7 +41,7 @@ public interface DonateService {
      * 查询全部捐赠信息
      * @return
      */
-    Page<Donate> selectAll(Integer page, Integer size);
+    Page<BookDonateVo> selectAll(Integer page, Integer size);
 
 
 }
