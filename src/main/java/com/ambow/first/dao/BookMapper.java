@@ -29,13 +29,7 @@ public interface BookMapper {
 
     Integer getBookTypeVoListNum();//全部图书类型数量
 
-    List<BookTypeVo> getBookTypeVoByTypeId(@Param("typeId") String typeId,@Param("page") Integer page, @Param("size") Integer size);//根据类型ID查询
 
-    Integer getBookTypeVoByTypeIdNum(String typeId);//根据类型ID查询总数量
-
-    List<BookTypeVo> selectByLike(@Param("blur") String blur,@Param("page") Integer page, @Param("size") Integer size);//总模糊查询
-
-    Integer selectByLikeNum(String blur);//总模糊查询的数量
 
     List<BookTypeVo> getBookTypeVoByTypeIAndLike(@Param("typeId") String typeId, @Param("blur") String blur,@Param("page") Integer page, @Param("size") Integer size);//分类下模糊查询
 

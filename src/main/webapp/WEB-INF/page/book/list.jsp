@@ -35,11 +35,11 @@
         <span class="layui-form-label">搜索条件：</span>
 
         <div class="layui-input-inline">
-            <input type="text" name="blur" placeholder="请输入搜索条件" class="layui-input">
+            <input type="text" name="blur" placeholder="输入书名/作者/出版社/简介" class="layui-input">
         </div>
         <div class="layui-input-inline">
          <select name="typeId"  autocomplete="off"  class="layui-input" >
-             <option value="">请选择</option>
+             <option value="">请选择图书类型</option>
                 <c:forEach items="${types}" var="types">
                     <option value="${types.id}">${types.name}</option>
                 </c:forEach>
@@ -71,27 +71,28 @@
 <c:if test="${show=='duo'}">
 <table class="layui-table" style="width: 1100px">
     <colgroup>
-        <col width="100">
-        <col width="200">
-        <col width="500">
-        <col width="100">
+        <col width="150">
+        <col width="150">
+        <col width="150">
+        <col width="150">
+        <col width="150">
+        <col width="150">
+        <col width="150">
+        <col width="150">
     </colgroup>
     <thead>
     <tr>
         <th>编号</th>
-        <th>书架编号</th>
-        <th>书架名称</th>
+
+        <th>图书类型</th>
         <th>书架位置</th>
-        <th>数目</th>
+
         <th>图书编号</th>
         <th>图书名称</th>
         <th>图书作者</th>
-        <th>出版社</th>
-        <th>出版日期</th>
-        <th>图书简介</th>
+
         <th>图书状态</th>
         <th>借出次数</th>
-        <th>图书备注</th>
 
 
         <th class="actions">操作</th>
@@ -101,28 +102,28 @@
     <c:forEach items="${list.rows}" var="type" varStatus="status">
         <tr>
             <td>${status.count}</td>
-            <td>${type.typeId}</td>
+
             <td>${type.typeName}</td>
             <td>${type.typePlace}</td>
-            <td>${type.bookNum}</td>
             <td>${type.bookId}</td>
+
             <td>${type.bookName}</td>
             <td>${type.bookAuthorName}</td>
-            <td>${type.bookPress}</td>
-            <td>${type.bookPublishDate}</td>
-            <td>${type.bookInfo}</td>
+
+
+
 
             <c:if test="${type.bookStatus==1}">
                 <td>在馆</td>
             </c:if>
             <c:if test="${type.bookStatus==2}">
-                <td>借出</td>
+                <td><font color="red">借出</font></td>
             </c:if>
 
 
                 <%-- <td>${type.bookStatus}</td>--%>
             <td>${type.bookBorrowNum}</td>
-            <td>${type.bookRemark}</td>
+
             <td class="actions">
 
 
@@ -137,74 +138,7 @@
 
 
 
-    <c:if test="${show=='dan'}">
-    <table class="layui-table" style="width: 1100px">
-        <colgroup>
-            <col width="100">
-            <col width="200">
-            <col width="500">
-            <col width="100">
-        </colgroup>
-        <thead>
-        <tr>
 
-            <th>书架编号</th>
-            <th>书架名称</th>
-            <th>书架位置</th>
-            <th>数目</th>
-            <th>图书编号</th>
-            <th>图书名称</th>
-            <th>图书作者</th>
-            <th>出版社</th>
-            <th>出版日期</th>
-            <th>图书简介</th>
-            <th>图书状态</th>
-            <th>借出次数</th>
-            <th>图书备注</th>
-
-
-            <th class="actions">操作</th>
-        </tr>
-        </thead>
-        <tbody>
-
-            <tr>
-
-                <td>${bookTypeVo.typeId}</td>
-                <td>${bookTypeVo.typeName}</td>
-                <td>${bookTypeVo.typePlace}</td>
-                <td>${bookTypeVo.bookNum}</td>
-                <td>${bookTypeVo.bookId}</td>
-                <td>${bookTypeVo.bookName}</td>
-                <td>${bookTypeVo.bookAuthorName}</td>
-                <td>${bookTypeVo.bookPress}</td>
-                <td>${bookTypeVo.bookPublishDate}</td>
-                <td>${bookTypeVo.bookInfo}</td>
-
-                <c:if test="${bookTypeVo.bookStatus==1}">
-                    <td>在馆</td>
-                </c:if>
-                <c:if test="${bookTypeVo.bookStatus==2}">
-                    <td>借出</td>
-                </c:if>
-
-
-                    <%-- <td>${type.bookStatus}</td>--%>
-                <td>${bookTypeVo.bookBorrowNum}</td>
-                <td>${bookTypeVo.bookRemark}</td>
-                <td class="actions">
-                    <a href="/book/toUpdate?bookId=${bookTypeVo.bookId}">
-                        <button class="layui-btn layui-btn-primary layui-btn-small">修改</button>
-
-                    </a>
-                    <a href="/borrow/toNew/${type.bookId}">    <button class="layui-btn layui-btn-primary layui-btn-small">借书</button></a>
-
-
-                </td>
-            </tr>
-
-        </tbody>
-        </c:if>
 </table>
 <div class="my-btn-box" style="width: 1100px">
     <c:if test="${root=='vo'}">

@@ -23,7 +23,7 @@
 
 
 <blockquote class="layui-elem-quote layui-text">
-    尽情的添加书籍吧。。。
+    修改一下书籍吧。。。
 </blockquote>
 
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">

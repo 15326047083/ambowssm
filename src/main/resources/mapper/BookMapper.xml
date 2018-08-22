@@ -49,45 +49,17 @@
 
 
     <!--Vo总数量-->
-
     <select id="getBookTypeVoListNum" resultType="java.lang.Integer">
     select count(*)
     from book b,type t where t.id=b.type_id;
     </select>
 
 
-    <!--图书类型-->
-
-    <select id="getBookTypeVoByTypeId" resultType="com.ambow.first.vo.BookTypeVo">
-    select t.id typeId,t.name typeName,t.place typePlace,t.book_num bookNum,b.id bookId,b.book_name bookName,b.author_name bookAuthorName,
-    b.press bookPress,b.publish_date bookPublishDate,b.info bookInfo,b.status bookStatus,b.num bookBorrowNum,b.remark bookRemark
-    from book b,type t where t.id=b.type_id and t.id=#{typeId}  limit #{page},#{size};
-  </select>
 
 
-    <!--根据类型Id图书类型数量-->
-
-    <select id="getBookTypeVoByTypeIdNum" parameterType="java.lang.String" resultType="java.lang.Integer">
-    select count(*)
-    from book b,type t where t.id=b.type_id and t.id=#{typeId};
-  </select>
-
-    <!--总模糊-->
-
-    <select id="selectByLike" resultType="com.ambow.first.vo.BookTypeVo" >
-        select t.id typeId,t.name typeName,t.place typePlace,t.book_num bookNum,b.id bookId,b.book_name bookName,b.author_name bookAuthorName,
-    b.press bookPress,b.publish_date bookPublishDate,b.info bookInfo,b.status bookStatus,b.num bookBorrowNum,b.remark bookRemark
-    from book b,type t where t.id=b.type_id
-       and (book_name like #{blur} or author_name like #{blur} or press like #{blur} or info like #{blur}) limit #{page},#{size};
-    </select>
 
 
-    <!--总模糊的数量-->
-    <select id="selectByLikeNum" resultType="java.lang.Integer" parameterType="java.lang.String">
-        select count(*)
-    from book b,type t where t.id=b.type_id
-       and (book_name like #{blur} or author_name like #{blur} or press like #{blur} or info like #{blur}) ;
-    </select>
+
 
     <!--分类下的模糊查询-->
 
@@ -98,13 +70,13 @@
     select t.id typeId,t.name typeName,t.place typePlace,t.book_num bookNum,b.id bookId,b.book_name bookName,b.author_name bookAuthorName,
     b.press bookPress,b.publish_date bookPublishDate,b.info bookInfo,b.status bookStatus,b.num bookBorrowNum,b.remark bookRemark
     from book b,type t where t.id=b.type_id
-    <if test="typeId!=null  ">
+    <if test="typeId!=null and typeId!='' ">
         and  t.id=#{typeId}
     </if>
 
-        <if test="blur!=null ">
+        <if test="blur!=null and blur!='' ">
 
-        and ( b.book_name like "%"#{blur}"%" or b.author_name like '%#{blur}%' or b.press like '%#{blur}%' or b.info like '%#{blur}%' )
+        and ( b.book_name like "%"#{blur}"%" or b.author_name like "%"#{blur}"%" or b.press like"%"#{blur}"%" or b.info like "%"#{blur}"%" )
         </if>
         limit #{page},#{size} ;
   </select>
@@ -113,11 +85,11 @@
     <select id="getBookTypeVoByTypeIAndLikeNum" resultType="java.lang.Integer">
     select count(*)
     from book b,type t where t.id=b.type_id
-        <if test="typeId!=null">
+        <if test="typeId!=null and typeId!=''">
             and  t.id=#{typeId}
         </if>
-        <if test="blur!=null">
-            and ( b.book_name like #{blur} or b.author_name like #{blur} or b.press like #{blur} or b.info like #{blur} )
+        <if test="blur!=null and blur!=''">
+            and ( b.book_name like "%"#{blur}"%" or b.author_name like "%"#{blur}"%" or b.press like"%"#{blur}"%" or b.info like "%"#{blur}"%" )
         </if>
        ;
   </select>

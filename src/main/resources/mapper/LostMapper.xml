@@ -10,7 +10,7 @@
     id, user_id, borrow_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from lost
     where id = #{id,jdbcType=VARCHAR}
@@ -68,4 +68,18 @@
       borrow_id = #{borrowId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <!--统计每个人的失信次数-->
+  <select id="selectCountUser" parameterType="java.lang.String" resultType="java.lang.Integer">
+SELECT COUNT(*)
+from user u,lost l
+where l.user_id=u.id and u.phone = #{phone};
+
+  </select>
+
+  <select id="getByBorrowId" parameterType="java.lang.String" resultType="lost">
+    select id,user_id,borrow_id
+    from lost
+    where borrow_id=#{borrowId};
+
+  </select>
 </mapper>

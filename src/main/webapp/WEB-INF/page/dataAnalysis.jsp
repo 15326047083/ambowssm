@@ -43,7 +43,8 @@
             },
             success(json) {
                 //获取数据
-                var count = json.count;
+                var count1 = json.count1;
+                var count2 = json.count2;
                 var date = json.date;
 
                 // option 里面的内容基本涵盖你要画的图表的所有内容
@@ -93,14 +94,14 @@
                         symbol: 'none',
                         smooth: 0.2,
                         color: ['#FF6E33'],
-                        data: count
+                        data: count1
                     }, {
                         name: '借出数量',
                         type: 'line',
                         symbol: 'none',
                         smooth: 0.2,
                         color: ['#8087CC'],
-                        data: [2, 3, 2,0,5,6,2]
+                        data: count2
                     }],
                     dataZoom:[ {
                         type: 'slider',

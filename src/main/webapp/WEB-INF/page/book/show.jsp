@@ -23,55 +23,73 @@
 
 
 <blockquote class="layui-elem-quote layui-text">
-    尽情的添加书籍吧。。。
+    尽情查看书籍吧。。。
 </blockquote>
 
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>图书添加</legend>
+    <legend>图书查看</legend>
 </fieldset>
 
-<form class="layui-form" action="/book/insert">
+
     <div class="layui-form-item">
         <label class="layui-form-label">图书类型</label>
         <div class="layui-input-block">
-            <select name="typeId"  lay-filter="aihao" >
-                <c:forEach items="${types}" var="types">
-                    <option value="${types.id}">${types.name}</option>
-                </c:forEach>
-            </select>
+            <input type="text" value="${bookTypeVo.typeName}" disabled="disabled" lay-verify="required"  autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
+        <label class="layui-form-label">所属类型</label>
+        <div class="layui-input-block">
+            <input type="text" value="${bookTypeVo.typeName}" disabled="disabled" lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">所在位置</label>
+        <div class="layui-input-block">
+            <input type="text" value="${bookTypeVo.typePlace}" disabled="disabled" lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+<div class="layui-form-item">
+    <label class="layui-form-label">图书编号</label>
+    <div class="layui-input-block">
+        <input type="text" value="${bookTypeVo.bookId}" disabled="disabled" lay-verify="required" autocomplete="off" class="layui-input">
+    </div>
+</div>
+    <div class="layui-form-item">
         <label class="layui-form-label">图书名称</label>
         <div class="layui-input-block">
-            <input type="text" name="bookName"  lay-verify="required" placeholder="请输入书名" autocomplete="off" class="layui-input">
+            <input type="text" value="${bookTypeVo.bookName}" disabled="disabled" lay-verify="required" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">图书作者</label>
         <div class="layui-input-block">
-            <input type="text" name="authorName"   lay-verify="required" placeholder="请输入作者名字" autocomplete="off" class="layui-input">
+            <input type="text" name="authorName" value="${bookTypeVo.bookAuthorName}" disabled="disabled"  lay-verify="required"  autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">出版社</label>
         <div class="layui-input-block">
-            <input type="text" name="press" lay-verify="required" placeholder="请输入图书出版社" autocomplete="off" class="layui-input">
+            <input type="text"  value="${bookTypeVo.bookPress}" disabled="disabled" name="press" lay-verify="required"  autocomplete="off" class="layui-input">
         </div>
     </div>
     </div>
    <div class="layui-form-item">
         <label class="layui-form-label">出版日期</label>
         <div class="layui-input-block">
-            <input type="date" name="publishDate"  placeholder="请输入图书出版日期" class="layui-input">
+            <input type="date" name="publishDate" value="${bookTypeVo.bookPublishDate}" disabled="disabled"  placeholder="请输入图书出版日期" class="layui-input">
         </div>
     </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">图书状态</label>
         <div class="layui-input-block">
-            <input type="radio" name="status" value="1" title="在馆" checked="">
-            <input type="radio" name="status" value="2" title="借出" disabled="">
+
+            <c:if test="${bookTypeVo.bookStatus==1}">
+            <input type="radio" checked="checked" name="status"  value="" title="在馆" ></c:if>
+            <c:if test="${bookTypeVo.bookStatus==2}">
+            <input type="radio"checked="checked" name="status" title="借出" >
+            </c:if>
 
         </div>
     </div>
@@ -80,47 +98,37 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">图书简介</label>
         <div class="layui-input-block">
-            <textarea class="layui-textarea layui-hide"  name="info" lay-verify="content" id="LAY_demo_editor"></textarea>
+            <textarea class="layui-textarea layui-hide" disabled="disabled"  name="info" lay-verify="content" id="LAY_demo_editor">${bookTypeVo.bookInfo}</textarea>
         </div>
     </div>
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">备注</label>
         <div class="layui-input-block">
-            <textarea placeholder="请输入图为位置" class="layui-textarea"name="remark"></textarea>
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">数量</label>
-        <div class="layui-input-block">
-            <input type="text" name="num" lay-verify="required" placeholder="请输入图书数量" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">捐赠人</label>
-        <div class="layui-input-block">
-            <input type="text" name="userName" lay-verify="required" placeholder="请输入捐赠人" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">联系方式</label>
-        <div class="layui-input-block">
-            <input type="text" name="userPhone" lay-verify="required" placeholder="请输入联系方式" autocomplete="off" class="layui-input">
+            <textarea  disabled="disabled" class="layui-textarea"name="remark">${bookTypeVo.bookRemark}</textarea>
         </div>
     </div>
 
 
-
+    </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
 
-            <input type="submit" value="提交" class="layui-btn"  lay-filter="demo1" >
-            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            <a href="/book/toUpdate?bookId=${bookTypeVo.bookId}">
+                <button class="layui-btn layui-btn-primary layui-btn-small">修改</button>
+            </a>
+
+            <a href="/book/delete?bookId=${bookTypeVo.bookId}&&typeId=${bookTypeVo.typeId}">
+                <button class="layui-btn layui-btn-primary layui-btn-small">删除</button>
+            </a>
+
+            <a href="/borrow/toNew/${bookTypeVo.bookId}">
+                <button class="layui-btn layui-btn-primary layui-btn-small">借书</button>
+            </a>
+
 
         </div>
     </div>
-</form>
+
 
 
 <script src="../frame/layui/layui.js" charset="utf-8"></script>

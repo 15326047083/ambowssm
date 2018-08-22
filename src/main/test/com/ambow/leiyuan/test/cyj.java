@@ -54,4 +54,11 @@ public class cyj {
         typeService.addBookNum("1");
         typeService.subBookNum("3");
     }
+    @Test
+    public void datelength() throws ParseException {
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        Date[] date2={simpleDateFormat.parse("2018-09-10"),simpleDateFormat.parse("2018-09-11"),simpleDateFormat.parse("2018-09-13")};
+        Date[] date1={simpleDateFormat.parse("2018-09-9"),simpleDateFormat.parse("2018-09-11"),simpleDateFormat.parse("2018-09-12")};
+        System.out.println(donateService.getAllDate(date1, date2));
+    }
 }

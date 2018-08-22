@@ -24,15 +24,14 @@ public class BookTest {
             i--;
             Book book = new Book();
 
+            book.setTypeId("2");
             book.setBookName("c++");
             book.setAuthorName("刘");
-            book.setInfo("159");
-            book.setNum(2);
             book.setPress("清华");
-            book.setTypeId("2");
-            book.setStatus(1);
             book.setPublishDate("2017-06-03");
-
+            book.setInfo("159");
+            book.setStatus(1);
+            book.setNum(2);
             book.setRemark("ddd");
             bookService.insert(book);
         }
@@ -65,16 +64,7 @@ public class BookTest {
         System.out.println(bookService.getBookTypeVoList(1,3).toString());
     }
 
-    @org.junit.Test
-    public void getBookTypeVoByTypeId() {
-        System.out.println(bookService.getBookTypeVoByTypeId("2",3,2).toString());
-    }
 
-
-    @org.junit.Test
-    public void selectByLike() {
-        System.out.println(bookService.selectByLike("人",2,3).toString());
-    }
 
     @org.junit.Test
     public void getBookTypeVoByTypeIAndLike() {
