@@ -117,11 +117,17 @@
                 <button class="layui-btn layui-btn-primary layui-btn-small">删除</button>
             </a>
 
-            <%--<a href="/borrow/toNew/${bookTypeVo.bookId}">
+           <%-- <a href="/borrow/toNew/${bookTypeVo.bookId}">
                 <button class="layui-btn layui-btn-primary layui-btn-small">
-                btn btn-primary btn-large借书</button>
+                借书</button>
+
+                && /borrow/newBorrow/${bookTypeVo.bookId}
             </a>--%>
-            <a data-toggle="modal" href="#example && /borrow/newBorrow/${bookTypeVo.bookId}"  class="layui-btn layui-btn-primary layui-btn-small" >借书</a>
+            <a data-toggle="modal" href="#example" onclick="bookId=${bookTypeVo.bookId}">
+
+                <button class="layui-btn layui-btn-primary layui-btn-small">
+                    借书</button>
+            </a>
 
 
         </div>
@@ -135,15 +141,60 @@
             <h3>借书窗口</h3>
         </div>
         <div class="modal-body">
-            <div class="layui-form-item">
-                <label class="layui-form-label">用户手机号</label>
-                <div class="layui-input-block">
-                    <input type="text" name="phone" lay-verify="required" placeholder="请输入您的手机号" autocomplete="off" class="layui-input">
+            <form  id="new_form" class="layui-form" action="/borrow/newBorrow/${bookTypeVo.bookId}">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户手机号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="phone" lay-verify="required" id="phone" onkeyup="checkPhone(this.value)" placeholder="请输入您的手机号" autocomplete="off" class="layui-input">
+                    </div>
                 </div>
-            </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                       <%-- <input type="submit" onclick="createBorrow('${bookTypeVo.bookId}')" class="layui-btn" lay-submit="" lay-filter="demo1"/>--%>
+                        <input type="hidden" id="bookId" value="${bookTypeVo.bookId}"/>
+                        <input type="submit"   class="layui-btn" lay-submit="" lay-filter="demo1" value="确认" onclick="return submitNewUser()" />
+                    </div>
+                </div>
+
+                <script>
+                    function submitNewUser() {
+                        if (document.getElementById("phone").value.length!=11){
+                            document.getElementById("phone").style.color="red"
+                            return false;
+                        }else if (document.getElementById("phone").value.length==11&&document.getElementById("phone").style.color=="black"){
+                            return true
+                        }
+                        else if (document.getElementById("phone").style.color=="red")
+                            return false;
+                        return true;
+                    }
+                </script>
+                <script>
+                    function checkPhone(phone) {
+                        var partten = /^((\(\d{3}\))|(\d{3}\-))?13[0-9]\d{8}|15[0-9]\d{8}|189\d{8}$/;
+                        if(!partten.test(phone)){
+                            return false;
+                        }else{
+                            $.ajax({
+                                type: "get",
+                                url: "/borrow/checkPhone/" + phone,
+                                success(data) {
+                                    if (data == 1) {
+                                        document.getElementById("phone").style.color = "red";
+                                    } else {
+                                        document.getElementById("phone").style.color = "black";
+                                    }
+                                }
+                            });
+                        }
+                    }
+                </script>
+            </form>
         </div>
         <div class="modal-footer">
-            <a href="#" onclick="createBorrow()" class="btn btn-success">保存</a>
+
+
             <a href="#" class="btn" data-dismiss="modal">Close</a>
         </div>
     </div>
@@ -152,7 +203,7 @@
 
     <script src="/js/jquery-1.11.3.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="/js/bootstrap.min.js"></script>
+
     <!-- Metis Menu Plugin JavaScript -->
     <script src="/js/metisMenu.min.js"></script>
     <!-- DataTables JavaScript -->
@@ -162,6 +213,7 @@
     <script src="/js/sb-admin-2.js"></script>
 
 <script src="../frame/layui/layui.js" charset="utf-8"></script>
+
 <script>
     layui.use(['form', 'layedit', 'laydate'], function(){
         var form = layui.form
@@ -208,22 +260,43 @@
         //     });
         //     return false;
         // });
-    });
-
-    function createBorrow(bookId) {
-        if(confirm('确定要添加借书信息吗?')) {
-            $.post("borrow/newBorrow",{"bookId":bookId},
-                function(data){
-                    if(data =="OK"){
-                        alert("借阅成功！");
-                        window.location.reload();
-                    }else{
-                        alert("借阅失败！");
-                        window.location.reload();
+   /* });*/
+        /*$("form").blur(function () {
+            alert("okokok");
+            var bookId=$("#bookId").val();
+            $.ajax({
+                url:"borrow/newBorrow/"+ bookId,
+                dataType: "json",
+                error() {
+                    alert("error");
+                },
+                success(json) {
+                    alert("json="+json);
+                    if (json=="OK"){
+                        alert("借书成功");
                     }
-                });
-        }
+                    else {
+                        alert("你已经失信！");
+                    }
+                }
+            })
+        })*/
+       // $.post("/borrow/newBorrow",{"bookId":bookId},
+
+           /* $("#new_form").serialize(),function(data){
+                if(data =="OK"){
+                    alert("借书成功！");
+                    window.location.reload();
+                }
+                if(data=="false"){
+                    alert("你已经失信！");
+                    window.location.reload();
+                }
+            });*/
     }
+
+
+
 </script>
 </body>
 </html>

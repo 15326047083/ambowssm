@@ -135,6 +135,9 @@
 <script src="/js/dataTables.bootstrap.min.js"></script>
 <!-- Custom Theme JavaScript -->
 <script src="/js/sb-admin-2.js"></script>
+<script>
+    ${flag}
+</script>
 <script type="text/javascript">
     function updateBorrow(bookId) {
 
