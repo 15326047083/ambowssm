@@ -120,6 +120,7 @@ public class UserController {
             pageUtil.setPageCount(pageUtil.getPageNumber() / pageUtil.getPageSize());
         }
         int index = (pageIndex - 1) * pageSize;//计算出每一页从数据库中第几条数据开始取值，也就是limit后面的第一个数字
+        if (number==0){pageUtil.setPageCount(1);}
         List<User> userList = userService.selectAllLimit(index);//调用service层的方法，取得数据库中的值
         pageUtil.setList(userList);//保存到工具类中的集合
         model.addAttribute("userList", userList);
@@ -152,6 +153,7 @@ public class UserController {
             pageUtil.setPageCount(pageUtil.getPageNumber() / pageUtil.getPageSize());
         }
         int index = (pageIndex - 1) * pageSize;//计算出每一页从数据库中第几条数据开始取值，也就是limit后面的第一个数字
+        if (number==0){pageUtil.setPageCount(1);}
         List<User> userList = userService.selectAllByBorrowNumLimit(index);//调用service层的方法，取得数据库中的值
         pageUtil.setList(userList);//保存到工具类中的集合
         model.addAttribute("userList", userList);
@@ -183,6 +185,7 @@ public class UserController {
             pageUtil.setPageCount(pageUtil.getPageNumber() / pageUtil.getPageSize());
         }
         int index = (pageIndex - 1) * pageSize;//计算出每一页从数据库中第几条数据开始取值，也就是limit后面的第一个数字
+        if (number==0){pageUtil.setPageCount(1);}
         Map map = new HashMap();
         map.put("pageIndex", pageIndex);
         map.put("selectKey", selectKey);
