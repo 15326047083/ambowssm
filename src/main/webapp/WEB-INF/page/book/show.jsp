@@ -156,20 +156,6 @@
                         <input type="submit"   class="layui-btn" lay-submit="" lay-filter="demo1" value="确认" onclick="return submitNewUser()" />
                     </div>
                 </div>
-
-                <script>
-                    function submitNewUser() {
-                        if (document.getElementById("phone").value.length!=11){
-                            document.getElementById("phone").style.color="red"
-                            return false;
-                        }else if (document.getElementById("phone").value.length==11&&document.getElementById("phone").style.color=="black"){
-                            return true
-                        }
-                        else if (document.getElementById("phone").style.color=="red")
-                            return false;
-                        return true;
-                    }
-                </script>
                 <script>
                     function checkPhone(phone) {
                         var partten = /^((\(\d{3}\))|(\d{3}\-))?13[0-9]\d{8}|15[0-9]\d{8}|189\d{8}$/;
@@ -190,6 +176,20 @@
                         }
                     }
                 </script>
+                <script>
+                    function submitNewUser() {
+                        if (document.getElementById("phone").value.length!=11){
+                            document.getElementById("phone").style.color="red"
+                            return false;
+                        }else if (document.getElementById("phone").value.length==11&&document.getElementById("phone").style.color=="black"){
+                            return true
+                        }
+                        else if (document.getElementById("phone").style.color=="red")
+                            return false;
+                        return true;
+                    }
+                </script>
+
             </form>
         </div>
         <div class="modal-footer">
