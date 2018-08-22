@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../frame/layui/css/layui.css">
     <link rel="stylesheet" href="../frame/static/css/style.css">
     <link rel="icon" href="../frame/static/image/code.png">
+    <link href="/bootstrap/twitter-bootstrap-v2/docs/assets/css/bootstrap.css" rel="stylesheet">
 </head>
 <body class="body">
 
@@ -121,15 +122,49 @@
                 <button class="layui-btn layui-btn-primary layui-btn-small">删除</button>
             </a>
 
-            <a href="/borrow/toNew/${bookTypeVo.bookId}">
-                <button class="layui-btn layui-btn-primary layui-btn-small">借书</button>
-            </a>
+            <%--<a href="/borrow/toNew/${bookTypeVo.bookId}">
+                <button class="layui-btn layui-btn-primary layui-btn-small">
+                btn btn-primary btn-large借书</button>
+            </a>--%>
+            <a data-toggle="modal" href="#example && /borrow/newBorrow/${bookTypeVo.bookId}"  class="layui-btn layui-btn-primary layui-btn-small" >借书</a>
 
 
         </div>
     </div>
 
+<div class="container">
 
+    <div id="example" class="modal hide fade in" style="display: none; ">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>借书窗口</h3>
+        </div>
+        <div class="modal-body">
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户手机号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="phone" lay-verify="required" placeholder="请输入您的手机号" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#" onclick="createBorrow()" class="btn btn-success">保存</a>
+            <a href="#" class="btn" data-dismiss="modal">Close</a>
+        </div>
+    </div>
+    <script src="/bootstrap/twitter-bootstrap-v2/docs/assets/js/jquery.js"></script>
+    <script src="/bootstrap/twitter-bootstrap-v2/js/bootstrap-modal.js"></script>
+
+    <script src="/js/jquery-1.11.3.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/js/metisMenu.min.js"></script>
+    <!-- DataTables JavaScript -->
+    <script src="/js/jquery.dataTables.min.js"></script>
+    <script src="/js/dataTables.bootstrap.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="/js/sb-admin-2.js"></script>
 
 <script src="../frame/layui/layui.js" charset="utf-8"></script>
 <script>
@@ -179,6 +214,21 @@
         //     return false;
         // });
     });
+
+    function createBorrow(bookId) {
+        if(confirm('确定要添加借书信息吗?')) {
+            $.post("borrow/newBorrow",{"bookId":bookId},
+                function(data){
+                    if(data =="OK"){
+                        alert("借阅成功！");
+                        window.location.reload();
+                    }else{
+                        alert("借阅失败！");
+                        window.location.reload();
+                    }
+                });
+        }
+    }
 </script>
 </body>
 </html>
