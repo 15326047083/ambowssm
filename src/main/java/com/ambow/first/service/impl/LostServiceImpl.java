@@ -4,8 +4,12 @@ import com.ambow.first.dao.LostMapper;
 import com.ambow.first.entity.Lost;
 import com.ambow.first.service.LostService;
 
+import com.ambow.first.util.Page;
+import com.ambow.first.vo.LostUserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class LostServiceImpl implements LostService {
@@ -38,10 +42,34 @@ public class LostServiceImpl implements LostService {
         return lostMapper.selectCountUser(phone);
     }
 
+    /**
+     * 根据borrowid查询失信表
+     * @param borrowId
+     * @return
+     */
     @Override
     public Lost getByBorrowId(String borrowId) {
         return lostMapper.getByBorrowId(borrowId);
     }
+    /**
+     * 分页查询失信表
+     * @param page
+     * @param size
+     * @return
+     */
+    @Override
+    public Page<LostUserVo> selectAllPage(Integer page, Integer size) {
+        Page<LostUserVo> pages=new Page<>();
+        pages.setTotal(lostMapper.selectLostCount());
+        pages.setPage(page);
+        pages.setSize(size);
+        List<LostUserVo> borrowBookUserVo=lostMapper.selectAllPage((page-1)*size,pages.getSize());
+        pages.setRows(borrowBookUserVo);
+        return pages;
+    }
+
+
+
 
 
 }
