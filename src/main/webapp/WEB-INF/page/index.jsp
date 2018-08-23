@@ -33,11 +33,13 @@
 
         <!-- 顶部左侧添加选项卡监听 -->
         <ul class="layui-nav" lay-filter="side-top-left">
-           <li class="layui-nav-item">
+            <li class="layui-nav-item">
                 <a href="javascript:;"><i class="layui-icon">&#xe671;</i>借阅</a>
                 <dl class="layui-nav-child">
-                    <dd><a style="color: #008B8B" href="javascript:;" href-url="demo/btn.html"><i class="layui-icon">&#xe630;</i>借书</a></dd>
-                    <dd><a style="color: #008B8B" href="javascript:;" href-url="demo/form.html"><i class="layui-icon">&#xe630;</i>还书</a></dd>
+                    <dd><a style="color: #008B8B" href="javascript:;" href-url="demo/btn.html"><i class="layui-icon">&#xe630;</i>借书</a>
+                    </dd>
+                    <dd><a style="color: #008B8B" href="javascript:;" href-url="demo/form.html"><i class="layui-icon">&#xe630;</i>还书</a>
+                    </dd>
                 </dl>
             </li>
         </ul>
@@ -57,7 +59,8 @@
             <li class="layui-nav-item">
                 <a class="name" href="javascript:;">Admin </a>
                 <dl class="layui-nav-child">
-                    <dd><a style="color: #008B8B" href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe68e;</i>首页</a></dd>
+                    <dd><a style="color: #008B8B" href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe68e;</i>首页</a>
+                    </dd>
                     <dd><a style="color: #008B8B" href="/"><i class="layui-icon">&#x1006;</i>退出</a></dd>
                 </dl>
             </li>
@@ -73,55 +76,92 @@
                 <li class="layui-nav-item  layui-nav-itemed">
                     <a href="javascript:;"><i class="layui-icon">&#xe705;</i>图书管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" href-url="/book/listVo"><i class="layui-icon">&#xe62d;</i>图书列表</a></dd>
-                        <dd><a href="javascript:;" href-url="/book/toNew"><i class="layui-icon">&#xe61f;</i>添加图书</a></dd>
-                        <dd><a href="javascript:;" href-url="/dataAnalysis/getDonate"><i class="layui-icon">&#xe62d;</i>捐书列表</a></dd>
+                        <dd><a href="javascript:;" href-url="/book/listVo"><i class="layui-icon">&#xe62d;</i>图书列表</a>
+                        </dd>
+                        <dd><a href="javascript:;" href-url="/book/toNew"><i class="layui-icon">&#xe61f;</i>添加图书</a>
+                        </dd>
+                        <dd><a href="javascript:;" href-url="/dataAnalysis/getDonate"><i class="layui-icon">&#xe62d;</i>捐书列表</a>
+                        </dd>
 
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="layui-icon">&#xe656;</i>类型管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" href-url="/type/toList"><i class="layui-icon">&#xe62d;</i>类型列表</a></dd>
-                        <dd><a href="javascript:;" href-url="/type/toNew"><i class="layui-icon">&#xe61f;</i>添加类型</a></dd>
+                        <dd><a href="javascript:;" href-url="/type/toList"><i class="layui-icon">&#xe62d;</i>类型列表</a>
+                        </dd>
+                        <dd><a href="javascript:;" href-url="/type/toNew"><i class="layui-icon">&#xe61f;</i>添加类型</a>
+                        </dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="layui-icon">&#xe630;</i>借阅管理管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe62d;</i>借阅列表</a></dd>
-                        <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe621;</i>借书</a></dd>
-                        <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe621;</i>还书</a></dd>
+                        <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe62d;</i>借阅列表</a>
+                        </dd>
+                        <dd><a href="javascript:;" href-url="demo/register.html"><i
+                                class="layui-icon">&#xe621;</i>借书</a></dd>
+                        <dd><a href="javascript:;" href-url="demo/register.html"><i
+                                class="layui-icon">&#xe621;</i>还书</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="layui-icon">&#xe612;</i>读者管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe62d;</i>读者列表</a></dd>
-                        <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe61f;</i>添加读者</a></dd>
-                        <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe62d;</i>失信列表</a></dd>
+                        <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe62d;</i>读者列表</a>
+                        </dd>
+                        <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe61f;</i>添加读者</a>
+                        </dd>
+                        <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe62d;</i>失信列表</a>
+                        </dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="layui-icon">&#xe68e;</i>我的书屋</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" href-url="/book/sort"><i class="layui-icon">&#xe62d;</i>图书排行榜</a></dd>
-                        <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe62d;</i>读者排行榜</a></dd>
-                        <dd><a href="javascript:;" href-url="/type/toPie"><i class="layui-icon">&#xe62c;</i>图书库存统计</a></dd>
-                        <dd><a href="javascript:;" href-url="/jump/todataAnalysis"><i class="layui-icon">&#xe62c;</i>租借数据统计</a></dd>
+                        <dd><a href="javascript:;" href-url="/book/sort"><i class="layui-icon">&#xe62d;</i>图书排行榜</a>
+                        </dd>
+                        <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe62d;</i>读者排行榜</a>
+                        </dd>
+                        <dd><a href="javascript:;" href-url="/type/toPie"><i class="layui-icon">&#xe62c;</i>图书库存统计</a>
+                        </dd>
+                        <dd><a href="javascript:;" href-url="/jump/todataAnalysis"><i class="layui-icon">&#xe62c;</i>租借数据统计</a>
+                        </dd>
+                        <dd><a id="xiaoai" href="javascript:;" href-url="../../ai.jsp"><i
+                                class="layui-icon">&#xe61c;</i>智障小Ai</a>
+                        </dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="/book/listVo"><i class="layui-icon">&#xe705;</i>图书查询</a></li>
-                <li class="layui-nav-item"><a href=""><i class="layui-icon">&#xe656;</i>类型查询</a></li>
-                <li class="layui-nav-item"><a href="/book/sort"><i class="layui-icon">&#xe62d;</i>借阅排行榜</a></li>
-                <li class="layui-nav-item"><a  href=""><i class="layui-icon">&#xe62d;</i>读者排行榜</a></li>
-                <li class="layui-nav-item"><a  href=""><i class="layui-icon">&#xe62d;</i>失信读者公示</a></li>
+
+
+                <li class="layui-nav-item  layui-nav-itemed">
+                    <a href="javascript:;"><i class="layui-icon">&#xe705;</i>自助服务</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" href-url="/book/listVo"><i class="layui-icon">&#xe705;</i>图书查询</a>
+                        </dd>
+                        <dd><a href="javascript:;" href-url=""><i class="layui-icon">&#xe656;</i>类型查询</a>
+                        </dd>
+                        <dd><a href="javascript:;" href-url="/book/sort"><i class="layui-icon">&#xe62d;</i>借阅排行榜</a>
+                        </dd>
+                        <dd><a href="javascript:;" href-url=""><i class="layui-icon">&#xe62d;</i>读者排行榜</a>
+                        </dd>
+                        <dd><a href="javascript:;" href-url=""><i class="layui-icon">&#xe62d;</i>失信读者公示</a>
+                        </dd>
+
+                    </dl>
+                </li>
                 <li>
-                    <div id="msg" style="width: 140px;height: 70px; position:absolute; right: 158px" >
-                     <a href=""> <img style="width: 140px;height: 70px" src="/frame/static/image/ai.png"></a>
+                    <div id="msg" style="width: 140px;height: 70px; position:absolute; right: 158px">
+                        <img onclick="goToXiaoAi()" style="width: 140px;height: 70px"
+                             src="/frame/static/image/ai.png">
                     </div>
                 </li>
             </ul>
+            <script>
+                function goToXiaoAi() {
+                    document.getElementById("xiaoai").click();
+                }
+            </script>
 
         </div>
     </div>
@@ -147,34 +187,34 @@
 <script>
     $("#msg").mouseenter(function () {
         $("#msg").stop().animate({
-            left:'0px',
-            opacity:'0.5',
-            height:'80px',
-            width:'160px',
+            left: '0px',
+            opacity: '0.5',
+            height: '80px',
+            width: '160px',
 
         });
     });
     $("#msg").mouseleave(function () {
         $("#msg").stop().animate({
-            left:'-100px',
-            opacity:'0.5',
-            height:'80px',
-            width:'160px'
+            left: '-100px',
+            opacity: '0.5',
+            height: '80px',
+            width: '160px'
         });
     });
 </script>
 <script type="text/javascript">
-    layui.use(['layer','vip_nav'], function () {
+    layui.use(['layer', 'vip_nav'], function () {
 
         // 操作对象
-        var layer       = layui.layer
-            ,vipNav     = layui.vip_nav
-            ,$          = layui.jquery;
+        var layer = layui.layer
+            , vipNav = layui.vip_nav
+            , $ = layui.jquery;
 
         // 顶部左侧菜单生成 [请求地址,过滤ID,是否展开,携带参数]
-        vipNav.top_left('./json/nav_top_left.json','side-top-left',false);
+        vipNav.top_left('./json/nav_top_left.json', 'side-top-left', false);
         // 主体菜单生成 [请求地址,过滤ID,是否展开,携带参数]
-        vipNav.main('./json/nav_main.json','side-main',true);
+        vipNav.main('./json/nav_main.json', 'side-main', true);
 
         // you code ...
 
