@@ -27,7 +27,8 @@ public class TypeController {
     private TypeService typeService;
 
     @RequestMapping("/toPie")
-    public String toPie(){
+    public String toPie(Model model){
+        model.addAttribute("number",typeService.allBookNum());
         return "/type/pie";
     }
 

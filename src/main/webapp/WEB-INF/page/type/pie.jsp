@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +26,8 @@
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
     </fieldset>
     <div id="box" style="width: 600px;height:400px;"></div>
+    <p style="color: #b94a48;font-size: 16px;font-weight: bolder;margin-left: 230px"><i class="layui-icon">&#xe6af;</i> 本店共藏书${number}册</p>
+
 </body>
 </html>
 <script>

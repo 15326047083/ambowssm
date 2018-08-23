@@ -107,15 +107,15 @@
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" href-url="/book/sort"><i class="layui-icon">&#xe62d;</i>图书排行榜</a></dd>
                         <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe62d;</i>读者排行榜</a></dd>
-                        <dd><a href="javascript:;" href-url="/type/pie"><i class="layui-icon">&#xe62c;</i>图书库存统计</a></dd>
+                        <dd><a href="javascript:;" href-url="/type/toPie"><i class="layui-icon">&#xe62c;</i>图书库存统计</a></dd>
                         <dd><a href="javascript:;" href-url="/jump/todataAnalysis"><i class="layui-icon">&#xe62c;</i>租借数据统计</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a target="_blank" href="/book/listVo"><i class="layui-icon">&#xe705;</i>图书查询</a></li>
-                <li class="layui-nav-item"><a target="_blank" href=""><i class="layui-icon">&#xe656;</i>类型查询</a></li>
-                <li class="layui-nav-item"><a target="_blank" href="/book/sort"><i class="layui-icon">&#xe62d;</i>图书排行榜</a></li>
-                <li class="layui-nav-item"><a target="_blank" href=""><i class="layui-icon">&#xe62d;</i>读者排行榜</a></li>
-                <li class="layui-nav-item"><a target="_blank" href=""><i class="layui-icon">&#xe62d;</i>失信读者公示</a></li>
+                <li class="layui-nav-item"><a href="/book/listVo"><i class="layui-icon">&#xe705;</i>图书查询</a></li>
+                <li class="layui-nav-item"><a href=""><i class="layui-icon">&#xe656;</i>类型查询</a></li>
+                <li class="layui-nav-item"><a href="/book/sort"><i class="layui-icon">&#xe62d;</i>借阅排行榜</a></li>
+                <li class="layui-nav-item"><a  href=""><i class="layui-icon">&#xe62d;</i>读者排行榜</a></li>
+                <li class="layui-nav-item"><a  href=""><i class="layui-icon">&#xe62d;</i>失信读者公示</a></li>
                 <li>
                     <div id="msg" style="width: 140px;height: 70px; position:absolute; right: 158px" >
                      <a href=""> <img style="width: 140px;height: 70px" src="/frame/static/image/ai.png"></a>
@@ -138,31 +138,7 @@
             </div>
         </div>
     </div>
-    <!-- footer -->
-    <div class="layui-footer my-footer">
 
-    </div>
-</div>
-
-<!-- pay -->
-<div class="my-pay-box none">
-    <div><img src="../../frame/static/image/zfb.png" alt="支付宝"><p>支付宝</p></div>
-    <div><img src="../../frame/static/image/wx.png" alt="微信"><p>微信</p></div>
-</div>
-
-<!-- 右键菜单 -->
-<div class="my-dblclick-box none">
-    <table class="layui-tab dblclick-tab">
-        <tr class="card-refresh">
-            <td><i class="layui-icon">&#x1002;</i>刷新当前标签</td>
-        </tr>
-        <tr class="card-close">
-            <td><i class="layui-icon">&#x1006;</i>关闭当前标签</td>
-        </tr>
-        <tr class="card-close-all">
-            <td><i class="layui-icon">&#x1006;</i>关闭所有标签</td>
-        </tr>
-    </table>
 </div>
 
 <script type="text/javascript" src="../../frame/layui/layui.js"></script>
