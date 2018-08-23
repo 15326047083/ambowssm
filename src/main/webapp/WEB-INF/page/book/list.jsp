@@ -53,8 +53,9 @@
 
 <div class="my-btn-box" style="width: 1100px">
     <span class="fl">
-     <a href="/book/toNew" class="layui-btn mgl-20" id="btn-delete-all">添加</a>
-           <a href="/book/sort" class="layui-btn mgl-20" id="btn-delete-all">借阅排行</a>
+     <a href="/book/toNew" class="layui-btn mgl-20" >添加</a>
+         <a href="/book/export" class="layui-btn mgl-20" id="">导出</a>
+           <a href="/book/sort" class="layui-btn mgl-20">借阅排行</a>
 
     </span>
 
@@ -71,27 +72,27 @@
 <c:if test="${show=='duo'}">
 <table class="layui-table" style="width: 1100px">
     <colgroup>
+        <col width="100">
+        <col width="150">
+        <col width="200">
+        <col width="200">
         <col width="150">
         <col width="150">
-        <col width="150">
-        <col width="150">
-        <col width="150">
-        <col width="150">
-        <col width="150">
+        <col width="100">
         <col width="150">
     </colgroup>
     <thead>
     <tr>
         <th>编号</th>
 
-        <th>图书类型</th>
-        <th>书架位置</th>
+        <th>类型</th>
+        <th>位置</th>
 
 
-        <th>图书名称</th>
-        <th>图书作者</th>
+        <th>名称</th>
+        <th>作者</th>
 
-        <th>图书状态</th>
+        <th>状态</th>
         <th>借出次数</th>
 
 

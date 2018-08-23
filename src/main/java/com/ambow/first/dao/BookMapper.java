@@ -39,4 +39,6 @@ public interface BookMapper {
     List<BookTypeVo> getBookTypeVoByTypeIdSort(@Param("page") Integer page, @Param("size") Integer size);//排行
     Integer getBookTypeVoByTypeIdSortNum();//排行数量
 
+    List<BookTypeVo> queryAll();
+
 }

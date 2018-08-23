@@ -73,17 +73,17 @@
                 <li class="layui-nav-item  layui-nav-itemed">
                     <a href="javascript:;"><i class="layui-icon">&#xe705;</i>图书管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" href-url="demo/btn1.html"><i class="layui-icon">&#xe62d;</i>图书列表</a></dd>
-                        <dd><a href="javascript:;" href-url="demo/form.html"><i class="layui-icon">&#xe61f;</i>添加图书</a></dd>
-                        <dd><a href="javascript:;" href-url="demo/table.html"><i class="layui-icon">&#xe62d;</i>捐书列表</a></dd>
+                        <dd><a href="javascript:;" href-url="/book/listVo"><i class="layui-icon">&#xe62d;</i>图书列表</a></dd>
+                        <dd><a href="javascript:;" href-url="/book/toNew"><i class="layui-icon">&#xe61f;</i>添加图书</a></dd>
+                        <dd><a href="javascript:;" href-url="/dataAnalysis/getDonate"><i class="layui-icon">&#xe62d;</i>捐书列表</a></dd>
 
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="layui-icon">&#xe656;</i>类型管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe62d;</i>类型列表</a></dd>
-                        <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe61f;</i>添加类型</a></dd>
+                        <dd><a href="javascript:;" href-url="/type/toList"><i class="layui-icon">&#xe62d;</i>类型列表</a></dd>
+                        <dd><a href="javascript:;" href-url="/type/toNew"><i class="layui-icon">&#xe61f;</i>添加类型</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -105,15 +105,15 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="layui-icon">&#xe68e;</i>我的书屋</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe62d;</i>图书排行榜</a></dd>
+                        <dd><a href="javascript:;" href-url="/book/sort"><i class="layui-icon">&#xe62d;</i>图书排行榜</a></dd>
                         <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe62d;</i>读者排行榜</a></dd>
-                        <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe62c;</i>图书库存统计</a></dd>
-                        <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe62c;</i>租借数据统计</a></dd>
+                        <dd><a href="javascript:;" href-url="/type/pie"><i class="layui-icon">&#xe62c;</i>图书库存统计</a></dd>
+                        <dd><a href="javascript:;" href-url="/jump/todataAnalysis"><i class="layui-icon">&#xe62c;</i>租借数据统计</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a target="_blank" href=""><i class="layui-icon">&#xe705;</i>图书查询</a></li>
+                <li class="layui-nav-item"><a target="_blank" href="/book/listVo"><i class="layui-icon">&#xe705;</i>图书查询</a></li>
                 <li class="layui-nav-item"><a target="_blank" href=""><i class="layui-icon">&#xe656;</i>类型查询</a></li>
-                <li class="layui-nav-item"><a target="_blank" href=""><i class="layui-icon">&#xe62d;</i>图书排行榜</a></li>
+                <li class="layui-nav-item"><a target="_blank" href="/book/sort"><i class="layui-icon">&#xe62d;</i>图书排行榜</a></li>
                 <li class="layui-nav-item"><a target="_blank" href=""><i class="layui-icon">&#xe62d;</i>读者排行榜</a></li>
                 <li class="layui-nav-item"><a target="_blank" href=""><i class="layui-icon">&#xe62d;</i>失信读者公示</a></li>
                 <li>

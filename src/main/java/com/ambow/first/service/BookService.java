@@ -4,6 +4,7 @@ import com.ambow.first.entity.Book;
 import com.ambow.first.util.Page;
 import com.ambow.first.vo.BookTypeVo;
 import org.apache.ibatis.annotations.Param;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public interface BookService {
 
     Page<BookTypeVo> getBookTypeVoList(Integer page, Integer size);//查询全部图书类型
 
-
+    XSSFWorkbook exportExcelInfo();
     Page<BookTypeVo> getBookTypeVoByTypeIAndLike(String typeId, String blur, Integer page, Integer size);//分类下模糊查询
 
 

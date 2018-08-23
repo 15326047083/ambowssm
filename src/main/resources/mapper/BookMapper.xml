@@ -55,7 +55,11 @@
     </select>
 
 
-
+    <select id="queryAll" resultType="com.ambow.first.vo.BookTypeVo">
+    select t.id typeId,t.name typeName,t.place typePlace,t.book_num bookNum,b.id bookId,b.book_name bookName,b.author_name bookAuthorName,
+    b.press bookPress,b.publish_date bookPublishDate,b.info bookInfo,b.status bookStatus,b.num bookBorrowNum,b.remark bookRemark
+    from book b,type t where t.id=b.type_id;
+  </select>
 
 
 
