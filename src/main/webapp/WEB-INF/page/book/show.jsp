@@ -82,21 +82,23 @@
         <div class="layui-input-block">
 
             <c:if test="${bookTypeVo.bookStatus==1}">
-            <input type="radio" checked="checked" name="status"  value="" title="在馆" ></c:if>
+                <input type="text"  value="在馆" disabled="disabled" name="press" lay-verify="required"  autocomplete="off" class="layui-input">
+            </c:if>
             <c:if test="${bookTypeVo.bookStatus==2}">
-            <input type="radio"checked="checked" name="status" title="借出" >
+                <input type="text"  value="借出"  disabled="disabled" name="press" lay-verify="required"  autocomplete="off" class="layui-input">
             </c:if>
 
         </div>
     </div>
+<div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">图书简介</label>
+    <div class="layui-input-block">
+        <textarea  disabled="disabled" class="layui-textarea"name="remark">${bookTypeVo.bookInfo}</textarea>
 
-
-    <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">图书简介</label>
-        <div class="layui-input-block">
-            <textarea class="layui-textarea layui-hide" disabled="disabled"  name="info" lay-verify="content" id="LAY_demo_editor">${bookTypeVo.bookInfo}</textarea>
-        </div>
     </div>
+</div>
+
+
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">备注</label>
         <div class="layui-input-block">
@@ -133,7 +135,6 @@
         </div>
     </div>
 
-<div class="container">
 
     <div id="example" class="modal hide fade in" style="display: none; ">
         <div class="modal-header">
@@ -148,6 +149,7 @@
                         <input type="text" name="phone" lay-verify="required" id="phone" onkeyup="checkPhone(this.value)" placeholder="请输入您的手机号" autocomplete="off" class="layui-input">
                     </div>
                 </div>
+
 
                 <div class="layui-form-item">
                     <div class="layui-input-block">
@@ -293,10 +295,11 @@
                     window.location.reload();
                 }
             });*/
-    }
+    })
 
 
 
 </script>
+
 </body>
 </html>
