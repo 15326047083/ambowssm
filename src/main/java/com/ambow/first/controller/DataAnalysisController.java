@@ -138,10 +138,16 @@ public class DataAnalysisController {
     @RequestMapping(value = "/getDonate")
     public String getDonate(Model mode,@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
 
-
+        String date=null;
 
         Page<BookDonateVo> list=donateService.selectAll(page,size);
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        List<BookDonateVo> donateVoList=list.getRows();
+        for (BookDonateVo bookDonate: donateVoList
+             ) {
+            date=sdf.format(bookDonate.getDonateTime());
 
+        }
         Integer ye = list.getTotal() / list.getSize();
 
         if (list.getTotal() % list.getSize() != 0) {
@@ -154,7 +160,7 @@ public class DataAnalysisController {
         mode.addAttribute("list", list);
         mode.addAttribute("ye", ye);
         mode.addAttribute("root","donate");
-
+        mode.addAttribute("date",date);
         return "/book/listDonate";
     }
 

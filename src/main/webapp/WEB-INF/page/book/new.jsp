@@ -128,7 +128,7 @@
             <input type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" value="提交"
                    onclick="return submitNewUser()">
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-
+            <button type="reset" class="layui-btn layui-btn-primary" onclick="history.go(-1)">返回</button>
         </div>
     </div>
     <script>

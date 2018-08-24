@@ -47,6 +47,13 @@
             <mvc:exclude-mapping path="/jump/toLogin"/>
             <mvc:exclude-mapping path="/jump/toIndex"/>
             <mvc:exclude-mapping path="/jump/login"/>
+            <mvc:exclude-mapping path="/book/sort"/>
+            <mvc:exclude-mapping path="/book/listVo"/>
+            <mvc:exclude-mapping path="/lost/toLost"/>
+            <mvc:exclude-mapping path="/type/toPie"/>
+            <mvc:exclude-mapping path="/type/pie"/>
+            <mvc:exclude-mapping path="/book/listVoBlurTypeId"/>
+            <mvc:exclude-mapping path="/borrow/export"/>
             <mvc:exclude-mapping path="/ai"/>
             <ref bean="checkAdmin"/>
         </mvc:interceptor>

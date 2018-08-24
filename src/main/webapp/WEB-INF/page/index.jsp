@@ -69,7 +69,7 @@
                     <a class="name" href="javascript:;">读者 </a>
                 </c:if>
                 <dl class="layui-nav-child">
-                    <dd><a style="color: #008B8B" href="javascript:;" href-url="欢迎页"><i
+                    <dd><a style="color: #008B8B" href="javascript:;" href-url="/type/toPie"><i
                             class="layui-icon">&#xe68e;</i>首页</a>
                     </dd>
                     <c:if test="${admin!=null}">
@@ -122,10 +122,6 @@
                             <dd><a href="javascript:;" href-url="/borrow/toList"><i
                                     class="layui-icon">&#xe62d;</i>借阅列表</a>
                             </dd>
-                            <dd><a href="javascript:;" href-url="/book/listVo"><i
-                                    class="layui-icon">&#xe621;</i>借书</a></dd>
-                            <dd><a href="javascript:;" href-url="/borrow/toList"><i
-                                    class="layui-icon">&#xe621;</i>还书</a></dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item">
@@ -201,7 +197,7 @@
             </ul>
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
-                    <iframe id="iframe" src="demo/welcome.html" frameborder="0"></iframe>
+                    <iframe id="iframe" src="/type/toPie" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
@@ -209,6 +205,20 @@
 
 </div>
 
+<!-- 右键菜单 -->
+<div class="my-dblclick-box none">
+    <table class="layui-tab dblclick-tab">
+        <tr class="card-refresh">
+            <td><i class="layui-icon">&#x1002;</i>刷新当前标签</td>
+        </tr>
+        <tr class="card-close">
+            <td><i class="layui-icon">&#x1006;</i>关闭当前标签</td>
+        </tr>
+        <tr class="card-close-all">
+            <td><i class="layui-icon">&#x1006;</i>关闭所有标签</td>
+        </tr>
+    </table>
+</div>
 <script type="text/javascript" src="../../frame/layui/layui.js"></script>
 <script type="text/javascript" src="../../frame/static/js/vip_comm.js"></script>
 <script type="text/javascript" src="/frame/jquery-3.3.1.js"></script>

@@ -24,12 +24,11 @@
 
 
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>全部类型</legend>
+    <legend>${title}</legend>
 </fieldset>
 
 
-
-   <span class="fr">
+<span class="fr">
 
 <form action="/book/listVoBlurTypeId">
         <span class="layui-form-label">搜索条件：</span>
@@ -38,7 +37,7 @@
             <input type="text" name="blur" placeholder="输入书名/作者/出版社/简介" class="layui-input">
         </div>
         <div class="layui-input-inline">
-         <select name="typeId"  autocomplete="off"  class="layui-input" >
+         <select name="typeId" autocomplete="off" class="layui-input">
              <option value="">请选择图书类型</option>
                 <c:forEach items="${types}" var="types">
                     <option value="${types.id}">${types.name}</option>
@@ -46,19 +45,19 @@
             </select>
 
         </div>
-       <input type="submit" value="查询" class="layui-btn mgl-20" >
+       <input type="submit" value="查询" class="layui-btn mgl-20">
 </form>
     </span>
 
 
 <div class="my-btn-box" style="width: 1100px">
     <span class="fl">
-     <a href="/book/toNew" class="layui-btn mgl-20" >添加</a>
-         <a href="/book/export" class="layui-btn mgl-20" id="">导出</a>
-           <a href="/book/sort" class="layui-btn mgl-20">借阅排行</a>
-
+        <a href="${url}" class="layui-btn mgl-20">刷新</a>
+    <c:if test="${admin!=null}">
+        <a href="/book/toNew" class="layui-btn mgl-20">添加</a>
+        <a href="/book/export" class="layui-btn mgl-20" id="">导出</a>
+    </c:if>
     </span>
-
 </div>
 
 
@@ -96,7 +95,9 @@
         <th>借出次数</th>
 
 
-        <th class="actions">操作</th>
+        <c:if test="${admin!=null}">
+            <th class="actions">操作</th>
+        </c:if>
     </tr>
     </thead>
     <tbody>
@@ -111,8 +112,6 @@
             <td>${type.bookAuthorName}</td>
 
 
-
-
             <c:if test="${type.bookStatus==1}">
                 <td>在馆</td>
             </c:if>
@@ -124,19 +123,19 @@
                 <%-- <td>${type.bookStatus}</td>--%>
             <td>${type.bookBorrowNum}</td>
 
-            <td class="actions">
+            <c:if test="${admin!=null}">
+                <td class="actions">
 
 
-                <a href="/book/get?bookId=${type.bookId} ">
-                    <button class="layui-btn layui-btn-primary layui-btn-small">查看</button>
-                </a>
-            </td>
+                    <a href="/book/get?bookId=${type.bookId} ">
+                        <button class="layui-btn layui-btn-primary layui-btn-small">查看</button>
+                    </a>
+                </td>
+            </c:if>
         </tr>
     </c:forEach>
     </tbody>
     </c:if>
-
-
 
 
 </table>
@@ -163,8 +162,6 @@
         </c:if>
     </span>
     </c:if>
-
-
 
 
     <c:if test="${root=='typeBlur'}">

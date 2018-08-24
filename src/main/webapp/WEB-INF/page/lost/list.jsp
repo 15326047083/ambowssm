@@ -28,7 +28,8 @@
 <div class="my-btn-box" style="width: 1100px">
     <span class="fl">
 
- <a href="/borrow/export" class="layui-btn mgl-20" id="">导出</a>
+ <a href="/lost/toLost" class="layui-btn mgl-20">刷新</a>
+ <a href="/borrow/export" class="layui-btn mgl-20">导出</a>
     </span>
 
 </div>
@@ -50,53 +51,49 @@
         <th>应当归还时间</th>
 
 
-
-
-
-
     </tr>
     </thead>
     <tbody>
 
     <c:forEach items="${list.rows}" var="lost" varStatus="status">
 
-        <tr >
-            <td>${status.count}</td>
+    <tr>
+        <td>${status.count}</td>
 
-            <td>${lost.userName}</td>
-            <td>${lost.userPhone}</td>
-            <td>${lost.userPlace}</td>
-            <td>${lost.bookName}</td>
-            <td>${lost.start}</td>
-            <td>${lost.endDate}</td>
-
-
+        <td>${lost.userName}</td>
+        <td>${lost.userPhone}</td>
+        <td>${lost.userPlace}</td>
+        <td>${lost.bookName}</td>
+        <td>${lost.start}</td>
+        <td>${lost.endDate}</td>
 
 
+            <%----%>
 
-                <%----%>
 
-
-    </c:forEach>
+        </c:forEach>
     </tbody>
 </table>
 <div class="my-btn-box" style="width: 1100px">
 
     <span class="fr">
-     <a href="/lost/toLost?page=1 && size=${list.size}">  <button class="layui-btn layui-btn-primary layui-btn-small">首页</button></a>
+     <a href="/lost/toLost?page=1 && size=${list.size}">  <button
+             class="layui-btn layui-btn-primary layui-btn-small">首页</button></a>
 
         <c:if test="${list.page>1}">
 
-            <a href="/lost/toLost?page=${list.page-1}&&size=${list.size}">    <button class="layui-btn layui-btn-primary layui-btn-small">上一页</button></a>
+            <a href="/lost/toLost?page=${list.page-1}&&size=${list.size}">    <button
+                    class="layui-btn layui-btn-primary layui-btn-small">上一页</button></a>
         </c:if>
       ${list.page}/${ye}
     <c:if test="${list.page<ye}">
-        <a href="/lost/toLost?page=${list.page+1}&&size=${list.size}">  <button class="layui-btn layui-btn-primary layui-btn-small">下一页</button></a>
+        <a href="/lost/toLost?page=${list.page+1}&&size=${list.size}">  <button
+                class="layui-btn layui-btn-primary layui-btn-small">下一页</button></a>
 
     </c:if>
-       <a href="/lost/toLost?page=${ye}&& size=${list.size}"><button class="layui-btn layui-btn-primary layui-btn-small">尾页</button> </a>
+       <a href="/lost/toLost?page=${ye}&& size=${list.size}"><button
+               class="layui-btn layui-btn-primary layui-btn-small">尾页</button> </a>
     </span>
-
 
 
 </div>

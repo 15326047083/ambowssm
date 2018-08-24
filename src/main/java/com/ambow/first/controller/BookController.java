@@ -83,8 +83,7 @@ public class BookController {
             book1.setRemark(book.getRemark());
 
 
-
-            if (userName!= "" &&userPhone!="") {
+            if (userName != "" && userPhone != "") {
                 Donate donate = new Donate();
 
                 donate.setBookId(book1.getId());
@@ -111,7 +110,8 @@ public class BookController {
      */
 
     @RequestMapping(value = "/listVo")
-    public String listVo(Model mode, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
+    public String listVo(Model mode, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue =
+            "3") Integer size) {
 
 
         Page<BookTypeVo> bookTypeVoList = bookService.getBookTypeVoList(page, size);
@@ -133,10 +133,11 @@ public class BookController {
         mode.addAttribute("root", "vo");
         mode.addAttribute("ye", ye);
         mode.addAttribute("list", bookTypeVoList);
+        mode.addAttribute("url", "/book/listVo");
+        mode.addAttribute("title", "图书列表");
         return "/book/list";
 
     }
-
 
 
     /**
@@ -159,7 +160,8 @@ public class BookController {
      */
 
     @RequestMapping(value = "/listVoBlurTypeId")
-    public String listVoBlurTypeId(Model mode, String blur, String typeId, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
+    public String listVoBlurTypeId(Model mode, String blur, String typeId, @RequestParam(defaultValue = "1") Integer
+            page, @RequestParam(defaultValue = "3") Integer size) {
 
 
         Page<BookTypeVo> bookTypeVoList = bookService.getBookTypeVoByTypeIAndLike(typeId, blur, page, size);
@@ -182,6 +184,8 @@ public class BookController {
         mode.addAttribute("blur", blur);
         mode.addAttribute("ye", ye);
         mode.addAttribute("list", bookTypeVoList);
+        mode.addAttribute("url", "/book/listVoBlurTypeId?typeId=" + typeId);
+        mode.addAttribute("title", "图书列表");
         return "/book/list";
 
     }
@@ -226,7 +230,8 @@ public class BookController {
      * 排行
      */
     @RequestMapping(value = "/sort")
-    public String sort(Model mode, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
+    public String sort(Model mode, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3")
+            Integer size) {
 
 
         Page<BookTypeVo> bookTypeVoList = bookService.getBookTypeVoByTypeIdSort(page, size);
@@ -246,7 +251,8 @@ public class BookController {
         mode.addAttribute("root", "sort");
         mode.addAttribute("ye", ye);
         mode.addAttribute("list", bookTypeVoList);
-
+        mode.addAttribute("url", "/book/sort");
+        mode.addAttribute("title", "借阅排行");
         return "/book/list";
     }
 
@@ -263,6 +269,7 @@ public class BookController {
 
         return "redirect:/book/listVo";
     }
+
     /**
      * 导出为Excel
      *
@@ -270,12 +277,14 @@ public class BookController {
      */
     @RequestMapping("/export")
     @ResponseBody
-    public String export(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, IntrospectionException, IllegalAccessException, ParseException, InvocationTargetException, UnsupportedEncodingException {
-   //     System.out.println(response+" "+request);
+    public String export(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException,
+            IntrospectionException, IllegalAccessException, ParseException, InvocationTargetException,
+            UnsupportedEncodingException {
+        //     System.out.println(response+" "+request);
         response.reset(); //清除buffer缓存
         // 指定下载的文件名，浏览器都会使用本地编码，即GBK，浏览器收到这个文件名后，用ISO-8859-1来解码，然后用GBK来显示
         // 所以我们用GBK解码，ISO-8859-1来编码，在浏览器那边会反过来执行。
-        response.setHeader("Content-Disposition", "attachment;filename=Book_"+new Date().getTime()+".xlsx");
+        response.setHeader("Content-Disposition", "attachment;filename=Book_" + new Date().getTime() + ".xlsx");
         response.setContentType("application/vnd.ms-excel;charset=UTF-8");
         response.setHeader("Pragma", "no-cache");
         response.setHeader("Cache-Control", "no-cache");

@@ -52,29 +52,23 @@
     </thead>
     <tbody>
     <c:forEach items="${list}" var="type" varStatus="status">
-        <tr >
+        <tr>
             <td><a> ${status.count}</a></td>
             <td><a href="">${type.name}</a></td>
             <td>${type.place}</td>
             <td>${type.bookNum}</td>
             <td class="actions">
                 <a href="/type/toUpdate/${type.id}">
-                <button class="layui-btn layui-btn-primary layui-btn-small">修改</button></a>
+                    <button class="layui-btn layui-btn-primary layui-btn-small">修改</button>
+                </a>
+                <a href="/book/listVoBlurTypeId?typeId=${type.id}">
+                    <button class="layui-btn layui-btn-primary layui-btn-small">查看图书</button>
+                </a>
             </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
-<div class="my-btn-box" style="width: 1100px">
-
-    <span class="fr">
-     <button class="layui-btn layui-btn-primary layui-btn-small">首页</button>
-      <button class="layui-btn layui-btn-primary layui-btn-small">上一页</button>
-      1/5
-        <button class="layui-btn layui-btn-primary layui-btn-small">下一页</button>
-        <button class="layui-btn layui-btn-primary layui-btn-small">尾页</button>
-    </span>
-</div>
 <%----%>
 <script type="text/javascript" src="../frame/layui/layui.js"></script>
 <script type="text/javascript">

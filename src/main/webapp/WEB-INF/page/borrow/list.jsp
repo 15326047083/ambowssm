@@ -27,10 +27,22 @@
 </fieldset>
 <div class="my-btn-box" style="width: 1100px">
     <span class="fl">
-        <a class="layui-btn mgl-20" id="btn-delete-all">添加</a>
+        <a class="layui-btn mgl-20" id="btn-delete-all" onclick="sendMessage()">一键提醒即将逾期用户</a>
+        <script>
+            function sendMessage() {
+                $.ajax({
+                    url: "/borrow/sendMessage",
+                    type: "get",
+                    dataType: "json",
+                    success(data) {
+                        alert("成功提醒" + data + "名用户！！！");
+                    }
+                });
+            }
+        </script>
  <a href="/borrow/export" class="layui-btn mgl-20" id="">导出</a>
     </span>
-    <form action="/borrow/toLikeList" >
+    <form action="/borrow/toLikeList">
     <span class="fr">
         <span class="layui-form-label">搜索条件：</span>
         <div class="layui-input-inline">
@@ -63,26 +75,36 @@
 
     <c:forEach items="${list.rows}" var="borrow" varStatus="status">
 
-        <tr >
+        <tr>
             <td>${status.count}</td>
             <td>《${borrow.bookName}》</td>
             <td>${borrow.userName}</td>
             <td>${borrow.userPhone}</td>
             <td>${borrow.borrowDate}</td>
             <td>${borrow.borrowSrdate}</td>
-            <c:if test="${borrow.borrowStatus==2}"><td style="color:red">借阅中</td></c:if>
-            <c:if test="${borrow.borrowStatus==3}"><td  style="color:red ">逾期未还
-            </td></c:if>
-            <c:if test="${borrow.borrowStatus==4}"><td  style="color: green">逾期已还
-            </td></c:if>
-            <c:if test="${borrow.borrowStatus==5}"><td style="color: green">按时归还
-            </td></c:if>
-<%----%>
+            <c:if test="${borrow.borrowStatus==2}">
+                <td style="color:red">借阅中</td>
+            </c:if>
+            <c:if test="${borrow.borrowStatus==3}">
+                <td style="color:red ">逾期未还
+                </td>
+            </c:if>
+            <c:if test="${borrow.borrowStatus==4}">
+                <td style="color: green">逾期已还
+                </td>
+            </c:if>
+            <c:if test="${borrow.borrowStatus==5}">
+                <td style="color: green">按时归还
+                </td>
+            </c:if>
+                <%----%>
             <td class="actions">
-               <%--  <a href="/borrow/updateBorrow?bookId=${borrow.bookId}"><button class="layui-btn layui-btn-primary layui-btn-small" >还书</button></a>--%>
+                    <%--  <a href="/borrow/updateBorrow?bookId=${borrow.bookId}"><button class="layui-btn layui-btn-primary layui-btn-small" >还书</button></a>--%>
 
 
-                 <button onclick="updateBorrow('${borrow.borrowId}')" class="layui-btn layui-btn-primary layui-btn-small" >还书</button>
+                <button onclick="updateBorrow('${borrow.borrowId}')"
+                        class="layui-btn layui-btn-primary layui-btn-small">还书
+                </button>
 
             </td>
         </tr>
@@ -97,33 +119,40 @@
 
         <c:if test="${list.page>1}">
 
-            <a href="/borrow/toList?page=${list.page-1}&&size=${list.size}">    <button class="layui-btn layui-btn-primary layui-btn-small">上一页</button></a>
+            <a href="/borrow/toList?page=${list.page-1}&&size=${list.size}">    <button
+                    class="layui-btn layui-btn-primary layui-btn-small">上一页</button></a>
         </c:if>
       ${list.page}/${ye}
     <c:if test="${list.page<ye}">
-        <a href="/borrow/toList?page=${list.page+1}&&size=${list.size}">  <button class="layui-btn layui-btn-primary layui-btn-small">下一页</button></a>
+        <a href="/borrow/toList?page=${list.page+1}&&size=${list.size}">  <button
+                class="layui-btn layui-btn-primary layui-btn-small">下一页</button></a>
 
     </c:if>
-       <a href="/borrow/toList?page=${ye}&& size=${list.size}"><button class="layui-btn layui-btn-primary layui-btn-small">尾页</button> </a>
+       <a href="/borrow/toList?page=${ye}&& size=${list.size}"><button
+               class="layui-btn layui-btn-primary layui-btn-small">尾页</button> </a>
     </span>
     </c:if>
 
-<c:if test="${chuanzhi=='dog'}">
+    <c:if test="${chuanzhi=='dog'}">
     <span class="fr">
-     <a href="/borrow/toLikeList?mohu=${mohu}&& page=1&&size=${list.size}">  <button class="layui-btn layui-btn-primary layui-btn-small">首页</button></a>
+     <a href="/borrow/toLikeList?mohu=${mohu}&& page=1&&size=${list.size}">  <button
+             class="layui-btn layui-btn-primary layui-btn-small">首页</button></a>
 
         <c:if test="${list.page>1}">
 
-            <a href="/borrow/toLikeList?mohu=${mohu}&&page=${list.page-1}&&size=${list.size}">    <button class="layui-btn layui-btn-primary layui-btn-small">上一页</button></a>
+            <a href="/borrow/toLikeList?mohu=${mohu}&&page=${list.page-1}&&size=${list.size}">    <button
+                    class="layui-btn layui-btn-primary layui-btn-small">上一页</button></a>
         </c:if>
       ${list.page}/${ye}
     <c:if test="${list.page<ye}">
-        <a href="/borrow/toLikeList?mohu=${mohu}&&page=${list.page+1}&&size=${list.size}">  <button class="layui-btn layui-btn-primary layui-btn-small">下一页</button></a>
+        <a href="/borrow/toLikeList?mohu=${mohu}&&page=${list.page+1}&&size=${list.size}">  <button
+                class="layui-btn layui-btn-primary layui-btn-small">下一页</button></a>
 
     </c:if>
-       <a href="/borrow/toLikeList?mohu=${mohu}&&page=${ye}&&size=${list.size}"><button class="layui-btn layui-btn-primary layui-btn-small">尾页</button> </a>
+       <a href="/borrow/toLikeList?mohu=${mohu}&&page=${ye}&&size=${list.size}"><button
+               class="layui-btn layui-btn-primary layui-btn-small">尾页</button> </a>
     </span>
-</c:if>
+    </c:if>
 </div>
 
 <script type="text/javascript" src="../frame/layui/layui.js"></script>
@@ -143,18 +172,18 @@
 <script type="text/javascript">
     function updateBorrow(borrowId) {
 
-        if(confirm('确定要归还此书吗?')) {
-            $.post("/borrow/updateBorrow",{"borrowId":borrowId},
-                function(data){
-                    if(data =="OK"){
+        if (confirm('确定要归还此书吗?')) {
+            $.post("/borrow/updateBorrow", {"borrowId": borrowId},
+                function (data) {
+                    if (data == "OK") {
                         alert("还书成功！");
                         window.location.reload();
                     }
-                    if (data=="false") {
+                    if (data == "false") {
                         alert("你已经逾期还书！");
                         window.location.reload();
                     }
-                    if(data=="error"){
+                    if (data == "error") {
                         alert("该书已经归还！");
                         window.location.reload();
                     }

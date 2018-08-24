@@ -67,7 +67,7 @@
             <td>${donate.userName}</td>
             <td>${donate.userPhone}</td>
 
-            <td>${donate.donateTime}</td>
+            <td>${date}</td>
 
         </tr>
     </c:forEach>
@@ -109,7 +109,7 @@
 
 
 
-</div
+</div>
 <%----%>
 <script type="text/javascript" src="../frame/layui/layui.js"></script>
 <script type="text/javascript">

@@ -24,8 +24,11 @@ public class Test {
 
     @org.junit.Test
     public void testIdea() {
-        System.out.println(typeMapper.getBookTypeVoList());
-        System.out.println("我是可以用的");
+        try {
+            Send.sendSms("18147147614","海底两万里","蔡瑜靓");
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
     }
 
     @org.junit.Test
