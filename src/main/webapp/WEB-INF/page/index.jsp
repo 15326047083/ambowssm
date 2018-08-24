@@ -6,13 +6,15 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>爱心书屋</title>
+    <title>爱心书屋${admin.username}</title>
     <link rel="stylesheet" href="../../frame/layui/css/layui.css">
     <link rel="stylesheet" href="../../frame/static/css/style.css">
     <link rel="icon" href="../../frame/static/image/code.png">
@@ -25,25 +27,28 @@
     <div class="layui-header my-header">
         <a href="index.html">
             <!--<img class="my-header-logo" src="" alt="logo">-->
-            <div class="my-header-logo">后台模板 HTML</div>
+            <div class="my-header-logo">爱心图书</div>
         </a>
         <div class="my-header-btn">
             <button class="layui-btn layui-btn-small btn-nav"><i class="layui-icon">&#xe65f;</i></button>
         </div>
 
-        <!-- 顶部左侧添加选项卡监听 -->
-        <ul class="layui-nav" lay-filter="side-top-left">
-            <li class="layui-nav-item">
-                <a href="javascript:;"><i class="layui-icon">&#xe671;</i>借阅</a>
-                <dl class="layui-nav-child">
-                    <dd><a style="color: #008B8B" href="javascript:;" href-url="demo/btn.html"><i class="layui-icon">&#xe630;</i>借书</a>
-                    </dd>
-                    <dd><a style="color: #008B8B" href="javascript:;" href-url="demo/form.html"><i class="layui-icon">&#xe630;</i>还书</a>
-                    </dd>
-                </dl>
-            </li>
-        </ul>
-
+        <c:if test="${admin!=null}">
+            <!-- 顶部左侧添加选项卡监听 -->
+            <ul class="layui-nav" lay-filter="side-top-left">
+                <li class="layui-nav-item">
+                    <a href="javascript:;"><i class="layui-icon">&#xe671;</i>借阅</a>
+                    <dl class="layui-nav-child">
+                        <dd><a style="color: #008B8B" href="javascript:;" href-url="/book/listVo"><i
+                                class="layui-icon">&#xe630;</i>借书</a>
+                        </dd>
+                        <dd><a style="color: #008B8B" href="javascript:;" href-url="/borrow/toList"><i
+                                class="layui-icon">&#xe630;</i>还书</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </c:if>
         <!-- 顶部右侧添加选项卡监听 -->
         <ul class="layui-nav my-header-user-nav" lay-filter="side-top-right">
             <li class="layui-nav-item">
@@ -57,11 +62,24 @@
             <li class="layui-nav-item" style="width: 10px"></li>
 
             <li class="layui-nav-item">
-                <a class="name" href="javascript:;">Admin </a>
+                <c:if test="${admin!=null}">
+                    <a class="name" href="javascript:;">Admin </a>
+                </c:if>
+                <c:if test="${admin==null}">
+                    <a class="name" href="javascript:;">读者 </a>
+                </c:if>
                 <dl class="layui-nav-child">
-                    <dd><a style="color: #008B8B" href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe68e;</i>首页</a>
+                    <dd><a style="color: #008B8B" href="javascript:;" href-url="欢迎页"><i
+                            class="layui-icon">&#xe68e;</i>首页</a>
                     </dd>
-                    <dd><a style="color: #008B8B" href="/"><i class="layui-icon">&#x1006;</i>退出</a></dd>
+                    <c:if test="${admin!=null}">
+                        <dd><a style="color: #008B8B" href="/jump/loginOut"><i class="layui-icon">&#x1006;</i>退出</a>
+                        </dd>
+                    </c:if>
+                    <c:if test="${admin==null}">
+                        <dd><a style="color: #008B8B" href="/jump/toLogin"><i class="layui-icon">&#x1006;</i>管理员登陆</a>
+                        </dd>
+                    </c:if>
                 </dl>
             </li>
             <li class="layui-nav-item" style="width: 15px"></li>
@@ -73,83 +91,93 @@
         <div class="layui-side-scroll">
             <!-- 左侧主菜单添加选项卡监听 -->
             <ul class="layui-nav layui-nav-tree" lay-filter="side-main">
-                <li class="layui-nav-item  layui-nav-itemed">
-                    <a href="javascript:;"><i class="layui-icon">&#xe705;</i>图书管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" href-url="/book/listVo"><i class="layui-icon">&#xe62d;</i>图书列表</a>
-                        </dd>
-                        <dd><a href="javascript:;" href-url="/book/toNew"><i class="layui-icon">&#xe61f;</i>添加图书</a>
-                        </dd>
-                        <dd><a href="javascript:;" href-url="/dataAnalysis/getDonate"><i class="layui-icon">&#xe62d;</i>捐书列表</a>
-                        </dd>
+                <c:if test="${admin!=null}">
+                    <li class="layui-nav-item  layui-nav-itemed">
+                        <a href="javascript:;"><i class="layui-icon">&#xe705;</i>图书管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" href-url="/book/listVo"><i
+                                    class="layui-icon">&#xe62d;</i>图书列表</a>
+                            </dd>
+                            <dd><a href="javascript:;" href-url="/book/toNew"><i class="layui-icon">&#xe61f;</i>添加图书</a>
+                            </dd>
+                            <dd><a href="javascript:;" href-url="/dataAnalysis/getDonate"><i
+                                    class="layui-icon">&#xe62d;</i>捐书列表</a>
+                            </dd>
 
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="layui-icon">&#xe656;</i>类型管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" href-url="/type/toList"><i class="layui-icon">&#xe62d;</i>类型列表</a>
-                        </dd>
-                        <dd><a href="javascript:;" href-url="/type/toNew"><i class="layui-icon">&#xe61f;</i>添加类型</a>
-                        </dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="layui-icon">&#xe630;</i>借阅管理管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe62d;</i>借阅列表</a>
-                        </dd>
-                        <dd><a href="javascript:;" href-url="demo/register.html"><i
-                                class="layui-icon">&#xe621;</i>借书</a></dd>
-                        <dd><a href="javascript:;" href-url="demo/register.html"><i
-                                class="layui-icon">&#xe621;</i>还书</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="layui-icon">&#xe612;</i>读者管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe62d;</i>读者列表</a>
-                        </dd>
-                        <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe61f;</i>添加读者</a>
-                        </dd>
-                        <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe62d;</i>失信列表</a>
-                        </dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="layui-icon">&#xe68e;</i>我的书屋</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" href-url="/book/sort"><i class="layui-icon">&#xe62d;</i>图书排行榜</a>
-                        </dd>
-                        <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe62d;</i>读者排行榜</a>
-                        </dd>
-                        <dd><a href="javascript:;" href-url="/type/toPie"><i class="layui-icon">&#xe62c;</i>图书库存统计</a>
-                        </dd>
-                        <dd><a href="javascript:;" href-url="/jump/todataAnalysis"><i class="layui-icon">&#xe62c;</i>租借数据统计</a>
-                        </dd>
-                        <dd><a id="xiaoai" href="javascript:;" href-url="../../ai.jsp"><i
-                                class="layui-icon">&#xe61c;</i>智障小Ai</a>
-                        </dd>
-                    </dl>
-                </li>
-
-
-                <li class="layui-nav-item  layui-nav-itemed">
-                    <a href="javascript:;"><i class="layui-icon">&#xe705;</i>自助服务</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" href-url="/book/listVo"><i class="layui-icon">&#xe705;</i>图书查询</a>
-                        </dd>
-                        <dd><a href="javascript:;" href-url=""><i class="layui-icon">&#xe656;</i>类型查询</a>
-                        </dd>
-                        <dd><a href="javascript:;" href-url="/book/sort"><i class="layui-icon">&#xe62d;</i>借阅排行榜</a>
-                        </dd>
-                        <dd><a href="javascript:;" href-url=""><i class="layui-icon">&#xe62d;</i>读者排行榜</a>
-                        </dd>
-                        <dd><a href="javascript:;" href-url=""><i class="layui-icon">&#xe62d;</i>失信读者公示</a>
-                        </dd>
-
-                    </dl>
-                </li>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="layui-icon">&#xe656;</i>类型管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" href-url="/type/toList"><i
+                                    class="layui-icon">&#xe62d;</i>类型列表</a>
+                            </dd>
+                            <dd><a href="javascript:;" href-url="/type/toNew"><i class="layui-icon">&#xe61f;</i>添加类型</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="layui-icon">&#xe630;</i>借阅管理管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" href-url="/borrow/toList"><i
+                                    class="layui-icon">&#xe62d;</i>借阅列表</a>
+                            </dd>
+                            <dd><a href="javascript:;" href-url="/book/listVo"><i
+                                    class="layui-icon">&#xe621;</i>借书</a></dd>
+                            <dd><a href="javascript:;" href-url="/borrow/toList"><i
+                                    class="layui-icon">&#xe621;</i>还书</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="layui-icon">&#xe612;</i>读者管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe62d;</i>读者列表</a>
+                            </dd>
+                            <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe61f;</i>添加读者</a>
+                            </dd>
+                            <dd><a href="javascript:;" href-url="/lost/toLost"><i
+                                    class="layui-icon">&#xe62d;</i>失信列表</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="layui-icon">&#xe68e;</i>我的书屋</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" href-url="/book/sort"><i class="layui-icon">&#xe62d;</i>图书排行榜</a>
+                            </dd>
+                            <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe62d;</i>读者排行榜</a>
+                            </dd>
+                            <dd><a href="javascript:;" href-url="/type/toPie"><i
+                                    class="layui-icon">&#xe62c;</i>图书库存统计</a>
+                            </dd>
+                            <dd><a href="javascript:;" href-url="/jump/todataAnalysis"><i
+                                    class="layui-icon">&#xe62c;</i>租借数据统计</a>
+                            </dd>
+                            <dd><a id="xiaoai" href="javascript:;" href-url="../../ai.jsp"><i
+                                    class="layui-icon">&#xe61c;</i>智障小Ai</a>
+                            </dd>
+                        </dl>
+                    </li>
+                </c:if>
+                <c:if test="${admin==null}">
+                    <li class="layui-nav-item  layui-nav-itemed">
+                        <a href="javascript:;"><i class="layui-icon">&#xe705;</i>自助服务</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" href-url="/book/listVo"><i
+                                    class="layui-icon">&#xe705;</i>图书查询</a>
+                            </dd>
+                            <dd><a href="javascript:;" href-url="/book/sort"><i class="layui-icon">&#xe62d;</i>借阅排行榜</a>
+                            </dd>
+                            <dd><a href="javascript:;" href-url=""><i class="layui-icon">&#xe62d;</i>读者排行榜</a>
+                            </dd>
+                            <dd><a href="javascript:;" href-url="/lost/toLost"><i class="layui-icon">&#xe62d;</i>失信读者公示</a>
+                            </dd>
+                            <dd><a id="xiaoai" href="javascript:;" href-url="../../ai.jsp"><i
+                                    class="layui-icon">&#xe61c;</i>智障小Ai</a>
+                            </dd>
+                        </dl>
+                    </li>
+                </c:if>
                 <li>
                     <div id="msg" style="width: 140px;height: 70px; position:absolute; right: 158px">
                         <img onclick="goToXiaoAi()" style="width: 140px;height: 70px"
