@@ -85,10 +85,12 @@ where l.user_id=u.id and u.phone = #{phone};
   <!--全查失信表带分页-->
   <select id="selectAllPage" resultType="com.ambow.first.vo.LostUserVo">
    select l.id lid,l.user_id lostId,l.borrow_id lBookId,u.id userId,u.name userName,u.phone userPhone,
-u.place userPlace,b.id bookId,b.book_name bookName,w.id wId,w.book_id wBookId
+u.place userPlace,b.id bookId,b.book_name bookName,w.id wId,w.book_id wBookId,w.borrow_date start,w.s_r_date endDate
 from lost l,user u,book b,borrow w
-where l.user_id=u.id and w.id=l.borrow_id and w.book_id=b.id limit #{page},#{size};
-
+where l.user_id=u.id and w.id=l.borrow_id and w.book_id=b.id
+<if test="page!=null and size!=null">
+limit #{page},#{size};
+</if>
 
   </select>
   <!--统计失信表总条目-->

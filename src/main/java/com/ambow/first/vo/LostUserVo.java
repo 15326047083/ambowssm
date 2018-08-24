@@ -1,25 +1,9 @@
 package com.ambow.first.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class LostUserVo {
 
-
-
-
-    private String lid; // 失信表主键
-    private String lostId;//失信表的用户ID
-    private String lBookId;
-    private String userId; // 用户ID
-    private String userName; // 用户名称
-    private String userPhone; // 手机号
-
-    private String userPlace; // 住址
-    private String bookId;
-    private String bookName;
-
-    private String wId;
-    private String wBookId;
 
     public String getLid() {
         return lid;
@@ -109,6 +93,22 @@ public class LostUserVo {
         this.wBookId = wBookId;
     }
 
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
     @Override
     public String toString() {
         return "LostUserVo{" +
@@ -123,10 +123,12 @@ public class LostUserVo {
                 ", bookName='" + bookName + '\'' +
                 ", wId='" + wId + '\'' +
                 ", wBookId='" + wBookId + '\'' +
+                ", start='" + start + '\'' +
+                ", endDate='" + endDate + '\'' +
                 '}';
     }
 
-    public LostUserVo(String lid, String lostId, String lBookId, String userId, String userName, String userPhone, String userPlace, String bookId, String bookName, String wId, String wBookId) {
+    public LostUserVo(String lid, String lostId, String lBookId, String userId, String userName, String userPhone, String userPlace, String bookId, String bookName, String wId, String wBookId, String start, String endDate) {
         this.lid = lid;
         this.lostId = lostId;
         this.lBookId = lBookId;
@@ -138,5 +140,29 @@ public class LostUserVo {
         this.bookName = bookName;
         this.wId = wId;
         this.wBookId = wBookId;
+        this.start = start;
+        this.endDate = endDate;
     }
+
+    private String lid; // 失信表主键
+    private String lostId;//失信表的用户ID
+    private String lBookId;
+    private String userId; // 用户ID
+    private String userName; // 用户名称
+    private String userPhone; // 手机号
+
+    private String userPlace; // 住址
+    private String bookId;
+    private String bookName;
+
+    private String wId;
+    private String wBookId;
+    private String start;
+    private String endDate;
+
+    public LostUserVo(){
+
+    }
+
+
 }

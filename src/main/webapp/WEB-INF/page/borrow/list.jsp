@@ -81,8 +81,10 @@
             <td class="actions">
                <%--  <a href="/borrow/updateBorrow?bookId=${borrow.bookId}"><button class="layui-btn layui-btn-primary layui-btn-small" >还书</button></a>--%>
 
-                  <%-- <c:if test="${borrow.borrowStatus==5}"> <button class="layui-btn layui-btn-primary layui-btn-small" >还书</button></a></c:if>--%>
-                   <button onclick="updateBorrow('${borrow.bookId}')" class="layui-btn layui-btn-primary layui-btn-small" >还书</button>        </td>
+
+                 <button onclick="updateBorrow('${borrow.borrowId}')" class="layui-btn layui-btn-primary layui-btn-small" >还书</button>
+
+            </td>
         </tr>
 
     </c:forEach>
@@ -139,10 +141,10 @@
     ${flag}
 </script>
 <script type="text/javascript">
-    function updateBorrow(bookId) {
+    function updateBorrow(borrowId) {
 
         if(confirm('确定要归还此书吗?')) {
-            $.post("/borrow/updateBorrow",{"bookId":bookId},
+            $.post("/borrow/updateBorrow",{"borrowId":borrowId},
                 function(data){
                     if(data =="OK"){
                         alert("还书成功！");
@@ -150,6 +152,10 @@
                     }
                     if (data=="false") {
                         alert("你已经逾期还书！");
+                        window.location.reload();
+                    }
+                    if(data=="error"){
+                        alert("该书已经归还！");
                         window.location.reload();
                     }
                 });

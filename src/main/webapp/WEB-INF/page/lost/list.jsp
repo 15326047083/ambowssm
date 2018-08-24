@@ -27,7 +27,7 @@
 </fieldset>
 <div class="my-btn-box" style="width: 1100px">
     <span class="fl">
-        <a class="layui-btn mgl-20" id="btn-delete-all">添加</a>
+
  <a href="/borrow/export" class="layui-btn mgl-20" id="">导出</a>
     </span>
 
@@ -42,15 +42,18 @@
     <thead>
     <tr>
         <th>编号</th>
-        <th>用户ID</th>
         <th>用户姓名</th>
         <th>用户手机号</th>
         <th>用户地址</th>
         <th>图书名字</th>
+        <th>借出时间</th>
+        <th>应当归还时间</th>
 
 
 
-        <th class="actions">操作</th>
+
+
+
     </tr>
     </thead>
     <tbody>
@@ -59,23 +62,20 @@
 
         <tr >
             <td>${status.count}</td>
-            <td>${lost.lostId}</td>
+
             <td>${lost.userName}</td>
             <td>${lost.userPhone}</td>
             <td>${lost.userPlace}</td>
             <td>${lost.bookName}</td>
-            <
+            <td>${lost.start}</td>
+            <td>${lost.endDate}</td>
+
 
 
 
 
                 <%----%>
-            <td class="actions">
-                    <%--  <a href="/borrow/updateBorrow?bookId=${borrow.bookId}"><button class="layui-btn layui-btn-primary layui-btn-small" >还书</button></a>--%>
 
-                    <%-- <c:if test="${borrow.borrowStatus==5}"> <button class="layui-btn layui-btn-primary layui-btn-small" >还书</button></a></c:if>--%>
-
-        </tr>
 
     </c:forEach>
     </tbody>

@@ -64,6 +64,7 @@ public class LostServiceImpl implements LostService {
         pages.setPage(page);
         pages.setSize(size);
         List<LostUserVo> borrowBookUserVo=lostMapper.selectAllPage((page-1)*size,pages.getSize());
+
         pages.setRows(borrowBookUserVo);
         return pages;
     }

@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/lost")
 public class LostController {
@@ -25,7 +27,11 @@ public class LostController {
      */
     @RequestMapping(value = "/toLost")
     public String selectAllPage(Model model, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size){
+        System.out.println("1");
         Page<LostUserVo> lostPage=lostService.selectAllPage(page, size);
+        List<LostUserVo> lostUserVo=lostPage.getRows();
+        System.out.println(lostUserVo);
+
         Integer ye = lostPage.getTotal()/lostPage.getSize();
         if (lostPage.getTotal()%lostPage.getSize() !=0){
             ye=ye+1;

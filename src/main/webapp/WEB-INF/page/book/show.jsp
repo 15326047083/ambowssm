@@ -125,12 +125,13 @@
 
                 && /borrow/newBorrow/${bookTypeVo.bookId}
             </a>--%>
+            <c:if test="${bookTypeVo.bookStatus==1}">
             <a data-toggle="modal" href="#example" onclick="bookId=${bookTypeVo.bookId}">
 
                 <button class="layui-btn layui-btn-primary layui-btn-small">
                     借书</button>
             </a>
-
+            </c:if>
 
         </div>
     </div>

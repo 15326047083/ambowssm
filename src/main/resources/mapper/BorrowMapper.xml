@@ -106,21 +106,18 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ambow.first.entity.Borrow" >
     update borrow
-    set book_id = #{bookId,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=VARCHAR},
-      borrow_date = #{borrowDate,jdbcType=TIMESTAMP},
-      s_r_date = #{sRDate,jdbcType=TIMESTAMP},
-      s_r_time_stamp = #{sRTimeStamp,jdbcType=BIGINT},
-      status = #{status,jdbcType=INTEGER}
+    set status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-  <update id="updateByBookId">
+  <update id="updateByBookId" parameterType="com.ambow.first.entity.Borrow">
     update borrow
     set status = #{status,jdbcType=INTEGER}
-    where book_id = #{bookId,jdbcType=VARCHAR}
+    where book_id = #{bookId,jdbcType=VARCHAR};
 
   </update>
+
+
   <!--借阅列表的全查带分页-->
   <select id="selectBorrowUserBook" resultType="com.ambow.first.vo.BorrowBookUserVo">
     select w.id borrowId,w.borrow_date borrowDate,w.s_r_date borrowSrdate,w.s_r_time_stamp borrowSrtimeStamp,
@@ -170,7 +167,7 @@
   <!--根据bookID查找应当还书时间戳-->
   <select id="getByBookId" parameterType="java.lang.String" resultType="borrow">
     select
-    s_r_time_stamp,user_id from borrow
+    s_r_time_stamp,id,user_id from borrow
     where book_id = #{bookId,jdbcType=VARCHAR}
   </select>
   <!--全查borrow表-->

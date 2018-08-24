@@ -114,6 +114,7 @@ public class BorrowController {
     }
 
     /**
+     *
      * 前往增加借阅信息的页面
      */
     @RequestMapping(value = "/toNew/{bookId}")
@@ -164,36 +165,47 @@ public class BorrowController {
      */
     @ResponseBody
     @RequestMapping(value = "/updateBorrow")
-    public String updateBorrow(String bookId) {
-        Book book = bookService.selectByPrimaryKey(bookId);
+    public String updateBorrow(String borrowId) {
+
         long date = new Date().getTime();//获取当前还书的时间戳
-        Borrow borrow = borrowService.getByBookId(bookId);
+        Borrow borrow = borrowService.selectByPrimaryKey(borrowId);
+        Book book = bookService.selectByPrimaryKey(borrow.getBookId());
         long date1 = borrow.getsRTimeStamp();//获取应当还书的时间戳*/
 
         if (date > date1) {
-            borrow.setBookId(bookId);
-            borrow.setStatus(4);
-            borrowService.updateByBookId(borrow);
+            if (borrow.getStatus()==2||borrow.getStatus()==3) {
+                borrow.setId(borrowId);
+                borrow.setStatus(4);
+                borrowService.updateByPrimaryKeySelective(borrow);
 
-            book.setId(bookId);
-            book.setStatus(1);
-            bookService.updateByPrimaryKeySelective(book);
+                book.setId(borrow.getBookId());
+                book.setStatus(1);
+                bookService.updateByPrimaryKeySelective(book);
+                return "false";
+            }else {
+                return "error";
+            }
 
-           /* Lost lost = new Lost();
-            lost.setUserId(borrow.getUserId());
-            lost.setBorrowId(borrow.getId());
-            lostService.insert(lost);*/
-            return "false";
-        } else {
-            borrow.setBookId(bookId);
-            borrow.setStatus(5);
-            borrowService.updateByBookId(borrow);
-
-            book.setId(bookId);
-            book.setStatus(1);
-            bookService.updateByPrimaryKeySelective(book);
-            return "OK";
         }
+        else{
+            if (borrow.getStatus()==2) {
+                borrow.setId(borrowId);
+                borrow.setStatus(5);
+                borrowService.updateByPrimaryKeySelective(borrow);
+                book.setId(borrow.getBookId());
+                book.setStatus(1);
+                bookService.updateByPrimaryKeySelective(book);
+                return "OK";
+            }
+            else{
+                return "error";
+            }
+        }
+
+
+
+
+
 
     }
     @RequestMapping("/export")
