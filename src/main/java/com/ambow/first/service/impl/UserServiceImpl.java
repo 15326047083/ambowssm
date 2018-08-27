@@ -5,8 +5,6 @@ import com.ambow.first.entity.User;
 import com.ambow.first.service.UserService;
 import com.ambow.first.util.ExcelBean;
 import com.ambow.first.util.ExcelUtil;
-import com.ambow.first.util.PageUtil;
-import org.apache.ibatis.annotations.Param;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,8 +32,9 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public void insert(User record) {
+    public boolean insert(User record) {
         userMapper.insert(record);
+        return true;
     }
 
     /**
@@ -65,8 +64,9 @@ public class UserServiceImpl implements UserService {
      * @param user
      */
     @Override
-    public void updateByPrimaryKeySelective(User user) {
+    public boolean updateByPrimaryKeySelective(User user) {
         userMapper.updateByPrimaryKeySelective(user);
+        return true;
     }
 
     /**
@@ -147,8 +147,9 @@ public class UserServiceImpl implements UserService {
      * @param id
      */
     @Override
-    public void deleteUser(String id) {
+    public boolean deleteUser(String id) {
         userMapper.deleteByPrimaryKey(id);
+        return true;
     }
 
     /**

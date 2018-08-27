@@ -16,16 +16,22 @@
   <sql id="Base_Column_List" >
     id, name, sex, age, phone, new_date, out_date, place, borrow_num, password
   </sql>
+
+  <!--根据主键查询-->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from user
     where id = #{id,jdbcType=VARCHAR}
   </select>
+
+  <!--根据主键删除-->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from user
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+
+  <!--新增-->
   <insert id="insert" parameterType="com.ambow.first.entity.User" >
     insert into user (id, name, sex, 
       age, phone, new_date, 
@@ -36,6 +42,8 @@
       #{outDate,jdbcType=TIMESTAMP}, #{place,jdbcType=VARCHAR}, #{borrowNum,jdbcType=INTEGER}, 
       #{password,jdbcType=VARCHAR})
   </insert>
+
+  <!--新增 选择-->
   <insert id="insertSelective" parameterType="com.ambow.first.entity.User" >
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -103,6 +111,8 @@
       </if>
     </trim>
   </insert>
+
+  <!--修改 -选择-->
   <update id="updateByPrimaryKeySelective" parameterType="com.ambow.first.entity.User" >
     update user
     <set >
@@ -136,6 +146,8 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <!--根据主键修改-->
   <update id="updateByPrimaryKey" parameterType="com.ambow.first.entity.User" >
     update user
     set name = #{name,jdbcType=VARCHAR},
@@ -149,29 +161,45 @@
       password = #{password,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <!--根据借阅次数查询所有   DESC输出-->
   <select id="selectAllByBorrowNum" resultType="com.ambow.first.entity.User">
       select * from user order by borrow_num DESC
   </select>
+
+  <!--根据借阅次数查询所有   加分页-->
   <select id="selectAllByBorrowNumLimit" resultType="com.ambow.first.entity.User">
       select * from user order by borrow_num DESC limit #{pageIndex},5
   </select>
+
+  <!--查询所有-->
   <select id="selectAll" resultType="com.ambow.first.entity.User">
       select * from user
   </select>
+
+  <!--查询所有  加分页-->
   <select id="selectAllLimit" resultType="com.ambow.first.entity.User">
       select * from user limit #{pageIndex},5
   </select>
+
+  <!--模糊查询  加分页-->
   <select id="likeSelect" resultType="com.ambow.first.entity.User">
       select * from user
       where name like concat('%',#{selectKey},'%') or phone like concat('%',#{selectKey},'%') or place like concat('%',#{selectKey},'%')
       limit #{pageIndex},5;
 </select>
+
+  <!--根据电话号码查询用户-->
   <select id="getUserByPhone" resultType="com.ambow.first.entity.User">
       select * from user where  phone = #{phone,jdbcType=VARCHAR}
   </select>
+
+  <!--得到表中的总数-->
 <select id="getPageNumber" resultType="int">
       select count(*) from user
 </select>
+
+  <!--得到模糊查询后的结果总数-->
   <select id="getPageNumberLike" resultType="int">
       select count(*) from user
           where name like concat('%',#{selectKey},'%') or phone like concat('%',#{selectKey},'%') or place like concat('%',#{selectKey},'%')

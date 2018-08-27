@@ -1,22 +1,20 @@
 package com.ambow.first.service;
 
 import com.ambow.first.entity.User;
-import org.apache.ibatis.annotations.Param;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.util.List;
-import java.util.Map;
 
 
 public interface UserService {
 
-    void insert(User user); // 新增读者
+    boolean insert(User user); // 新增读者
 
     User selectByPrimaryKey(String id); // 查询读者信息
 
     void updateByPrimaryKey(User user); // 根据主键修改
 
-    void updateByPrimaryKeySelective(User user); // 修改读者信息
+    boolean updateByPrimaryKeySelective(User user); // 修改读者信息
 
     List<User> selectAllByBorrowNum(); // 查询所有读者并按借阅次数排列
 
@@ -32,7 +30,7 @@ public interface UserService {
 
     int getPageNumberLike(String selectKey); // 获得模糊查询后的总记录数
 
-    void deleteUser(String id); // 根据读者ID删除信息
+    boolean deleteUser(String id); // 根据读者ID删除信息
 
     User getUserByPhone(String phone); // 根据电话查询读者
 

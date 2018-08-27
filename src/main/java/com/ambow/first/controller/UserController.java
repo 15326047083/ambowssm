@@ -3,14 +3,14 @@ package com.ambow.first.controller;
 import com.ambow.first.entity.User;
 import com.ambow.first.service.UserService;
 import com.ambow.first.util.PageUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,55 +34,97 @@ public class UserController {
     private UserService userService;
 
     /**
-     * 前往新增页面
-     *
-     * @return
-     */
-    @RequestMapping(value = "/toInsertUser")
-    public String toInsertUser() {
-        return "/user/insertUser";
-    }
-
-    /**
      * 判断手机号是否已被注册
+     *
      * @param phone
      * @return
      */
-    @RequestMapping("/checkPhone/{phone}")
+    @RequestMapping(value = "/checkPhone", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public int checkPhone(@PathVariable("phone")String phone){
-        System.out.println(phone);
-        if (userService.getUserByPhone(phone)==null){
-            return 0; // 未注册
+    public String checkPhone(@RequestParam String phone) {
+        boolean result = true;
+        List<User> existUser = userService.selectAll();
+        for (User user : existUser) {
+            if (user.getPhone().equals(phone)) {
+                result = false;
+                break;
+            }
         }
-        return 1; // 已经注册
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("valid", result);
+        ObjectMapper mapper = new ObjectMapper();
+        String resultString = "";
+        try {
+            resultString = mapper.writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return resultString;
     }
+
+    /**
+     * 修改页面异步校验
+     *
+     * @param phone
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/checkUpdatePhone", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String checkUpdatePhone(@RequestParam String phone, @RequestParam String id) {
+        boolean result = true;
+        List<User> existUser = userService.selectAll();
+        for (User user : existUser) {
+            if (user.getPhone().equals(phone)) {
+                if (user.getId().equals(id))
+                    continue;
+                else {
+                    result = false;
+                    break;
+                }
+            }
+        }
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("valid", result);
+        ObjectMapper mapper = new ObjectMapper();
+        String resultString = "";
+        try {
+            resultString = mapper.writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return resultString;
+    }
+
 
     /**
      * 新增读者
      *
      * @param user
      */
+    @ResponseBody
     @RequestMapping(value = "/insertUser")
     public String insertUser(User user) {
         user.setNewDate(new Date());
         user.setBorrowNum(0);
         user.setPassword("000000");
-        userService.insert(user);
-        return "redirect:selectAll";
+        if (userService.insert(user)) {
+            return "OK";
+        }
+        return "error";
     }
 
     /**
-     * 前往修改：查询读者信息
+     * 弹出模态框时：查询读者信息
      *
      * @param id
      * @return
      */
-    @RequestMapping(value = "/toUpdateUser")
-    public String toUpdateUser(String id, Model model) {
+    @RequestMapping(value = "/selectByPrimaryKey", method = RequestMethod.GET)
+    @ResponseBody
+    public User selectByPrimaryKey(String id) {
         User user = userService.selectByPrimaryKey(id);
-        model.addAttribute("userList", user);
-        return "/user/updateUser";
+        return user;
     }
 
     /**
@@ -91,9 +133,12 @@ public class UserController {
      * @param user
      */
     @RequestMapping(value = "/updateUser")
+    @ResponseBody
     public String updateUser(User user) {
-        userService.updateByPrimaryKeySelective(user);
-        return "redirect:selectAll";
+        if (userService.updateByPrimaryKeySelective(user)) {
+            return "OK";
+        }
+        return "error";
     }
 
     /**
@@ -120,7 +165,9 @@ public class UserController {
             pageUtil.setPageCount(pageUtil.getPageNumber() / pageUtil.getPageSize());
         }
         int index = (pageIndex - 1) * pageSize;//计算出每一页从数据库中第几条数据开始取值，也就是limit后面的第一个数字
-        if (number==0){pageUtil.setPageCount(1);}
+        if (number == 0) {
+            pageUtil.setPageCount(1);
+        }
         List<User> userList = userService.selectAllLimit(index);//调用service层的方法，取得数据库中的值
         pageUtil.setList(userList);//保存到工具类中的集合
         model.addAttribute("userList", userList);
@@ -153,7 +200,9 @@ public class UserController {
             pageUtil.setPageCount(pageUtil.getPageNumber() / pageUtil.getPageSize());
         }
         int index = (pageIndex - 1) * pageSize;//计算出每一页从数据库中第几条数据开始取值，也就是limit后面的第一个数字
-        if (number==0){pageUtil.setPageCount(1);}
+        if (number == 0) {
+            pageUtil.setPageCount(1);
+        }
         List<User> userList = userService.selectAllByBorrowNumLimit(index);//调用service层的方法，取得数据库中的值
         pageUtil.setList(userList);//保存到工具类中的集合
         model.addAttribute("userList", userList);
@@ -185,7 +234,9 @@ public class UserController {
             pageUtil.setPageCount(pageUtil.getPageNumber() / pageUtil.getPageSize());
         }
         int index = (pageIndex - 1) * pageSize;//计算出每一页从数据库中第几条数据开始取值，也就是limit后面的第一个数字
-        if (number==0){pageUtil.setPageCount(1);}
+        if (number == 0) {
+            pageUtil.setPageCount(1);
+        }
         Map map = new HashMap();
         map.put("pageIndex", pageIndex);
         map.put("selectKey", selectKey);
@@ -203,10 +254,13 @@ public class UserController {
      *
      * @param id
      */
+    @ResponseBody
     @RequestMapping(value = "/deleteUser")
     public String deleteUser(String id) {
-        userService.deleteUser(id);
-        return "redirect:selectAll";
+        if (userService.deleteUser(id)) {
+            return "OK";
+        }
+        return "error";
     }
 
 

@@ -24,7 +24,7 @@ public class GuoWeiTest {
     public void insertUser(){
         User user = new User();
         user.setName("4389");
-        user.setSex("男");
+        user.setSex("0");
         user.setAge(12);
         user.setPhone("6556");
         user.setNewDate(new Date());
