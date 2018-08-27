@@ -136,7 +136,7 @@ public class DataAnalysisController {
      * 查询捐赠信息
      */
     @RequestMapping(value = "/getDonate")
-    public String getDonate(Model mode,@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
+    public String getDonate(Model mode,@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "9") Integer size) {
 
         String date=null;
 

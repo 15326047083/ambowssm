@@ -32,19 +32,23 @@
 </head>
 <body class="body">
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>全部读者</legend>
+    <legend>读者列表</legend>
 </fieldset>
 <div class="my-btn-box" style="width: 1100px">
     <span class="fl">
+
+<c:if test="${admin!=null}">
         <a class="layui-btn mgl-20" id="btn-delete-all" data-toggle="modal" data-target="#newModal"
            onclick="clearUser()">添加</a>
-         <a href="/user/export" class="layui-btn mgl-20">导出</a>
+    <a href="/user/export" class="layui-btn mgl-20">导出</a>
+</c:if>
+         <a href="/user/selectAllByBorrowNum" class="layui-btn mgl-20">刷新</a>
     </span>
     <span class="fr">
         <form method="post" action="/user/likeSelect">
              <span class="layui-form-label" style="width: 100px">搜索条件</span>
            <div class="layui-input-inline">
-               <input type="text" name="selectKey" value="" placeholder="请输入搜索条件" class="layui-input">
+               <input type="text" name="selectKey" value="" placeholder="用户名，地址，手机号" class="layui-input">
            </div>
                <input name="" type="submit" value="查询" class="layui-btn mgl-20">
         </form>
@@ -70,33 +74,41 @@
         <th>姓名</th>
         <th>性别</th>
         <th>年龄</th>
-        <th>电话</th>
-        <th>注册时间</th>
-        <th>注销时间</th>
-        <th>地址</th>
+        <c:if test="${admin!=null}">
+            <th>电话</th>
+            <th>注册时间</th>
+            <th>注销时间</th>
+            <th>地址</th>
+            <th>密码</th>
+        </c:if>
         <th>借阅次数</th>
-        <th>密码</th>
-        <th class="actions">操作</th>
+        <c:if test="${admin!=null}">
+            <th class="actions">操作</th>
+        </c:if>
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${userList}" var="ul">
+    <c:forEach items="${userList}" var="ul" varStatus="status">
         <tr>
-            <td>${ul.id}</td>
+            <td>${status.count}</td>
             <td>${ul.name}</td>
             <td>${ul.sex}</td>
             <td>${ul.age}</td>
-            <td>${ul.phone}</td>
-            <td>${ul.newDate}</td>
-            <td>${ul.outDate}</td>
-            <td>${ul.place}</td>
+            <c:if test="${admin!=null}">
+                <td>${ul.phone}</td>
+                <td>${ul.newDate}</td>
+                <td>${ul.outDate}</td>
+                <td>${ul.place}</td>
+                <td>${ul.password}</td>
+            </c:if>
             <td>${ul.borrowNum}</td>
-            <td>${ul.password}</td>
-            <td class="actions">
-                <a class="layui-btn layui-btn-primary layui-btn-small" data-toggle="modal" data-target="#updateModal"
-                   onclick="toUpdateUser('${ul.id}')">修改</a>
-                <a class="layui-btn layui-btn-primary layui-btn-small" onclick="deleteUser('${ul.id}')">删除</a>
-            </td>
+            <c:if test="${admin!=null}">
+                <td class="actions">
+                    <a class="layui-btn layui-btn-primary layui-btn-small" data-toggle="modal"
+                       data-target="#updateModal"
+                       onclick="toUpdateUser('${ul.id}')">修改</a>
+                </td>
+            </c:if>
         </tr>
     </c:forEach>
     </tbody>
@@ -145,135 +157,142 @@
 </div>
 
 
-<%----新增读者--模态框----%>
-<div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <%--<!--Modal-header-->--%>
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                <h4 class="modal-title" id="newUserModal">新增读者</h4>
-            </div>
-            <%--Modal-boby--%>
-            <div class="modal-body">
-                <form class="form-horizontal" id="newForm" name="newForm">
-                    <div class="layui-form-item">
-                        <label for="new_name" class="col-sm-2 control-label">读者姓名</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" required="required" id="new_name" placeholder="读者姓名"
-                                   name="name"/>
+<c:if test="${admin!=null}">
+    <%----新增读者--模态框----%>
+    <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                    <%--<!--Modal-header-->--%>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 class="modal-title" id="newUserModal">新增读者</h4>
+                </div>
+                    <%--Modal-boby--%>
+                <div class="modal-body">
+                    <form class="form-horizontal" id="newForm" name="newForm">
+                        <div class="layui-form-item">
+                            <label for="new_name" class="col-sm-2 control-label">读者姓名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" required="required" id="new_name"
+                                       placeholder="读者姓名"
+                                       name="name"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label for="new_sex" class="col-sm-2 control-label">读者性别</label>
-                        <div class="col-sm-10">
-                            <input type="radio" id="new_sex" name="sex" value="男" title="男" checked="">男
-                            <input type="radio" name="sex" value="女" title="男">女
+                        <div class="layui-form-item">
+                            <label for="new_sex" class="col-sm-2 control-label">读者性别</label>
+                            <div class="col-sm-10">
+                                <input type="radio" id="new_sex" name="sex" value="男" title="男" checked="">男
+                                <input type="radio" name="sex" value="女" title="男">女
+                            </div>
                         </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label for="new_age" class="col-sm-2 control-label">读者年龄</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="new_age" placeholder="读者年龄" name="age"/>
+                        <div class="layui-form-item">
+                            <label for="new_age" class="col-sm-2 control-label">读者年龄</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="new_age" placeholder="读者年龄" name="age"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label for="new_phone" class="col-sm-2 control-label">读者电话</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" required="required" id="new_phone"
-                                   placeholder="读者电话" name="phone"/>
+                        <div class="layui-form-item">
+                            <label for="new_phone" class="col-sm-2 control-label">读者电话</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" required="required" id="new_phone"
+                                       placeholder="读者电话" name="phone"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label for="new_place" class="col-sm-2 control-label">读者地址</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" required="required" id="new_place"
-                                   placeholder="读者地址" name="place"/>
+                        <div class="layui-form-item">
+                            <label for="new_place" class="col-sm-2 control-label">读者地址</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" required="required" id="new_place"
+                                       placeholder="读者地址" name="place"/>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
 
-                <%--Modal-footer--%>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-info" id="newUser">新增</button>
+                        <%--Modal-footer--%>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-info" id="newUser">新增</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<%----修改页面--模态框----%>
-<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <%--<!--Modal-header-->--%>
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                <h4 class="modal-title" id="myModalLabel">修改读者信息</h4>
-            </div>
-            <%--Modal-boby--%>
-            <div class="modal-body">
-                <form class="form-horizontal" id="updateForm" name="updateForm">
-                    <input type="hidden" id="update_id" name="id">
-                    <div class="layui-form-item">
-                        <label for="update_name" class="col-sm-2 control-label">读者姓名</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="update_name" placeholder="读者姓名" name="name"/>
+    <%----修改页面--模态框----%>
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                    <%--<!--Modal-header-->--%>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 class="modal-title" id="myModalLabel">修改读者信息</h4>
+                </div>
+                    <%--Modal-boby--%>
+                <div class="modal-body">
+                    <form class="form-horizontal" id="updateForm" name="updateForm">
+                        <input type="hidden" id="update_id" name="id">
+                        <div class="layui-form-item">
+                            <label for="update_name" class="col-sm-2 control-label">读者姓名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="update_name" placeholder="读者姓名"
+                                       name="name"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label for="update_sex" class="col-sm-2 control-label">读者性别</label>
-                        <div class="col-sm-10">
-                            <input type="hidden" id="update_sex">
-                            <input type="radio" name="sex" value="男" title="男" checked="">男
-                            <input type="radio" name="sex" value="女" title="女">女
+                        <div class="layui-form-item">
+                            <label for="update_sex" class="col-sm-2 control-label">读者性别</label>
+                            <div class="col-sm-10">
+                                <input type="hidden" id="update_sex">
+                                <input type="radio" name="sex" value="男" title="男" checked="">男
+                                <input type="radio" name="sex" value="女" title="女">女
+                            </div>
                         </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label for="update_age" class="col-sm-2 control-label">读者年龄</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="update_age" placeholder="读者年龄" name="age"/>
+                        <div class="layui-form-item">
+                            <label for="update_age" class="col-sm-2 control-label">读者年龄</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="update_age" placeholder="读者年龄"
+                                       name="age"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label for="update_phone" class="col-sm-2 control-label">读者电话</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="update_phone" placeholder="读者电话" name="phone"/>
+                        <div class="layui-form-item">
+                            <label for="update_phone" class="col-sm-2 control-label">读者电话</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="update_phone" placeholder="读者电话"
+                                       name="phone"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label for="update_place" class="col-sm-2 control-label">读者地址</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="update_place" placeholder="读者地址" name="place"/>
+                        <div class="layui-form-item">
+                            <label for="update_place" class="col-sm-2 control-label">读者地址</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="update_place" placeholder="读者地址"
+                                       name="place"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label for="upate_borrow_num" class="col-sm-2 control-label">借阅次数</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="upate_borrow_num" placeholder="借阅次数"
-                                   name="borrowNum"/>
+                        <div class="layui-form-item">
+                            <label for="upadte_password" class="col-sm-2 control-label">读者密码</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="upadte_password" placeholder="读者密码"
+                                       name="password"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label for="upadte_password" class="col-sm-2 control-label">读者密码</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="upadte_password" placeholder="读者密码"
-                                   name="password"/>
+                        <div class="layui-form-item">
+                            <label for="upate_borrow_num" class="col-sm-2 control-label">借阅次数</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="upate_borrow_num" placeholder="借阅次数"
+                                       name="borrowNum"/>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
 
-                <%--Modal-footer--%>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-info" id="updateUser">保存修改</button>
+                        <%--Modal-footer--%>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-info" id="updateUser">保存修改</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
+</c:if>
 
 <script type="text/javascript" src="../frame/layui/layui.js"></script>
 
@@ -452,11 +471,11 @@
                     },
                     remote: {
                         url: '/user/checkUpdatePhone',
-                        data:{                                     // 给后台传递phone，id值
-                            phone:function () {
+                        data: {                                     // 给后台传递phone，id值
+                            phone: function () {
                                 return $('#update_phone').val()
                             },
-                            id:function () {
+                            id: function () {
                                 return $('#update_id').val()
                             }
                         },
@@ -480,31 +499,31 @@
                     },
                 }
             },
-            borrowNum:{
-                validators:{
-                    notEmpty:{
-                      message:'The borrownum is required and cannot be empty'
+            borrowNum: {
+                validators: {
+                    notEmpty: {
+                        message: 'The borrownum is required and cannot be empty'
                     },
-                    stringLength:{
-                      min:1,
-                      max:9,
-                      message:'The borrownum is between 1 and 9 digits.'
+                    stringLength: {
+                        min: 1,
+                        max: 9,
+                        message: 'The borrownum is between 1 and 9 digits.'
                     },
-                    regexp:{
-                        regexp:/^[1-9]\d*$/,
-                        message:'The borrownum is a positive integer.'
+                    regexp: {
+                        regexp: /^[1-9]\d*$/,
+                        message: 'The borrownum is a positive integer.'
                     },
                 }
             },
-            password:{
-                validators:{
-                    notEmpty:{
-                        message:'The borrownum is required and cannot be empty'
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The borrownum is required and cannot be empty'
                     },
-                        regexp:{
-                            regexp:/^\d{6}$/,
-                            message:'Please enter the 6 bit password.'
-                        },
+                    regexp: {
+                        regexp: /^\d{6}$/,
+                        message: 'Please enter the 6 bit password.'
+                    },
                 }
             },
         }

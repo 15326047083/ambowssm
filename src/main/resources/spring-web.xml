@@ -54,6 +54,8 @@
             <mvc:exclude-mapping path="/type/pie"/>
             <mvc:exclude-mapping path="/book/listVoBlurTypeId"/>
             <mvc:exclude-mapping path="/borrow/export"/>
+            <mvc:exclude-mapping path="/user/likeSelect"/>
+            <mvc:exclude-mapping path="/user/selectAllByBorrowNum"/>
             <mvc:exclude-mapping path="/ai"/>
             <ref bean="checkAdmin"/>
         </mvc:interceptor>

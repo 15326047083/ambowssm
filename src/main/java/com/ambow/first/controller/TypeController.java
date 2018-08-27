@@ -27,21 +27,21 @@ public class TypeController {
     private TypeService typeService;
 
     @RequestMapping("/toPie")
-    public String toPie(Model model){
-        model.addAttribute("number",typeService.allBookNum());
+    public String toPie(Model model) {
+        model.addAttribute("number", typeService.allBookNum());
         return "/type/pie";
     }
 
     /**
      * 饼图的生成
+     *
      * @return
      */
     @RequestMapping(value = "/pie")
     @ResponseBody
-    public PieVo pie(){
-
-        PieVo p=new PieVo();
-        List<Type> list1 =typeService.queryAll();
+    public PieVo pie() {
+        PieVo p = new PieVo();
+        List<Type> list1 = typeService.queryAll();
         //按booknum大小排序
         Collections.sort(list1, new Comparator<Type>() {
             @Override
@@ -50,21 +50,30 @@ public class TypeController {
             }
         });
 
-        List<Type> list=list1.subList(0,5);
-        String[] name=new String[6];
-        int[] count=new int[6];
-        int i=0;
-        int sum=typeService.allBookNum();
+        List<Type> list = null;
+        String[] name = null;
+        int[] count = null;
+        if (list1.size() > 6) {
+            list = list1.subList(0, 5);
+            name = new String[6];
+            count = new int[6];
+        } else {
+            list = list1.subList(0, list1.size());
+            name = new String[list1.size()];
+            count = new int[list1.size()];
+        }
+        int i = 0;
+        int sum = typeService.allBookNum();
 
-        for (Type type:list){
-            if (type.getBookNum()!=0) {
+        for (Type type : list) {
+            if (type.getBookNum() != 0) {
                 sum = sum - type.getBookNum();
                 count[i] = type.getBookNum();
                 name[i] = type.getName();
                 i++;
             }
         }
-        if (i==5) {
+        if (i == 5) {
             count[i] = sum;
             name[i] = "其他";
         }
@@ -75,6 +84,7 @@ public class TypeController {
 
     /**
      * 查看列表
+     *
      * @param model
      * @return
      */
@@ -86,7 +96,8 @@ public class TypeController {
 
     /**
      * 根据ID修改
-     * @param id  前台传来的ID
+     *
+     * @param id    前台传来的ID
      * @param model
      * @return
      */
@@ -122,42 +133,45 @@ public class TypeController {
      */
     @RequestMapping("/export")
     @ResponseBody
-    public String export(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, IntrospectionException, IllegalAccessException, ParseException, InvocationTargetException, UnsupportedEncodingException {
-      //  System.out.println(response+" "+request);
-            response.reset(); //清除buffer缓存
-            // 指定下载的文件名，浏览器都会使用本地编码，即GBK，浏览器收到这个文件名后，用ISO-8859-1来解码，然后用GBK来显示
-            // 所以我们用GBK解码，ISO-8859-1来编码，在浏览器那边会反过来执行。
-            response.setHeader("Content-Disposition", "attachment;filename=Type_"+new Date().getTime()+".xlsx");
-            response.setContentType("application/vnd.ms-excel;charset=UTF-8");
-            response.setHeader("Pragma", "no-cache");
-            response.setHeader("Cache-Control", "no-cache");
-            response.setDateHeader("Expires", 0);
-            XSSFWorkbook workbook = null;
-            //导出Excel对象
-            workbook = typeService.exportExcelInfo();
-            OutputStream output;
-            try {
-                output = response.getOutputStream();
-                BufferedOutputStream bufferedOutPut = new BufferedOutputStream(output);
-                bufferedOutPut.flush();
-                workbook.write(bufferedOutPut);
-                bufferedOutPut.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    public String export(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException,
+            IntrospectionException, IllegalAccessException, ParseException, InvocationTargetException,
+            UnsupportedEncodingException {
+        //  System.out.println(response+" "+request);
+        response.reset(); //清除buffer缓存
+        // 指定下载的文件名，浏览器都会使用本地编码，即GBK，浏览器收到这个文件名后，用ISO-8859-1来解码，然后用GBK来显示
+        // 所以我们用GBK解码，ISO-8859-1来编码，在浏览器那边会反过来执行。
+        response.setHeader("Content-Disposition", "attachment;filename=Type_" + new Date().getTime() + ".xlsx");
+        response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+        XSSFWorkbook workbook = null;
+        //导出Excel对象
+        workbook = typeService.exportExcelInfo();
+        OutputStream output;
+        try {
+            output = response.getOutputStream();
+            BufferedOutputStream bufferedOutPut = new BufferedOutputStream(output);
+            bufferedOutPut.flush();
+            workbook.write(bufferedOutPut);
+            bufferedOutPut.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "redirect:/type/toList";
     }
 
     /**
      * 判断是否有重名
+     *
      * @param name
      * @return
      */
     @RequestMapping("/checkname/{name}")
     @ResponseBody
-    int getCountByName(@PathVariable("name") String name){
+    int getCountByName(@PathVariable("name") String name) {
 
-       // System.out.println(name);
+        // System.out.println(name);
         return typeService.getCountByName(name);
     }
 

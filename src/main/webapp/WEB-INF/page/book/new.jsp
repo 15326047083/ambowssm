@@ -105,21 +105,17 @@
     <div class="layui-form-item">
         <label class="layui-form-label">捐赠人</label>
         <div class="layui-input-block">
-            <input type="text" name="userName"  placeholder="请输入捐赠人" autocomplete="off"
-                   class="layui-input" >
+            <input type="text" name="userName" placeholder="请输入捐赠人" autocomplete="off"
+                   class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">联系方式</label>
         <div class="layui-input-block">
-            <input type="number" name="userPhone" id="userPhone"  placeholder="请输入联系方式"
-                   autocomplete="off"  class="layui-input" >
+            <input type="number" name="userPhone" id="userPhone" placeholder="请输入联系方式"
+                   autocomplete="off" class="layui-input">
         </div>
     </div>
-
-
-
-
 
 
     <div class="layui-form-item">
@@ -134,15 +130,15 @@
     <script>
         function submitNewUser() {
 
-            if(document.getElementById("num").value<1){
+            if (document.getElementById("num").value < 1) {
                 alert("图书数量要大于0")
-                document.getElementById("num").value='';
+                document.getElementById("num").value = '';
             }
 
-            var phone=document.getElementById("userPhone").value;
+            var phone = document.getElementById("userPhone").value;
 
             var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
-            if(phone!='' && phone!=null) {
+            if (phone != '' && phone != null) {
                 if (!myreg.test(phone)) {
                     alert("手机号格式不正确")
                     document.getElementById("userPhone").value = '';
@@ -150,25 +146,24 @@
                 } else {
                     return true;
                 }
-            }return true;
+            }
+            return true;
 
 
-
-
-          /*  if (document.getElementById("userPhone").value.length!=11  ){
-                alert("手机号格式不正确")
-                document.getElementById("userPhone").value='';
-                return false;
-            }else {
-                return true;
-            }*/
+            /*  if (document.getElementById("userPhone").value.length!=11  ){
+                  alert("手机号格式不正确")
+                  document.getElementById("userPhone").value='';
+                  return false;
+              }else {
+                  return true;
+              }*/
 
         }
     </script>
 </form>
 
 
-<script src="../frame/layui/layui.js" charset="utf-8"></script>
+<script src="../../../frame/layui/layui.js" charset="utf-8"></script>
 <script>
     layui.use(['form', 'layedit', 'laydate'], function () {
         var form = layui.form
@@ -183,7 +178,13 @@
         laydate.render({
             elem: '#date1'
         });
-
+        // 图片上传接口
+        layedit.set({
+            uploadImage: {
+                url: '${pageContext.request.contextPath}/jump/upload' //接口url
+                , type: 'post' //默认post
+            }
+        });
         //创建一个编辑器
         var editIndex = layedit.build('LAY_demo_editor');
 

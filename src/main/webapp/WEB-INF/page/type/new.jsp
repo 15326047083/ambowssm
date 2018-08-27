@@ -36,8 +36,9 @@
     <div class="layui-form-item">
         <label class="layui-form-label">分类名称</label>
         <div class="layui-input-block">
-            <input onkeyup="checkType(this.value)" required type="text" id="name" name="name" lay-verify="required" placeholder="请输入书名" autocomplete="off" class="layui-input">
-        <span id="errorMsg" style="color: red"></span>
+            <input onkeyup="checkType(this.value)" required type="text" id="name" name="name" lay-verify="required"
+                   placeholder="请输入分类名称" autocomplete="off" class="layui-input">
+            <span id="errorMsg" style="color: red"></span>
         </div>
     </div>
 
@@ -60,29 +61,31 @@
 </body>
 </html>
 <script>
-    var bj=0;
+    var bj = 0;
+
     function checkType(name) {
         //发ajax请求到后台判断用户名是否重复
         $.ajax({
-            url:"/type/checkname/"+name,
-            data:{name:name},
+            url: "/type/checkname/" + name,
+            data: {name: name},
             dataType: "json",
             error() {
             },
             success(json) {
-                if (json==0){
+                if (json == 0) {
                     $("#errorMsg").html("可以注册");
-                    bj=0;
+                    bj = 0;
                 }
                 else {
                     $("#errorMsg").html("该名字已经存在");
-                    bj=1;
+                    bj = 1;
                 }
             }
         });
     }
-    function submitType(){
-        if (bj==0)
+
+    function submitType() {
+        if (bj == 0)
             return true;
         return false;
     }

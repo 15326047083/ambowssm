@@ -117,7 +117,7 @@
                         </dl>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="javascript:;"><i class="layui-icon">&#xe630;</i>借阅管理管理</a>
+                        <a href="javascript:;"><i class="layui-icon">&#xe630;</i>借阅管理</a>
                         <dl class="layui-nav-child">
                             <dd><a href="javascript:;" href-url="/borrow/toList"><i
                                     class="layui-icon">&#xe62d;</i>借阅列表</a>
@@ -127,9 +127,7 @@
                     <li class="layui-nav-item">
                         <a href="javascript:;"><i class="layui-icon">&#xe612;</i>读者管理</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" href-url="demo/login.html"><i class="layui-icon">&#xe62d;</i>读者列表</a>
-                            </dd>
-                            <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe61f;</i>添加读者</a>
+                            <dd><a href="javascript:;" href-url="/user/selectAll"><i class="layui-icon">&#xe62d;</i>读者列表</a>
                             </dd>
                             <dd><a href="javascript:;" href-url="/lost/toLost"><i
                                     class="layui-icon">&#xe62d;</i>失信列表</a>
@@ -141,7 +139,7 @@
                         <dl class="layui-nav-child">
                             <dd><a href="javascript:;" href-url="/book/sort"><i class="layui-icon">&#xe62d;</i>图书排行榜</a>
                             </dd>
-                            <dd><a href="javascript:;" href-url="demo/register.html"><i class="layui-icon">&#xe62d;</i>读者排行榜</a>
+                            <dd><a href="javascript:;" href-url="/user/selectAllByBorrowNum"><i class="layui-icon">&#xe62d;</i>读者排行榜</a>
                             </dd>
                             <dd><a href="javascript:;" href-url="/type/toPie"><i
                                     class="layui-icon">&#xe62c;</i>图书库存统计</a>
@@ -164,7 +162,7 @@
                             </dd>
                             <dd><a href="javascript:;" href-url="/book/sort"><i class="layui-icon">&#xe62d;</i>借阅排行榜</a>
                             </dd>
-                            <dd><a href="javascript:;" href-url=""><i class="layui-icon">&#xe62d;</i>读者排行榜</a>
+                            <dd><a href="javascript:;" href-url="/user/selectAllByBorrowNum"><i class="layui-icon">&#xe62d;</i>读者排行榜</a>
                             </dd>
                             <dd><a href="javascript:;" href-url="/lost/toLost"><i class="layui-icon">&#xe62d;</i>失信读者公示</a>
                             </dd>
@@ -221,7 +219,7 @@
 </div>
 <script type="text/javascript" src="../../frame/layui/layui.js"></script>
 <script type="text/javascript" src="../../frame/static/js/vip_comm.js"></script>
-<script type="text/javascript" src="/frame/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="../../frame/jquery-3.3.1.js"></script>
 <script>
     $("#msg").mouseenter(function () {
         $("#msg").stop().animate({

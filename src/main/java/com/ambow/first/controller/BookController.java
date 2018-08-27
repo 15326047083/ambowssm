@@ -111,7 +111,7 @@ public class BookController {
 
     @RequestMapping(value = "/listVo")
     public String listVo(Model mode, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue =
-            "3") Integer size) {
+            "9") Integer size) {
 
 
         Page<BookTypeVo> bookTypeVoList = bookService.getBookTypeVoList(page, size);
@@ -161,7 +161,7 @@ public class BookController {
 
     @RequestMapping(value = "/listVoBlurTypeId")
     public String listVoBlurTypeId(Model mode, String blur, String typeId, @RequestParam(defaultValue = "1") Integer
-            page, @RequestParam(defaultValue = "3") Integer size) {
+            page, @RequestParam(defaultValue = "9") Integer size) {
 
 
         Page<BookTypeVo> bookTypeVoList = bookService.getBookTypeVoByTypeIAndLike(typeId, blur, page, size);
@@ -230,7 +230,7 @@ public class BookController {
      * 排行
      */
     @RequestMapping(value = "/sort")
-    public String sort(Model mode, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3")
+    public String sort(Model mode, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "9")
             Integer size) {
 
 

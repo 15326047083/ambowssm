@@ -28,7 +28,7 @@ public class LostController {
      */
     @RequestMapping(value = "/toLost")
     public String selectAllPage(Model model, @RequestParam(defaultValue = "1") Integer page, @RequestParam
-            (defaultValue = "3") Integer size) {
+            (defaultValue = "9") Integer size) {
         Page<LostUserVo> lostPage = lostService.selectAllPage(page, size);
         Integer ye = lostPage.getTotal() / lostPage.getSize();
         if (lostPage.getTotal() % lostPage.getSize() != 0) {

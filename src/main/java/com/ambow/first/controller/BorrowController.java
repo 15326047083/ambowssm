@@ -92,7 +92,7 @@ public class BorrowController {
      */
     @RequestMapping(value = "/toList")
     public String toList(Model model, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue =
-            "3") Integer size, RedirectAttributes attr) {
+            "9") Integer size, RedirectAttributes attr) {
         Page<BorrowBookUserVo> borrowBookUserVoPage = borrowService.selectBorrowUserBook(page, size);
         Integer ye = borrowBookUserVoPage.getTotal() / borrowBookUserVoPage.getSize();
         if (borrowBookUserVoPage.getTotal() % borrowBookUserVoPage.getSize() != 0) {
@@ -133,7 +133,7 @@ public class BorrowController {
      */
     @RequestMapping(value = "toLikeList")
     public String selectLikeBorrow(String mohu, Model model, @RequestParam(defaultValue = "1") Integer page,
-                                   @RequestParam(defaultValue = "3") Integer size) {
+                                   @RequestParam(defaultValue = "9") Integer size) {
         System.out.println(mohu);
         System.out.println(page);
         Page<BorrowBookUserVo> borrowBookUserVoPage = borrowService.selectBorrowLike(page, size, mohu);

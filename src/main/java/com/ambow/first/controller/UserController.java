@@ -150,7 +150,7 @@ public class UserController {
     @RequestMapping(value = "/selectAll")
     public String selectAll(HttpServletRequest request, Model model) {
         int pageIndex = 1;//设置初始的当前页，页面显示的都是第一页
-        int pageSize = 5;//设置每一页显示几条数据,用于计算总页数，此处设置的值必须与sql语句的limit最后的数值一样
+        int pageSize = 9;//设置每一页显示几条数据,用于计算总页数，此处设置的值必须与sql语句的limit最后的数值一样
         PageUtil<User> pageUtil = new PageUtil<User>();//初始化工具类
         if (request.getParameter("pageIndex") != null) {
             pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
@@ -185,7 +185,7 @@ public class UserController {
     @RequestMapping(value = "/selectAllByBorrowNum")
     public String selectAllByBorrowNum(HttpServletRequest request, Model model) {
         int pageIndex = 1;//设置初始的当前页，页面显示的都是第一页
-        int pageSize = 5;//设置每一页显示几条数据,用于计算总页数，此处设置的值必须与sql语句的limit最后的数值一样
+        int pageSize = 9;//设置每一页显示几条数据,用于计算总页数，此处设置的值必须与sql语句的limit最后的数值一样
         PageUtil<User> pageUtil = new PageUtil<User>();//初始化工具类
         if (request.getParameter("pageIndex") != null) {
             pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
@@ -219,7 +219,7 @@ public class UserController {
     @RequestMapping(value = "/likeSelect")
     public String likeSelect(@Param(value = "selectKey") String selectKey, Model model, HttpServletRequest request) {
         int pageIndex = 1;//设置初始的当前页，页面显示的都是第一页
-        int pageSize = 5;//设置每一页显示几条数据,用于计算总页数，此处设置的值必须与sql语句的limit最后的数值一样
+        int pageSize = 9;//设置每一页显示几条数据,用于计算总页数，此处设置的值必须与sql语句的limit最后的数值一样
         PageUtil<User> pageUtil = new PageUtil<User>();//初始化工具类
         if (request.getParameter("pageIndex") != null) {
             pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
