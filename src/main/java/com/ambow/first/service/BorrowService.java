@@ -26,7 +26,7 @@ public interface BorrowService {
 
     //模糊查询借阅列表
     Page<BorrowBookUserVo> selectBorrowLike(@Param("page") Integer page, @Param("size") Integer size, @Param("mohu")
-            String mohu);
+            String mohu,@Param("borrowDate") String borrowDate,@Param("borrowSrdate") String borrowSrdate);
 
     //可选择性增加
     int insertSelective(Borrow record);

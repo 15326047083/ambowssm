@@ -47,6 +47,20 @@
         <span class="layui-form-label">搜索条件：</span>
         <div class="layui-input-inline">
             <input type="text" name="mohu" autocomplete="off" placeholder="读者姓名/手机号/书名" class="layui-input">
+
+
+        </div>
+       借书日期：
+        <div class="layui-input-inline">
+            <input type="Date" name="borrowDate" autocomplete="off"  class="layui-input">
+
+
+        </div>
+        至
+         <div class="layui-input-inline">
+            <input type="Date" name="borrowSrdate" autocomplete="off"  class="layui-input">
+
+
         </div>
         <input type="submit" class="layui-btn mgl-20" value="查询"></input>
     </span>
@@ -135,21 +149,21 @@
 
     <c:if test="${chuanzhi=='dog'}">
     <span class="fr">
-     <a href="/borrow/toLikeList?mohu=${mohu}&& page=1&&size=${list.size}">  <button
+     <a href="/borrow/toLikeList?mohu=${mohu}&& page=1&&size=${list.size}&&borrowDate=${borrowDate}&&borrowSrdate=${borrowSrdate}">  <button
              class="layui-btn layui-btn-primary layui-btn-small">首页</button></a>
 
         <c:if test="${list.page>1}">
 
-            <a href="/borrow/toLikeList?mohu=${mohu}&&page=${list.page-1}&&size=${list.size}">    <button
+            <a href="/borrow/toLikeList?mohu=${mohu}&&page=${list.page-1}&&size=${list.size}&&borrowDate=${borrowDate}&&borrowSrdate=${borrowSrdate}">    <button
                     class="layui-btn layui-btn-primary layui-btn-small">上一页</button></a>
         </c:if>
       ${list.page}/${ye}
     <c:if test="${list.page<ye}">
-        <a href="/borrow/toLikeList?mohu=${mohu}&&page=${list.page+1}&&size=${list.size}">  <button
+        <a href="/borrow/toLikeList?mohu=${mohu}&&page=${list.page+1}&&size=${list.size}&&borrowDate=${borrowDate}&&borrowSrdate=${borrowSrdate}">  <button
                 class="layui-btn layui-btn-primary layui-btn-small">下一页</button></a>
 
     </c:if>
-       <a href="/borrow/toLikeList?mohu=${mohu}&&page=${ye}&&size=${list.size}"><button
+       <a href="/borrow/toLikeList?mohu=${mohu}&&page=${ye}&&size=${list.size}&&borrowDate=${borrowDate}&&borrowSrdate=${borrowSrdate}"><button
                class="layui-btn layui-btn-primary layui-btn-small">尾页</button> </a>
     </span>
     </c:if>

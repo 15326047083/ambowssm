@@ -97,15 +97,15 @@ public class BorrowServiceImpl implements BorrowService {
      * @return
      */
     @Override
-    public Page<BorrowBookUserVo> selectBorrowLike(Integer page, Integer size, String mohu) {
+    public Page<BorrowBookUserVo> selectBorrowLike(Integer page, Integer size, String mohu,String borrowDate,String borrowSrdate) {
         mohu = "%" + mohu + "%";
         Page<BorrowBookUserVo> pages = new Page<>();
-        pages.setTotal(borrowMapper.selectAllCountLike(mohu));
-        System.out.println("zonggpng:" + borrowMapper.selectAllCountLike(mohu));
+        pages.setTotal(borrowMapper.selectAllCountLike(mohu,borrowDate,borrowSrdate));
+        System.out.println("zonggpng:" + borrowMapper.selectAllCountLike(mohu,borrowDate,borrowSrdate));
         pages.setPage(page);
         pages.setSize(size);
         List<BorrowBookUserVo> borrowBookUserVo = borrowMapper.selectBorrowLike((page - 1) * size, pages.getSize(),
-                mohu);
+                mohu,borrowDate,borrowSrdate);
         pages.setRows(borrowBookUserVo);
         return pages;
     }

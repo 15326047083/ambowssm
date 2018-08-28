@@ -147,6 +147,12 @@
     u.out_date UserOutDate,u.place UserPlace,u.borrow_num borrowNum,u.password UserPassword
     from book b,user u,borrow w
     where b.id=w.book_id and w.user_id=u.id
+    <if test="borrowDate!=null and borrowDate!=''">
+      <![CDATA[and w.borrow_date>=#{borrowDate}]]>
+    </if>
+    <if test="borrowSrdate!=null and borrowSrdate!=''">
+      <![CDATA[and w.borrow_date<=#{borrowSrdate}]]>
+    </if>
     and(b.book_name like #{mohu} or u.phone like #{mohu} or u.name like #{mohu}) limit #{page},#{size};
   </select>
   <!--统计全查的分页的统计条目-->
@@ -161,6 +167,12 @@
     select count(*)
     from book b,user u,borrow w
     where b.id=w.book_id and  w.user_id=u.id
+    <if test="borrowDate!=null and borrowDate!=''">
+      <![CDATA[ and w.borrow_date>=#{borrowDate}]]>
+    </if>
+    <if test="borrowSrdate!=null and borrowSrdate!=''">
+      <![CDATA[ and w.borrow_date<=#{borrowSrdate}]]>
+    </if>
     and(b.book_name like #{mohu} or u.phone like #{mohu} or u.name like #{mohu});
 
   </select>
