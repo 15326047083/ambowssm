@@ -115,11 +115,22 @@
             <td class="actions">
                     <%--  <a href="/borrow/updateBorrow?bookId=${borrow.bookId}"><button class="layui-btn layui-btn-primary layui-btn-small" >还书</button></a>--%>
 
-
-                <button onclick="updateBorrow('${borrow.borrowId}')"
+            <c:choose>
+                <c:when test="${borrow.borrowStatus==2}"><button onclick="updateBorrow('${borrow.borrowId}')"
                         class="layui-btn layui-btn-primary layui-btn-small">还书
                 </button>
-
+                </c:when>
+                <c:when test="${borrow.borrowStatus==3}"><button onclick="updateBorrow('${borrow.borrowId}')"
+                                                                 class="layui-btn layui-btn-primary layui-btn-small">还书
+                </button>
+                </c:when>
+                <c:otherwise>
+                        <a class="notice" href="#">
+                        <button
+                                class="layui-btn layui-btn-primary layui-btn-small">还书
+                        </button></a>
+                </c:otherwise>
+            </c:choose>
             </td>
         </tr>
 
@@ -180,6 +191,8 @@
 <script src="/js/dataTables.bootstrap.min.js"></script>
 <!-- Custom Theme JavaScript -->
 <script src="/js/sb-admin-2.js"></script>
+<script src="/js/jquery.growl.js" type="text/javascript"></script>
+<link href="/stylesheets/jquery.growl.css" rel="stylesheet" type="text/css" />
 <script>
     ${flag}
 </script>
@@ -204,6 +217,15 @@
                 });
         }
     }
+
+    $('.notice').click(function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        return $.growl.notice({
+            title: "提醒标题",
+            message: "该书已经归还!"
+        });
+    });
 </script>
 </body>
 </html>
