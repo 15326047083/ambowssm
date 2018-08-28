@@ -57,7 +57,7 @@
         <col width="80">
         <col width="180">
         <col width="120">
-        <col width="100">
+        <col width="110">
     </colgroup>
     <thead>
     <tr>
