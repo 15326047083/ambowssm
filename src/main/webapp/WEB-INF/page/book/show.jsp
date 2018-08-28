@@ -123,9 +123,9 @@
             <button class="layui-btn layui-btn-primary layui-btn-small">修改</button>
         </a>
 
-        <a href="/book/delete?bookId=${bookTypeVo.bookId}&&typeId=${bookTypeVo.typeId}">
-            <button class="layui-btn layui-btn-primary layui-btn-small">删除</button>
-        </a>
+        <%--<a href="/book/delete?bookId=${bookTypeVo.bookId}&&typeId=${bookTypeVo.typeId}">--%>
+            <%--<button class="layui-btn layui-btn-primary layui-btn-small">删除</button>--%>
+        <%--</a>--%>
 
         <%-- <a href="/borrow/toNew/${bookTypeVo.bookId}">
              <button class="layui-btn layui-btn-primary layui-btn-small">

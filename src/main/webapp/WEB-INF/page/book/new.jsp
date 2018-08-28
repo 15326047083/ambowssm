@@ -30,7 +30,7 @@
     <legend>图书添加</legend>
 </fieldset>
 
-<form class="layui-form" action="/book/insert">
+<form class="layui-form" action="/book/insert" method="post">
     <div class="layui-form-item">
         <label class="layui-form-label">图书类型</label>
         <div class="layui-input-block">

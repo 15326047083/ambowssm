@@ -63,7 +63,7 @@ public class BookController {
      * @param book
      * @return
      */
-    @RequestMapping(value = "/insert")
+    @RequestMapping(value = "/insert",method = RequestMethod.POST)
     public String insert(Book book, int num, String userName, String userPhone) {
 
         System.out.println(userName);
@@ -216,7 +216,7 @@ public class BookController {
     /**
      * 修改
      */
-    @RequestMapping(value = "/update")
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
     public String update(Book book) {
 
         System.out.println(book.toString());

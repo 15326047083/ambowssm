@@ -30,7 +30,7 @@
     <legend>图书添加</legend>
 </fieldset>
 
-<form class="layui-form" action="/book/update">
+<form class="layui-form" action="/book/update" method="post">
     <div class="layui-form-item">
 
         <div class="layui-input-block">
@@ -143,6 +143,13 @@
             elem: '#date1'
         });
 
+        // 图片上传接口
+        layedit.set({
+            uploadImage: {
+                url: '${pageContext.request.contextPath}/jump/upload' //接口url
+                , type: 'post' //默认post
+            }
+        });
         //创建一个编辑器
         var editIndex = layedit.build('LAY_demo_editor');
 
