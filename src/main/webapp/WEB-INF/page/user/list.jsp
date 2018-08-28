@@ -56,21 +56,21 @@
 </div>
 <table class="layui-table" style="width: 1100px">
     <colgroup>
+        <col width="70">
         <col width="100">
+        <col width="70">
+        <col width="70">
         <col width="100">
-        <col width="100">
-        <col width="100">
-        <col width="100">
-        <col width="100">
-        <col width="100">
-        <col width="100">
-        <col width="100">
-        <col width="100">
+        <col width="145">
+        <col width="145">
         <col width="200">
+        <col width="100">
+        <col width="100">
+        <col width="100">
     </colgroup>
     <thead>
     <tr>
-        <th>读者编号</th>
+        <th>编号</th>
         <th>姓名</th>
         <th>性别</th>
         <th>年龄</th>
