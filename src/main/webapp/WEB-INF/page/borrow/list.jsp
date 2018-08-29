@@ -233,7 +233,7 @@
         event.preventDefault();
         event.stopPropagation();
         return $.growl.notice({
-            title: "提醒标题",
+            title: "温馨提示",
             message: "该书已经归还!"
         });
     });

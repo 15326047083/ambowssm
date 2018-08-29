@@ -172,7 +172,7 @@
             </div>
             <script>
                 function checkPhone(phone) {
-                    var partten = /^((\(\d{3}\))|(\d{3}\-))?13[0-9]\d{8}|15[0-9]\d{8}|189\d{8}$/;
+                    var partten =  /^[1][3,4,5,7,8][0-9]{9}$/;
                     if (!partten.test(phone)) {
                         return false;
                     } else {
@@ -182,15 +182,13 @@
                             success(data) {
                                 if (data == 1) {
                                     document.getElementById("phone").style.color = "red";
-                                } else {
+                                } if(data==0) {
                                     document.getElementById("phone").style.color = "black";
                                 }
                             }
                         });
                     }
                 }
-            </script>
-            <script>
                 function submitNewUser() {
                     if (document.getElementById("phone").value.length != 11) {
                         document.getElementById("phone").style.color = "red"
@@ -202,6 +200,9 @@
                         return false;
                     return true;
                 }
+            </script>
+            <script>
+
             </script>
 
         </form>
