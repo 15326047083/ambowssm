@@ -132,9 +132,9 @@ public class BorrowController {
      * 借阅列表的模糊查询
      */
     @RequestMapping(value = "toLikeList")
-    public String selectLikeBorrow(String borrowSrdate,String borrowDate,String mohu, Model model, @RequestParam(defaultValue = "1") Integer page,
+    public String selectLikeBorrow(Integer status, String borrowSrdate,String borrowDate,String mohu, Model model, @RequestParam(defaultValue = "1") Integer page,
                                    @RequestParam(defaultValue = "9") Integer size) {
-        Page<BorrowBookUserVo> borrowBookUserVoPage = borrowService.selectBorrowLike(page, size, mohu,borrowDate,borrowSrdate);
+        Page<BorrowBookUserVo> borrowBookUserVoPage = borrowService.selectBorrowLike(page, size,status,mohu,borrowDate,borrowSrdate);
         Integer ye = borrowBookUserVoPage.getTotal() / borrowBookUserVoPage.getSize();
         if (borrowBookUserVoPage.getTotal() % borrowBookUserVoPage.getSize() != 0) {
             ye = ye + 1;
@@ -146,6 +146,7 @@ public class BorrowController {
         model.addAttribute("ye", ye);
         model.addAttribute("list", borrowBookUserVoPage);
         model.addAttribute("mohu", mohu);
+        model.addAttribute("status",status);
         model.addAttribute("borrowDate",borrowDate);
         model.addAttribute("borrowSrdate",borrowSrdate);
         model.addAttribute("chuanzhi", "dog");
@@ -289,5 +290,7 @@ public class BorrowController {
         }
         return 1; // 不正确
     }
+
+
 
 }

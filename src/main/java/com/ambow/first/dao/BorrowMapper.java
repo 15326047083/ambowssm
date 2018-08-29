@@ -22,16 +22,17 @@ public interface BorrowMapper {
     //查询全部 book表 user 表 borrow 表
     List<BorrowBookUserVo> selectBorrowUserBook(@Param("page") Integer page, @Param("size") Integer size);
     //模糊查询借阅列表带分页
-    List<BorrowBookUserVo> selectBorrowLike(@Param("page") Integer page, @Param("size") Integer size,@Param("mohu") String mohu,@Param("borrowDate") String borrowDate,@Param("borrowSrdate") String borrowSrdate);
+    List<BorrowBookUserVo> selectBorrowLike(@Param("page") Integer page, @Param("size") Integer size,@Param("status") Integer status,@Param("mohu") String mohu,@Param("borrowDate") String borrowDate,@Param("borrowSrdate") String borrowSrdate);
     //根据图书ID修改状态
     int updateByBookId(Borrow borrow);
     //分页查询总数量
     Integer selectAllCount();
     //模糊查询分页总数量
-    Integer selectAllCountLike(@Param("mohu") String mohu,@Param("borrowDate") String borrowDate,@Param("borrowSrdate") String borrowSrdate);
+    Integer selectAllCountLike(@Param("status") Integer status,@Param("mohu") String mohu,@Param("borrowDate") String borrowDate,@Param("borrowSrdate") String borrowSrdate);
     //根据bookId查询时间戳
     Borrow getByBookId(String bookId);
     //查询全部借书信息
     List<BorrowBookUserVo> queryAll();
+
 
 }

@@ -50,6 +50,17 @@
 
 
         </div>
+         <div class="layui-input-inline">
+         <select name="status" autocomplete="off" class="layui-input">
+             <option value="">请选择借阅状态</option>
+
+             <option value="2">借阅中</option>
+               <option value="3">逾期未还</option>
+               <option value="4">逾期已还</option>
+                 <option value="5">按时归还</option>
+            </select>
+
+        </div>
        借书日期：
         <div class="layui-input-inline">
             <input type="Date" name="borrowDate" autocomplete="off"  class="layui-input">
@@ -160,21 +171,21 @@
 
     <c:if test="${chuanzhi=='dog'}">
     <span class="fr">
-     <a href="/borrow/toLikeList?mohu=${mohu}&& page=1&&size=${list.size}&&borrowDate=${borrowDate}&&borrowSrdate=${borrowSrdate}">  <button
+     <a href="/borrow/toLikeList?mohu=${mohu}&& page=1&&size=${list.size}&&borrowDate=${borrowDate}&&borrowSrdate=${borrowSrdate}&&status=${status}">  <button
              class="layui-btn layui-btn-primary layui-btn-small">首页</button></a>
 
         <c:if test="${list.page>1}">
 
-            <a href="/borrow/toLikeList?mohu=${mohu}&&page=${list.page-1}&&size=${list.size}&&borrowDate=${borrowDate}&&borrowSrdate=${borrowSrdate}">    <button
+            <a href="/borrow/toLikeList?mohu=${mohu}&&page=${list.page-1}&&size=${list.size}&&borrowDate=${borrowDate}&&borrowSrdate=${borrowSrdate}&&status=${status}">    <button
                     class="layui-btn layui-btn-primary layui-btn-small">上一页</button></a>
         </c:if>
       ${list.page}/${ye}
     <c:if test="${list.page<ye}">
-        <a href="/borrow/toLikeList?mohu=${mohu}&&page=${list.page+1}&&size=${list.size}&&borrowDate=${borrowDate}&&borrowSrdate=${borrowSrdate}">  <button
+        <a href="/borrow/toLikeList?mohu=${mohu}&&page=${list.page+1}&&size=${list.size}&&borrowDate=${borrowDate}&&borrowSrdate=${borrowSrdate}&&status=${status}">  <button
                 class="layui-btn layui-btn-primary layui-btn-small">下一页</button></a>
 
     </c:if>
-       <a href="/borrow/toLikeList?mohu=${mohu}&&page=${ye}&&size=${list.size}&&borrowDate=${borrowDate}&&borrowSrdate=${borrowSrdate}"><button
+       <a href="/borrow/toLikeList?mohu=${mohu}&&page=${ye}&&size=${list.size}&&borrowDate=${borrowDate}&&borrowSrdate=${borrowSrdate}&&status=${status}"><button
                class="layui-btn layui-btn-primary layui-btn-small">尾页</button> </a>
     </span>
     </c:if>

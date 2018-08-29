@@ -91,21 +91,23 @@ public class BorrowServiceImpl implements BorrowService {
         return pages;
     }
 
+
+
     /**
      * 模糊查询借阅列表带分页
      *
      * @return
      */
     @Override
-    public Page<BorrowBookUserVo> selectBorrowLike(Integer page, Integer size, String mohu,String borrowDate,String borrowSrdate) {
+    public Page<BorrowBookUserVo> selectBorrowLike(Integer page, Integer size,Integer status, String mohu,String borrowDate,String borrowSrdate) {
         mohu = "%" + mohu + "%";
         Page<BorrowBookUserVo> pages = new Page<>();
-        pages.setTotal(borrowMapper.selectAllCountLike(mohu,borrowDate,borrowSrdate));
-        System.out.println("zonggpng:" + borrowMapper.selectAllCountLike(mohu,borrowDate,borrowSrdate));
+        pages.setTotal(borrowMapper.selectAllCountLike(status,mohu,borrowDate,borrowSrdate));
+
         pages.setPage(page);
         pages.setSize(size);
         List<BorrowBookUserVo> borrowBookUserVo = borrowMapper.selectBorrowLike((page - 1) * size, pages.getSize(),
-                mohu,borrowDate,borrowSrdate);
+               status,mohu,borrowDate,borrowSrdate);
         pages.setRows(borrowBookUserVo);
         return pages;
     }
@@ -210,6 +212,8 @@ public class BorrowServiceImpl implements BorrowService {
     public List<BorrowBookUserVo> queryAll() {
         return borrowMapper.queryAll();
     }
+
+
 
 
 }

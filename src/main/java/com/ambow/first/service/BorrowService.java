@@ -25,7 +25,7 @@ public interface BorrowService {
     Page<BorrowBookUserVo> selectBorrowUserBook(@Param("page") Integer page, @Param("size") Integer size);
 
     //模糊查询借阅列表
-    Page<BorrowBookUserVo> selectBorrowLike(@Param("page") Integer page, @Param("size") Integer size, @Param("mohu")
+    Page<BorrowBookUserVo> selectBorrowLike(@Param("page") Integer page, @Param("size") Integer size,Integer status, @Param("mohu")
             String mohu,@Param("borrowDate") String borrowDate,@Param("borrowSrdate") String borrowSrdate);
 
     //可选择性增加
@@ -44,4 +44,6 @@ public interface BorrowService {
 
     // 查询全部借阅列表
     List<BorrowBookUserVo> queryAll();
+
+
 }
