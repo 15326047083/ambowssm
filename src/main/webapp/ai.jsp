@@ -24,6 +24,7 @@
             bottom: 0;
         }
     </style>
+    <script type="text/javascript" src="/bootstrap/twitter-bootstrap-v2/js/jquery-3.3.1.js"></script>
 </head>
 <body style="background: #fff url(frame/static/image/buxie.jpg) no-repeat center 0;">
 <div class="main">
@@ -31,11 +32,10 @@
         <span style="float: left;">我叫小i机器人，很乐意为您服务。</span><br/>
     </div>
     <div style="width: 700px;height:300px;border-color: red;">
-        <input style="width: 500px; height: 60px;" id="question" placeholder="请输入你的问题哟！"/>
+        <input style="width: 500px; height: 60px;" id="question" placeholder="请输入你的问题哟！" r/>
         <button style="height: 60px;width: 190px; " onclick="getReply()">发送</button>
     </div>
 </div>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <script>
     <%-- 发送对话 --%>
