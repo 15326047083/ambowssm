@@ -15,7 +15,6 @@
     </resultMap>
 
 
-
     <sql id="Base_Column_List">
     id, type_id, book_name, author_name, press, publish_date, info, status, num, remark
   </sql>
@@ -62,41 +61,42 @@
   </select>
 
 
-
-
-
     <!--分类下的模糊查询-->
 
 
     <select id="getBookTypeVoByTypeIAndLike" resultType="com.ambow.first.vo.BookTypeVo">
 
 
-    select t.id typeId,t.name typeName,t.place typePlace,t.book_num bookNum,b.id bookId,b.book_name bookName,b.author_name bookAuthorName,
-    b.press bookPress,b.publish_date bookPublishDate,b.info bookInfo,b.status bookStatus,b.num bookBorrowNum,b.remark bookRemark
-    from book b,type t where t.id=b.type_id
-    <if test="typeId!=null and typeId!='' ">
-        and  t.id=#{typeId}
-    </if>
+        select t.id typeId,t.name typeName,t.place typePlace,t.book_num bookNum,b.id bookId,b.book_name
+        bookName,b.author_name bookAuthorName,
+        b.press bookPress,b.publish_date bookPublishDate,b.info bookInfo,b.status bookStatus,b.num
+        bookBorrowNum,b.remark bookRemark
+        from book b,type t where t.id=b.type_id
+        <if test="typeId!=null and typeId!='' ">
+            and t.id=#{typeId}
+        </if>
 
         <if test="blur!=null and blur!='' ">
 
-        and ( b.book_name like "%"#{blur}"%" or b.author_name like "%"#{blur}"%" or b.press like"%"#{blur}"%" or b.info like "%"#{blur}"%" )
+            and ( b.book_name like "%"#{blur}"%" or b.author_name like "%"#{blur}"%" or b.press like"%"#{blur}"%" or
+            b.info like "%"#{blur}"%" )
         </if>
         limit #{page},#{size} ;
-  </select>
+    </select>
 
     <!--分类下的模糊查询的数量-->
     <select id="getBookTypeVoByTypeIAndLikeNum" resultType="java.lang.Integer">
-    select count(*)
-    from book b,type t where t.id=b.type_id
+        select count(*)
+        from book b,type t where t.id=b.type_id
         <if test="typeId!=null and typeId!=''">
-            and  t.id=#{typeId}
+            and t.id=#{typeId}
         </if>
         <if test="blur!=null and blur!=''">
-            and ( b.book_name like "%"#{blur}"%" or b.author_name like "%"#{blur}"%" or b.press like"%"#{blur}"%" or b.info like "%"#{blur}"%" )
+            and ( b.book_name like "%"#{blur}"%" or b.author_name like "%"#{blur}"%" or b.press like"%"#{blur}"%" or
+            b.info like "%"#{blur}"%" )
         </if>
-       ;
-  </select>
+        ;
+    </select>
     <!--借阅排行-->
 
     <select id="getBookTypeVoByTypeIdSort" resultType="com.ambow.first.vo.BookTypeVo">
@@ -106,8 +106,8 @@
   </select>
 
 
-<!--借阅排行数量-->
-    <select id="getBookTypeVoByTypeIdSortNum"  resultType="java.lang.Integer">
+    <!--借阅排行数量-->
+    <select id="getBookTypeVoByTypeIdSortNum" resultType="java.lang.Integer">
    SELECT count(*) FROM(
 SELECT b.book_name
     from book b,type t where t.id=b.type_id  group by b.book_name) sort ;
@@ -127,7 +127,7 @@ SELECT b.book_name
       #{info,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, 
       #{remark,jdbcType=VARCHAR})
   </insert>
-    <insert id="insertSelective"  parameterType="com.ambow.first.entity.Book">
+    <insert id="insertSelective" parameterType="com.ambow.first.entity.Book">
         insert into book
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -194,7 +194,7 @@ SELECT b.book_name
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective"   parameterType="com.ambow.first.entity.Book">
+    <update id="updateByPrimaryKeySelective" parameterType="com.ambow.first.entity.Book">
         update book
         <set>
             <if test="typeId != null">

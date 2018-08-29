@@ -273,13 +273,6 @@
                                        name="password"/>
                             </div>
                         </div>
-                        <div class="layui-form-item">
-                            <label for="upate_borrow_num" class="col-sm-2 control-label">借阅次数</label>
-                            <div class="col-sm-10">
-                                <input type="number" class="form-control" id="upate_borrow_num" placeholder="借阅次数"
-                                       name="borrowNum"/>
-                            </div>
-                        </div>
                     </form>
 
                         <%--Modal-footer--%>

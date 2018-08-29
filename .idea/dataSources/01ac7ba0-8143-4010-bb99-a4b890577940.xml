@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="@172.7.52.231">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.8">
+    <root id="1">
+      <ServerVersion>5.0.86</ServerVersion>
+      <DefaultCasing>lower/lower</DefaultCasing>
+    </root>
+    <schema id="2" parent="1" name="first_ssm">
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="ssm"/>
+    <schema id="6" parent="1" name="test"/>
+    <table id="7" parent="2" name="book"/>
+    <table id="8" parent="2" name="borrow"/>
+    <table id="9" parent="2" name="donate"/>
+    <table id="10" parent="2" name="lost"/>
+    <table id="11" parent="2" name="type"/>
+    <table id="12" parent="2" name="user"/>
+    <column id="13" parent="7" name="id">
+      <Position>1</Position>
+      <DataType>VARCHAR(50)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="14" parent="7" name="type_id">
+      <Position>2</Position>
+      <DataType>VARCHAR(50)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="15" parent="7" name="book_name">
+      <Position>3</Position>
+      <DataType>VARCHAR(45)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="16" parent="7" name="author_name">
+      <Position>4</Position>
+      <DataType>VARCHAR(45)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="17" parent="7" name="press">
+      <Position>5</Position>
+      <DataType>VARCHAR(45)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="18" parent="7" name="publish_date">
+      <Position>6</Position>
+      <DataType>DATETIME(19)|93s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="19" parent="7" name="info">
+      <Position>7</Position>
+      <DataType>VARCHAR(45)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="20" parent="7" name="status">
+      <Position>8</Position>
+      <DataType>INT(10)|4s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>0</DefaultExpression>
+    </column>
+    <column id="21" parent="7" name="num">
+      <Position>9</Position>
+      <DataType>INT(10)|4s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>0</DefaultExpression>
+    </column>
+    <column id="22" parent="7" name="remark">
+      <Position>10</Position>
+      <DataType>VARCHAR(45)|12s</DataType>
+    </column>
+    <key id="23" parent="7" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="24" parent="8" name="id">
+      <Position>1</Position>
+      <DataType>VARCHAR(50)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="25" parent="8" name="book_id">
+      <Position>2</Position>
+      <DataType>VARCHAR(45)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="26" parent="8" name="user_id">
+      <Position>3</Position>
+      <DataType>VARCHAR(45)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="27" parent="8" name="borrow_date">
+      <Position>4</Position>
+      <DataType>DATETIME(19)|93s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="28" parent="8" name="s_r_date">
+      <Position>5</Position>
+      <DataType>DATETIME(19)|93s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="29" parent="8" name="s_r_time_stamp">
+      <Position>6</Position>
+      <DataType>BIGINT(19)|-5s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>0</DefaultExpression>
+    </column>
+    <column id="30" parent="8" name="status">
+      <Position>7</Position>
+      <DataType>INT(10)|4s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>0</DefaultExpression>
+    </column>
+    <key id="31" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="32" parent="9" name="id">
+      <Position>1</Position>
+      <DataType>VARCHAR(50)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="33" parent="9" name="book_id">
+      <Position>2</Position>
+      <DataType>VARCHAR(50)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="34" parent="9" name="user_name">
+      <Position>3</Position>
+      <DataType>VARCHAR(45)|12s</DataType>
+    </column>
+    <column id="35" parent="9" name="user_phone">
+      <Position>4</Position>
+      <DataType>VARCHAR(50)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="9" name="donate_time">
+      <Position>5</Position>
+      <DataType>DATETIME(19)|93s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
+    </column>
+    <key id="37" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="38" parent="10" name="id">
+      <Position>1</Position>
+      <DataType>VARCHAR(50)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="39" parent="10" name="user_id">
+      <Position>2</Position>
+      <DataType>VARCHAR(50)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="40" parent="10" name="borrow_id">
+      <Position>3</Position>
+      <DataType>VARCHAR(50)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="41" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="42" parent="11" name="id">
+      <Position>1</Position>
+      <DataType>VARCHAR(50)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="43" parent="11" name="name">
+      <Position>2</Position>
+      <DataType>VARCHAR(45)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="44" parent="11" name="place">
+      <Position>3</Position>
+      <DataType>VARCHAR(45)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="45" parent="11" name="book_num">
+      <Position>4</Position>
+      <DataType>INT(10)|4s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>0</DefaultExpression>
+    </column>
+    <key id="46" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="47" parent="12" name="id">
+      <Position>1</Position>
+      <DataType>VARCHAR(50)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="48" parent="12" name="name">
+      <Position>2</Position>
+      <DataType>VARCHAR(45)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="49" parent="12" name="sex">
+      <Position>3</Position>
+      <DataType>VARCHAR(45)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="50" parent="12" name="age">
+      <Position>4</Position>
+      <DataType>INT(10)|4s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>0</DefaultExpression>
+    </column>
+    <column id="51" parent="12" name="phone">
+      <Position>5</Position>
+      <DataType>VARCHAR(15)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="52" parent="12" name="new_date">
+      <Position>6</Position>
+      <DataType>DATETIME(19)|93s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="53" parent="12" name="out_date">
+      <Position>7</Position>
+      <DataType>DATETIME(19)|93s</DataType>
+    </column>
+    <column id="54" parent="12" name="place">
+      <Position>8</Position>
+      <DataType>VARCHAR(45)|12s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="55" parent="12" name="borrow_num">
+      <Position>9</Position>
+      <DataType>INT(10)|4s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>0</DefaultExpression>
+    </column>
+    <column id="56" parent="12" name="password">
+      <Position>10</Position>
+      <DataType>VARCHAR(45)|12s</DataType>
+    </column>
+    <key id="57" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

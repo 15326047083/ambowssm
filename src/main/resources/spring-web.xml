@@ -57,6 +57,12 @@
             <mvc:exclude-mapping path="/user/likeSelect"/>
             <mvc:exclude-mapping path="/user/selectAllByBorrowNum"/>
             <mvc:exclude-mapping path="/ai"/>
+            <mvc:exclude-mapping path="/ai"/>
+            <mvc:exclude-mapping path="/bootstrap/**"/>
+            <mvc:exclude-mapping path="/js/**"/>
+            <mvc:exclude-mapping path="/frame/**"/>
+            <mvc:exclude-mapping path="/json/**"/>
+            <mvc:exclude-mapping path="/stylesheets/**"/>
             <ref bean="checkAdmin"/>
         </mvc:interceptor>
     </mvc:interceptors>
