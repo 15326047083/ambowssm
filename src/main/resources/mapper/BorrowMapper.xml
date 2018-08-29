@@ -160,7 +160,7 @@
       <![CDATA[and w.borrow_date<=#{borrowSrdate}]]>
     </if>
 
-    and(b.book_name like #{mohu} or u.phone like #{mohu} or u.name like #{mohu}) limit #{page},#{size};
+    and(b.book_name like #{mohu} or u.phone like #{mohu} or u.name like #{mohu}) order by w.status limit #{page},#{size};
   </select>
   <!--统计全查的分页的统计条目-->
   <select id="selectAllCount" resultType="java.lang.Integer">

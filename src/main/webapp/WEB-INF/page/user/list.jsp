@@ -79,7 +79,6 @@
             <th>注册时间</th>
             <th>注销时间</th>
             <th>地址</th>
-            <th>密码</th>
         </c:if>
         <th>借阅次数</th>
         <c:if test="${admin!=null}">
@@ -99,7 +98,6 @@
                 <td>${ul.newDate}</td>
                 <td>${ul.outDate}</td>
                 <td>${ul.place}</td>
-                <td>${ul.password}</td>
             </c:if>
             <td>${ul.borrowNum}</td>
             <c:if test="${admin!=null}">

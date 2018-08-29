@@ -73,8 +73,13 @@
             },
             success(json) {
                 if (json == 0) {
-                    $("#errorMsg").html("可以注册");
-                    bj = 0;
+                    if (name[0] == " ") {
+                        $("#errorMsg").html("首个字符不可为空格");
+                        bj = 1;
+                    } else {
+                        $("#errorMsg").html("可以注册");
+                        bj = 0;
+                    }
                 }
                 else {
                     $("#errorMsg").html("该名字已经存在");
