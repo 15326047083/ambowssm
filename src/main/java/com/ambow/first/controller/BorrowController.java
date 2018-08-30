@@ -250,7 +250,6 @@ public class BorrowController {
     public String export(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException,
             IntrospectionException, IllegalAccessException, ParseException, InvocationTargetException,
             UnsupportedEncodingException {
-        System.out.println(response + " " + request);
         response.reset(); //清除buffer缓存
         // 指定下载的文件名，浏览器都会使用本地编码，即GBK，浏览器收到这个文件名后，用ISO-8859-1来解码，然后用GBK来显示
         // 所以我们用GBK解码，ISO-8859-1来编码，在浏览器那边会反过来执行。
@@ -284,7 +283,6 @@ public class BorrowController {
     @RequestMapping("/checkPhone/{phone}")
     @ResponseBody
     public int checkPhone(@PathVariable("phone") String phone) {
-        System.out.println(phone);
         if (userService.getUserByPhone(phone) != null) {
             return 0; // 正确
         }

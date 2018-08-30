@@ -65,9 +65,6 @@ public class BookController {
      */
     @RequestMapping(value = "/insert",method = RequestMethod.POST)
     public String insert(Book book, int num, String userName, String userPhone) {
-
-        System.out.println(userName);
-        System.out.println(userPhone);
         int i = num;
         while (i > 0) {
             i--;
@@ -90,7 +87,6 @@ public class BookController {
                 donate.setUserName(userName);
                 donate.setUserPhone(userPhone);
                 donate.setDonateTime(new Date());
-                System.out.println(donate.getDonateTime());
 
                 donateService.insert(donate);
             }
@@ -218,10 +214,7 @@ public class BookController {
      */
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public String update(Book book) {
-
-        System.out.println(book.toString());
-        System.out.println(bookService.updateByPrimaryKeySelective(book));
-
+        bookService.updateByPrimaryKeySelective(book);
         return "redirect:/book/listVo";
     }
 
@@ -262,9 +255,7 @@ public class BookController {
 
     @RequestMapping(value = "/delete")
     public String delete(String bookId, String typeId) {
-
-
-        System.out.println(bookService.deleteByPrimaryKey(bookId));
+        bookService.deleteByPrimaryKey(bookId);
         typeService.subBookNum(typeId);
 
         return "redirect:/book/listVo";

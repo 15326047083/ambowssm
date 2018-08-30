@@ -105,7 +105,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public int updateByPrimaryKeySelective(Book record) {
-        System.out.println(record.toString());
         return bookMapper.updateByPrimaryKeySelective(record);
     }
 
@@ -153,12 +152,9 @@ public class BookServiceImpl implements BookService {
     //    blur = "%" + blur + "%";
         Page<BookTypeVo> pages = new Page<>();
         pages.setTotal(bookMapper.getBookTypeVoByTypeIAndLikeNum(typeId, blur));
-        System.out.println(blur);
-        System.out.println(typeId);
         pages.setPage(page);
         pages.setSize(size);
         List<BookTypeVo> bookTypeVoList = bookMapper.getBookTypeVoByTypeIAndLike(typeId, blur, (page - 1) * size, pages.getSize());
-        System.out.println(bookTypeVoList.toString());
         pages.setRows(bookTypeVoList);
         return pages;
     }
@@ -174,7 +170,6 @@ public class BookServiceImpl implements BookService {
     public Page<BookTypeVo> getBookTypeVoByTypeIdSort(Integer page, Integer size) {
         Page<BookTypeVo> pages = new Page<>();
         pages.setTotal(bookMapper.getBookTypeVoByTypeIdSortNum());
-        System.out.println(bookMapper.getBookTypeVoByTypeIdSortNum());
         pages.setPage(page);
         pages.setSize(size);
         List<BookTypeVo> bookTypeVoList = bookMapper.getBookTypeVoByTypeIdSort((page - 1) * size, pages.getSize());
