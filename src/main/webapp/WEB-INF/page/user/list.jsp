@@ -198,44 +198,26 @@
                         </div>
                         <div class="layui-form-item">
                             <label for="new_phone" class="col-sm-2 control-label">读者电话</label>
-                            <div class="col-sm-5">
-                                <div style="float: left;">
-                                    <input id="new_phone" type="text" class="form-control" style="width: 200px;"
+                            <div class="col-sm-10">
+                                    <input id="new_phone" type="text" class="form-control"
                                            placeholder="读者电话" name="phone"/>
-                                </div>
                             </div>
                         </div>
 
                         <div class="layui-form-item">
-                            <label for="new_phone" class="col-sm-2 control-label">验证码</label>
-                            <div class="col-sm-10" style="width: 150px">
-                                <input style="width: 180px" type="text" class="form-control" required="required" id="new_code"
-                                       placeholder="请输入验证码" name="phone"/>
-
-                            </div>
-                            <div style="margin-left: 150px">
-                                <button onclick="run(this)" id="phonecode" style="margin-left: 150px" type="button" class="btn btn-default" >点击发送验证码</button>
-                            </div>
-                        </div>
-
-                      <%--  <div class="layui-form-item">
-                            <label class="col-sm-2 control-label">验证码</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" id="codename" placeholder="验证码">
+                            <label for="codename" class="col-sm-2 control-label">验证码</label>
+                            <div class="col-sm-10" style="width: 300px">
+                                <input type="text" class="form-control" id="codename"
+                                       placeholder="请输入验证码" name="codename"/>
                                 <span id="codenameTip"></span>
                             </div>
-                        </div>--%>
-                            <%--<div class="layui-form-item">
-                                <label for="new_phone" class="col-sm-2 control-label">读者电话</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" required="required" id="new_phone"
-                                           placeholder="读者电话" name="phone"/>
-                                </div>
-                            </div>--%>
-                      <%--  <div style="float: left;">
-                            <input class="btn btn-info" type="button" id="getcode" value="点击获取手机验证码"/>
-                            <span id="telephonenameTip"></span>
-                        </div>--%>
+                            <div style="margin-left: 300px">
+                                <input class="btn btn-info" type="button" id="getcode" value="点击获取手机验证码"/>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                                <span style="float: right" id="telephonenameTip"></span>
+                        </div>
                     </form>
 
                         <%--Modal-footer--%>
@@ -339,23 +321,14 @@
         var InterValObj; //timer变量，控制时间
         var count = 60; //间隔函数，1秒执行
         var curCount;//当前剩余秒数
-        var code = ""; //验证码
-        var codeLength = 6;//验证码长度
 
         $("#getcode").click(function () {
 
             //获取输入的手机号码
-            var phoNum = $("#new_phone").val();
-            //alert(phoNum);
-            curCount = count;
+            var phone = $("#new_phone").val();
 
-            //用正则表达式验证手机号是否合法
-            //var re = /(^1[3|5|8][0-9]{9}$)/;
-            //略
-            // 产生随记验证码
-            for (var i = 0; i < codeLength; i++) {
-                code += parseInt(Math.random() * 9).toString();
-            }
+            curCount = count;//alert(phoNum);
+
 
             // 设置按钮显示效果，倒计时
             $("#getcode").attr("disabled", "true");
@@ -367,15 +340,15 @@
                 type: "POST", // 用POST方式传输
                 dataType: "text", // 数据格式:JSON
                 url: "/user/getCode", // 目标地址
-                data: { "Code": code, "phoNum": phoNum },
+                data: { "phone": phone },
                 error: function (msg) {
                     alert(msg);
                 },
                 success: function (data) {
                     //前台给出提示语
-                    if (data == "true") {
+                    if (data == "OK") {
                         $("#telephonenameTip").html("<font color='#339933'>√ 短信验证码已发到您的手机,请查收(30分钟内有效)</font>");
-                    } else if (data == "false") {
+                    } else if (data == "error") {
                         $("#telephonenameTip").html("<font color='red'>× 短信验证码发送失败，请重新发送</font>");
                         return false;
                     }
@@ -390,7 +363,7 @@
                 window.clearInterval(InterValObj);// 停止计时器
                 $("#getcode").removeAttr("disabled");// 启用按钮
                 $("#getcode").val("重新发送验证码");
-                code = ""; // 清除验证码。如果不清除，过时间后，输入收到的验证码依然有效
+                /*code = ""; // 清除验证码。如果不清除，过时间后，输入收到的验证码依然有效*/
             } else {
                 curCount--;
                 $("#getcode").val("请在" + curCount + "秒内输入验证码");
@@ -398,16 +371,16 @@
         }
 
        /* //提交注册按钮
-        $("#submit").click(function () {
-            var CheckCode = $("#codename").val();
+        $("#newUser").click(function () {
+            var checkCode = $("#codename").val();
             // 向后台发送处理数据
             $.ajax({
-                url: "/Register/CheckCode",
-                data: { "CheckCode": CheckCode },
+                url: "/user/checkCode",
+                data: { "checkCode": checkCode },
                 type: "POST",
                 dataType: "text",
                 success: function (data) {
-                    if (data == "true") {
+                    if (data == "OK") {
                         $("#codenameTip").html("<font color='#339933'>√</font>");
                     } else {
                         $("#codenameTip").html("<font color='red'>× 短信验证码有误，请核实后重新填写</font>");
@@ -511,6 +484,18 @@
                     regexp: {           //正则校验
                         regexp: /([\u4e00-\u9fa5]{2,4})/,
                         message: 'The place must be more than two words in Chinese'
+                    },
+                }
+            },
+            codename:{
+                validators: {
+                    remote: {
+                        url: '/user/checkCode',
+                        message: 'The code must be right!!',
+                        type: 'POST',
+                    },
+                    notEmpty: {
+                        message: 'The code is required and cannot be empty'
                     },
                 }
             },

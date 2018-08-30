@@ -1,10 +1,13 @@
 package com.ambow.first.controller;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.ambow.first.entity.User;
 import com.ambow.first.service.UserService;
 import com.ambow.first.util.PageUtil;
+import com.ambow.first.util.Send;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.http.HttpRequest;
 import org.apache.ibatis.annotations.Param;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +35,53 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    /**
+     * 验证码验证
+     * @param codename
+     * @return
+     */
+    @RequestMapping(value = "/checkCode", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String checkCode(@RequestParam String codename,HttpServletRequest request) {
+        String code= (String) request.getSession().getAttribute("code");
+        boolean result = false;
+        if(codename.equals(code)){
+            result = true;
+        }
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("valid", result);
+        ObjectMapper mapper = new ObjectMapper();
+        String resultString = "";
+        try {
+            resultString = mapper.writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return resultString;
+    }
 
+
+    /**
+     * 获取验证码
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "/getCode", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String getCode(@RequestParam String phone,HttpServletRequest request) {
+        String code="";
+        try {
+            code = Send.sendCode(phone);
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
+        if(!"".equals(code)){
+            request.getSession().setAttribute("code",code);
+            return "OK";
+        }else{
+            return "error";
+        }
+    }
     /**
      * 判断手机号是否已被注册
      *
@@ -104,7 +153,8 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping(value = "/insertUser")
-    public String insertUser(User user) {
+    public String insertUser(User user,HttpServletRequest request) {
+        request.getSession().removeAttribute("code");
         user.setNewDate(new Date());
         user.setBorrowNum(0);
         user.setPassword("000000");
