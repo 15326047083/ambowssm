@@ -63,7 +63,6 @@
 
     <!--分类下的模糊查询-->
 
-
     <select id="getBookTypeVoByTypeIAndLike" resultType="com.ambow.first.vo.BookTypeVo">
 
 
@@ -78,8 +77,7 @@
 
         <if test="blur!=null and blur!='' ">
 
-            and ( b.book_name like "%"#{blur}"%" or b.author_name like "%"#{blur}"%" or b.press like"%"#{blur}"%" or
-            b.info like "%"#{blur}"%" )
+            and ( b.book_name like "%"#{blur}"%" or b.author_name like "%"#{blur}"%" or b.press like"%"#{blur}"%"  )
         </if>
         limit #{page},#{size} ;
     </select>
@@ -92,8 +90,7 @@
             and t.id=#{typeId}
         </if>
         <if test="blur!=null and blur!=''">
-            and ( b.book_name like "%"#{blur}"%" or b.author_name like "%"#{blur}"%" or b.press like"%"#{blur}"%" or
-            b.info like "%"#{blur}"%" )
+            and ( b.book_name like "%"#{blur}"%" or b.author_name like "%"#{blur}"%" or b.press like"%"#{blur}"%"  )
         </if>
         ;
     </select>

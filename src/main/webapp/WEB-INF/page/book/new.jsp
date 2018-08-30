@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2018/8/16
@@ -8,6 +9,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page isELIgnored="false" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -44,21 +47,21 @@
     <div class="layui-form-item">
         <label class="layui-form-label">图书名称</label>
         <div class="layui-input-block">
-            <input type="text" name="bookName" lay-verify="required" placeholder="请输入书名" autocomplete="off"
+            <input type="text" name="bookName" maxlength="20" lay-verify="required" placeholder="请输入书名" autocomplete="off"
                    class="layui-input" required>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">图书作者</label>
         <div class="layui-input-block">
-            <input type="text" name="authorName" lay-verify="required" placeholder="请输入作者名字" autocomplete="off"
+            <input type="text" name="authorName" maxlength="20" lay-verify="required" placeholder="请输入作者名字" autocomplete="off"
                    class="layui-input" required>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">出版社</label>
         <div class="layui-input-block">
-            <input type="text" name="press" lay-verify="required" placeholder="请输入图书出版社" autocomplete="off"
+            <input type="text" name="press" maxlength="30" lay-verify="required" placeholder="请输入图书出版社" autocomplete="off"
                    class="layui-input" required>
         </div>
     </div>
@@ -66,9 +69,11 @@
     <div class="layui-form-item">
         <label class="layui-form-label">出版日期</label>
         <div class="layui-input-block">
-            <input type="date" name="publishDate" placeholder="请输入图书出版日期" class="layui-input" required>
+            <input type="date" name="publishDate"  max=<%=new SimpleDateFormat("yyyy-MM-dd").format(new Date())%> min="1900-01-01" id="publishDate" placeholder="请输入图书出版日期" class="layui-input" required>
         </div>
     </div>
+
+    
 
     <div class="layui-form-item">
         <label class="layui-form-label">图书状态</label>
@@ -90,14 +95,14 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">备注</label>
         <div class="layui-input-block">
-            <textarea placeholder="请输入图为位置" class="layui-textarea" name="remark" required></textarea>
+            <textarea placeholder="请输入图为位置" maxlength="50" class="layui-textarea" name="remark" required></textarea>
         </div>
     </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">数量</label>
         <div class="layui-input-block">
-            <input type="number" name="num" id="num" lay-verify="required" placeholder="请输入图书数量" autocomplete="off"
+            <input type="number" name="num" id="num" max="100" lay-verify="required" placeholder="请输入图书数量" autocomplete="off"
                    class="layui-input" required>
         </div>
     </div>

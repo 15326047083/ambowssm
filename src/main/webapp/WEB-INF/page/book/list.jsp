@@ -34,7 +34,7 @@
         <span class="layui-form-label">搜索条件：</span>
 
         <div class="layui-input-inline">
-            <input type="text" name="blur" placeholder="输入书名/作者/出版社/简介" class="layui-input">
+            <input type="text" name="blur" placeholder="输入书名/作者/出版社" class="layui-input">
         </div>
         <div class="layui-input-inline">
          <select name="typeId" autocomplete="off" class="layui-input">
